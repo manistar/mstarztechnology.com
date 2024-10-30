@@ -1,0 +1,168 @@
+[04-Jan-2023 15:46:18 America/New_York] PHP Notice:  Undefined index: pID in /home/windhcoz/mstarztech.com/theboss/edit_job-exp.php on line 42
+[04-Jan-2023 15:51:29 America/New_York] PHP Notice:  Undefined index: course  in /home/windhcoz/mstarztech.com/theboss/functions/proserver.php on line 448
+[06-Jan-2023 03:06:32 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[06-Jan-2023 03:06:32 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[06-Jan-2023 03:06:32 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[06-Jan-2023 03:06:32 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[06-Jan-2023 03:06:32 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[06-Jan-2023 03:06:32 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[06-Jan-2023 03:12:27 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /home/windhcoz/mstarztech.com/theboss/feedbacks.php on line 41
+[06-Jan-2023 12:00:11 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[06-Jan-2023 12:00:11 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[06-Jan-2023 12:00:11 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[06-Jan-2023 12:00:11 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[06-Jan-2023 12:00:11 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[06-Jan-2023 12:00:11 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[08-Jan-2023 08:52:30 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[08-Jan-2023 08:52:30 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[08-Jan-2023 08:52:30 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[08-Jan-2023 08:52:30 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[08-Jan-2023 08:52:30 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[08-Jan-2023 08:52:30 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[08-Jan-2023 11:30:00 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[08-Jan-2023 11:30:00 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[08-Jan-2023 11:30:00 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[08-Jan-2023 11:30:00 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[08-Jan-2023 11:30:00 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[08-Jan-2023 11:30:00 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[08-Jan-2023 11:36:28 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /home/windhcoz/mstarztech.com/theboss/feedbacks.php on line 41
+[12-Jan-2023 14:17:54 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[12-Jan-2023 14:17:54 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[12-Jan-2023 14:17:54 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[12-Jan-2023 14:17:54 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[12-Jan-2023 14:17:54 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[12-Jan-2023 14:17:54 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[13-Jan-2023 01:42:05 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[13-Jan-2023 01:42:05 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[13-Jan-2023 01:42:05 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[13-Jan-2023 01:42:05 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[13-Jan-2023 01:42:05 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[13-Jan-2023 01:42:05 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[13-Jan-2023 07:18:32 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[13-Jan-2023 07:18:32 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[13-Jan-2023 07:18:32 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[13-Jan-2023 07:18:32 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[13-Jan-2023 07:18:32 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[13-Jan-2023 07:18:32 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[13-Jan-2023 07:23:24 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[13-Jan-2023 07:23:24 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[13-Jan-2023 07:23:24 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[13-Jan-2023 07:23:24 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[13-Jan-2023 07:23:24 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[13-Jan-2023 07:23:24 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[13-Jan-2023 07:45:33 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[13-Jan-2023 07:45:33 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[13-Jan-2023 07:45:33 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[13-Jan-2023 07:45:33 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[13-Jan-2023 07:45:33 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[13-Jan-2023 07:46:54 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[13-Jan-2023 07:46:54 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[13-Jan-2023 07:46:54 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[13-Jan-2023 07:46:54 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[13-Jan-2023 07:46:54 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[30-Jan-2023 14:04:50 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[30-Jan-2023 14:04:50 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[30-Jan-2023 14:04:50 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[30-Jan-2023 14:04:50 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[30-Jan-2023 14:04:50 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[30-Jan-2023 14:04:50 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[05-Mar-2023 13:54:15 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[05-Mar-2023 13:54:15 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[05-Mar-2023 13:54:15 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[05-Mar-2023 13:54:15 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[05-Mar-2023 13:54:15 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[05-Mar-2023 13:54:15 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[06-Mar-2023 01:45:34 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[06-Mar-2023 01:45:34 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[06-Mar-2023 01:45:34 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[06-Mar-2023 01:45:35 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[06-Mar-2023 01:45:35 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[06-Mar-2023 01:45:35 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[14-Apr-2023 16:00:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[14-Apr-2023 16:00:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[14-Apr-2023 16:00:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[14-Apr-2023 16:00:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[14-Apr-2023 16:00:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[14-Apr-2023 16:00:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[15-Apr-2023 03:26:06 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[15-Apr-2023 03:26:06 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[15-Apr-2023 03:26:06 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[15-Apr-2023 03:26:06 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[15-Apr-2023 03:26:06 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[15-Apr-2023 03:26:06 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[08-May-2023 03:14:12 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[08-May-2023 03:14:12 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[08-May-2023 03:14:12 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[08-May-2023 03:14:12 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[08-May-2023 03:14:12 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[08-May-2023 03:14:12 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[08-May-2023 10:23:48 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[08-May-2023 10:23:48 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[08-May-2023 10:23:48 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[08-May-2023 10:23:48 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[08-May-2023 10:23:48 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[08-May-2023 10:23:48 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[09-May-2023 16:03:23 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[09-May-2023 16:03:23 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[09-May-2023 16:03:23 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[09-May-2023 16:03:23 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[09-May-2023 16:03:23 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[09-May-2023 16:03:23 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[10-May-2023 12:54:04 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[10-May-2023 12:54:04 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[10-May-2023 12:54:04 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[10-May-2023 12:54:04 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[10-May-2023 12:54:04 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[10-May-2023 12:54:04 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[24-May-2023 01:30:12 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[24-May-2023 01:30:12 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[24-May-2023 01:30:12 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[24-May-2023 01:30:12 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[24-May-2023 01:30:12 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[24-May-2023 01:30:12 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[07-Jun-2023 13:54:18 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[07-Jun-2023 13:54:18 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[07-Jun-2023 13:54:18 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[07-Jun-2023 13:54:18 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[07-Jun-2023 13:54:18 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[07-Jun-2023 13:54:18 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[07-Jun-2023 13:55:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[07-Jun-2023 13:55:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[07-Jun-2023 13:55:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[07-Jun-2023 13:55:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[07-Jun-2023 13:55:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[07-Jun-2023 13:55:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[07-Jun-2023 13:56:18 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[07-Jun-2023 13:56:18 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[07-Jun-2023 13:56:18 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[07-Jun-2023 13:56:18 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[07-Jun-2023 13:56:18 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[07-Jun-2023 13:56:28 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[07-Jun-2023 13:56:28 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[07-Jun-2023 13:56:28 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[07-Jun-2023 13:56:28 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[07-Jun-2023 13:56:28 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[07-Jun-2023 17:10:27 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[07-Jun-2023 17:10:27 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[07-Jun-2023 17:10:27 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[07-Jun-2023 17:10:27 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[07-Jun-2023 17:10:27 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[07-Jun-2023 17:10:27 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[30-Aug-2023 13:37:15 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[30-Aug-2023 13:37:15 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[30-Aug-2023 13:37:15 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[30-Aug-2023 13:37:15 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[30-Aug-2023 13:37:15 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[30-Aug-2023 13:37:15 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[13-Sep-2023 13:30:39 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[13-Sep-2023 13:30:39 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[13-Sep-2023 13:30:39 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[13-Sep-2023 13:30:39 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[13-Sep-2023 13:30:39 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[13-Sep-2023 13:30:39 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161
+[04-Oct-2023 07:17:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[04-Oct-2023 07:17:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[04-Oct-2023 07:17:47 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/getall.php on line 3
+[04-Oct-2023 07:17:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 143
+[04-Oct-2023 07:17:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 144
+[04-Oct-2023 07:17:47 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/header.php on line 161

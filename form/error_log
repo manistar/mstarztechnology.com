@@ -1,0 +1,19 @@
+[07-Dec-2022 13:48:41 America/New_York] PHP Warning:  Illegal string offset 'fname' in /home/windhcoz/mstarztech.com/form/function/server.php on line 8
+[07-Dec-2022 13:53:03 America/New_York] PHP Warning:  Illegal string offset 'fname' in /home/windhcoz/mstarztech.com/form/function/server.php on line 8
+[25-Dec-2022 14:09:26 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'img' cannot be null in /home/windhcoz/mstarztech.com/form/include/database.php:143
+Stack trace:
+#0 /home/windhcoz/mstarztech.com/form/include/database.php(143): PDOStatement->execute(Array)
+#1 /home/windhcoz/mstarztech.com/form/function/server.php(49): Database->quick_insert('form_data', 'ID, userID, fna...', Array, 'Form Successful...')
+#2 /home/windhcoz/mstarztech.com/form/include/isset.php(3): project->form_assessment()
+#3 /home/windhcoz/mstarztech.com/form/index.php(20): require_once('/home/windhcoz/...')
+#4 {main}
+  thrown in /home/windhcoz/mstarztech.com/form/include/database.php on line 143
+[25-Dec-2022 14:17:08 America/New_York] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'img' cannot be null in /home/windhcoz/mstarztech.com/form/include/database.php:143
+Stack trace:
+#0 /home/windhcoz/mstarztech.com/form/include/database.php(143): PDOStatement->execute(Array)
+#1 /home/windhcoz/mstarztech.com/form/function/server.php(49): Database->quick_insert('form_data', 'ID, userID, fna...', Array, 'Form Successful...')
+#2 /home/windhcoz/mstarztech.com/form/include/isset.php(3): project->form_assessment()
+#3 /home/windhcoz/mstarztech.com/form/index.php(20): require_once('/home/windhcoz/...')
+#4 {main}
+  thrown in /home/windhcoz/mstarztech.com/form/include/database.php on line 143
+[08-Jan-2023 08:58:56 America/New_York] PHP Warning:  Illegal string offset 'fname' in /home/windhcoz/mstarztech.com/form/function/server.php on line 8

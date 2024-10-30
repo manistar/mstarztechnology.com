@@ -1,0 +1,84 @@
+[25-Dec-2022 06:47:18 America/New_York] PHP Warning:  require_once(functions/proserver.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 4
+[25-Dec-2022 06:47:18 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'functions/proserver.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 4
+[25-Dec-2022 06:47:21 America/New_York] PHP Warning:  require_once(functions/proserver.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 4
+[25-Dec-2022 06:47:21 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'functions/proserver.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 4
+[25-Dec-2022 06:50:00 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:00 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:02 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:02 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:03 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:03 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:04 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:04 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:05 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:05 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:05 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:05 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:06 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:50:06 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:51:21 America/New_York] PHP Warning:  require_once(content/content.php): failed to open stream: No such file or directory in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 06:51:21 America/New_York] PHP Fatal error:  require_once(): Failed opening required 'content/content.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/windhcoz/mstarztech.com/theboss/include/ini.php on line 6
+[25-Dec-2022 07:34:22 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[25-Dec-2022 07:34:22 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[25-Dec-2022 07:34:22 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[25-Dec-2022 07:34:22 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[25-Dec-2022 07:34:22 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156
+[25-Dec-2022 07:52:58 America/New_York] PHP Notice:  Undefined index: name in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 07:52:58 America/New_York] PHP Notice:  Undefined index: name in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 07:52:58 America/New_York] PHP Notice:  Undefined index: name in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:22:41 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:22:41 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:22:41 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:24:16 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:24:16 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:24:16 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:25:02 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:25:05 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:25:08 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 11
+[25-Dec-2022 08:26:01 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:26:01 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:26:01 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:26:35 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:26:35 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:26:35 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:34:25 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:34:25 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 08:34:25 America/New_York] PHP Notice:  Undefined variable: img_src in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 12
+[25-Dec-2022 12:17:38 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[25-Dec-2022 12:17:38 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[25-Dec-2022 12:17:38 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[25-Dec-2022 12:17:38 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[25-Dec-2022 12:17:38 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156
+[25-Dec-2022 12:34:02 America/New_York] PHP Notice:  Undefined variable: reference_id in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 14
+[25-Dec-2022 12:34:02 America/New_York] PHP Notice:  Undefined variable: reference_id in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 14
+[25-Dec-2022 12:34:02 America/New_York] PHP Notice:  Undefined variable: reference_id in /home/windhcoz/mstarztech.com/theboss/student-data/ajax.php on line 14
+[25-Dec-2022 13:49:57 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[25-Dec-2022 13:49:57 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[25-Dec-2022 13:49:57 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[25-Dec-2022 13:49:57 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[25-Dec-2022 13:49:57 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156
+[25-Dec-2022 15:26:24 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[25-Dec-2022 15:26:24 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[25-Dec-2022 15:26:24 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[25-Dec-2022 15:26:24 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[25-Dec-2022 15:26:24 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156
+[26-Dec-2022 13:46:25 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[26-Dec-2022 13:46:25 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[26-Dec-2022 13:46:25 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[26-Dec-2022 13:46:25 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[26-Dec-2022 13:46:25 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156
+[26-Dec-2022 13:46:50 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[26-Dec-2022 13:46:50 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[26-Dec-2022 13:46:50 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[26-Dec-2022 13:46:50 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[26-Dec-2022 13:46:50 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156
+[08-Jan-2023 11:29:49 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[08-Jan-2023 11:29:49 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[08-Jan-2023 11:29:49 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[08-Jan-2023 11:29:49 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[08-Jan-2023 11:29:49 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156
+[24-May-2023 03:21:02 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 7
+[24-May-2023 03:21:02 America/New_York] PHP Notice:  Undefined index: AdminSession in /home/windhcoz/mstarztech.com/theboss/include/session.php on line 30
+[24-May-2023 03:21:02 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 138
+[24-May-2023 03:21:02 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 139
+[24-May-2023 03:21:02 America/New_York] PHP Notice:  Trying to access array offset on value of type bool in /home/windhcoz/mstarztech.com/theboss/student-data/header.php on line 156

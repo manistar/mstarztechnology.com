@@ -1,0 +1,122 @@
+/* Resetting some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1A1A2E;
+    color: #FFF;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container styling */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* Login card */
+.login-card {
+    background-color: #222831;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.title {
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #E94560;
+}
+
+/* Input group styles */
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #E94560;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background-color: #393E46;
+    border: none;
+    border-radius: 8px;
+    color: #FFF;
+    outline: none;
+    font-size: 16px;
+}
+
+.input-group input::placeholder {
+    color: #AAA;
+}
+
+/* Button styling */
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #E94560;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #F15A79;
+}
+
+/* Forgot password link */
+.forgot-password {
+    display: block;
+    margin: 10px 0;
+    text-align: right;
+    color: #AAA;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    color: #FFF;
+}
+
+/* Register text */
+.register-text {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #AAA;
+}
+
+.register-text a {
+    color: #E94560;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
