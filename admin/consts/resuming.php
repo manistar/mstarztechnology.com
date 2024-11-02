@@ -223,11 +223,11 @@ $blog = [
         ],
         "global_class" => "col-md-12"
     ],
-     "upload_image" => [
+     "img" => [
         "is_required" => false,
         "input_type" => "file",
-        "path" => "../upload/blog",
-        "file_name" => "profile_" . uniqid(),
+        "path" => "../upload/blog/",
+        "file_name" => "blog_" . uniqid(),
         "format" => ["jpeg", "jpg", "png"]
     ],
 ];

@@ -1,3 +1,4 @@
+<?php //$script[] = "payment"?>
 <style>
     /* General page styles */
     body {

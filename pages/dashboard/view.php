@@ -1,12 +1,15 @@
-<?php 
-echo $_GET['pID']; 
+<?php
+require_once "passer.php";
+echo $_GET['pID'];
+$likeCount = $d->getall('like_portfolio', 'userID = ?', [$portfolio_single['ID']], fetch: "");
 ?>
 <div class="row align-items-center">
 
     <div class="col-lg-6">
         <div class="portfolio-popup-thumbnail">
             <div class="image">
-                <img class="w-100" src="upload/portfolio/<?= htmlspecialchars($portfolio_single['img']); ?>" alt="slide">
+                <img class="w-100" src="upload/portfolio/<?= htmlspecialchars($portfolio_single['img']); ?>"
+                    alt="slide">
             </div>
         </div>
     </div>
@@ -16,15 +19,29 @@ echo $_GET['pID'];
             <h3><?= htmlspecialchars($portfolio_single['title']); ?></h3>
             <p class="mb--30"><?= htmlspecialchars($portfolio_single['content']); ?></p>
 
+
+
             <div class="button-group mt--20">
-                <a href="#" class="rn-btn thumbs-icon" 
+
+                <form action="passer" method="post" id="foo">
+                    <input type="hidden" name="likesID" value="<?= $portfolio_single['ID']; ?>">
+                    <div id="custommessage"></div>
+                    <button type="submit" class="rn-btn thumbs-icon like-btn" data-id="<?= $portfolio_single['ID']; ?>">
+                        <span id="like-count-<?= $portfolio_single['ID']; ?>">
+                            <?= $likeCount; ?>
+                        </span>
+                        <i data-feather="thumbs-up"></i>
+                    </button>
+                </form>
+
+                <!-- <a href="#" class="rn-btn thumbs-icon" 
                    id="like-btn" 
                    data-id="<?= $portfolio_single['ID']; ?>">
                     <span id="like-count-<?= $portfolio_single['ID']; ?>">
                         <?= $portfolio_single['likes']; ?>
                     </span> LIKE THIS
                     <i data-feather="thumbs-up"></i>
-                </a>
+                </a> -->
             </div>
         </div>
     </div>
@@ -38,7 +55,7 @@ echo $_GET['pID'];
         likeBtn.addEventListener('click', function (event) {
             likePost(event);
         });
-    
+
         function likePost(event) {
             event.preventDefault(); // Prevent default anchor behavior
 
@@ -53,22 +70,22 @@ echo $_GET['pID'];
                 },
                 body: JSON.stringify({ postID: postID }), // Send the post ID
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const currentCount = parseInt(likeCountSpan.textContent) || 0;
-                    likeCountSpan.textContent = currentCount + 1;
-                } else {
-                    console.error('Error liking the post:', data.message);
-                    alert('Could not like the post. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('AJAX request failed:', error);
-                alert('Something went wrong. Please try again.');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const currentCount = parseInt(likeCountSpan.textContent) || 0;
+                        likeCountSpan.textContent = currentCount + 1;
+                    } else {
+                        console.error('Error liking the post:', data.message);
+                        alert('Could not like the post. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('AJAX request failed:', error);
+                    alert('Something went wrong. Please try again.');
+                });
         }
     });
 
-    
+
 </script>

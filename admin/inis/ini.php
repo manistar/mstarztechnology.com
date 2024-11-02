@@ -15,6 +15,7 @@ require_once "content/content.php";
 require_once "function/autorize.php";
 require_once 'function/staffs.php';
 require_once "function/store.php";
+require_once "function/home.php";
 // require 'function/ads.php';
 require 'function/content.php';
 
@@ -26,6 +27,7 @@ $v = new validate;
 $s = new shop;
 $i = new input;
 $c = new content;
+$b = new bar;
 $staff = new staffs;
 // $plan = new plans;
 $content = new web_content;

@@ -12,4 +12,5 @@ class input extends database
         }
     }
 }
+
 ?>

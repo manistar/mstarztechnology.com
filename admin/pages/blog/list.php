@@ -21,7 +21,7 @@
 
               <?= $c->create_form($blog); ?>
 
-              <input type="hidden" name="create_products">
+              <input type="hidden" name="create_blog">
               <div id="custommessage"></div>
              
               <input type="submit" value="Submit" class="btn btn-primary">

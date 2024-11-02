@@ -1,4 +1,5 @@
 <?php
+$d = new database;
 $user_validating = [
     "ID" => ["input_type"=>"hidden", "is_required"=>false],
     "email" => [
@@ -34,7 +35,7 @@ $user_registration = [
     "userID" => ["input_type"=>"hidden", "is_required"=>false],
     "first_name" => [
         "title" => "First Name",
-        "global_class" => "col-md-12",
+        "global_class" => "input-group__item",
         "name"=> "first_name",
         "placeholder" => "Enter your First Name",
         "is_required" => true,
@@ -45,7 +46,7 @@ $user_registration = [
 
     "last_name" => [
         "title" => "Last Name",
-        "global_class" => "col-md-12",
+        "global_class" => "input-group__item",
         "name"=> "last_name",
         "placeholder" => "Enter your Last Name",
         "is_required" => true,
@@ -77,7 +78,7 @@ $user_registration = [
 
     "upload_image"=>[
         "input_type"=>"file", 
-        "path"=>"upload/",
+        "path"=>"upload/profile/",
          "file_name"=>"profile_" .uniqid(), 
          "formart"=>["jpeg", "jpg", "png"]
         ],
@@ -167,6 +168,97 @@ $contact = [
     ],
 ];
 
+$reply_blog = [
+    // "ID" => ["input_type"=>"hidden", "is_required"=>false],
+    "userID" => ["input_type"=>"hidden", "is_required"=>false],
+    "fname" => [
+        "title" => "Full Name",
+        "global_class" => "rnform-group",
+        // "class"=> "rnform-group",
+        "name"=> "fname",
+        "placeholder" => "Enter your Full Name",
+        "is_required" => true,
+        "input_type" => "text",
+        "type" => "input"
+    ],
+    "email" => [
+        "title" => "Email",
+        "global_class" => "rnform-group",
+        // "class"=> "rnform-group",
+        "name"=> "email",
+        "placeholder" => "Example@email.com",
+        "is_required" => true,
+        "input_type" => "email",
+        "type" => "input",
+        "unique"=>""
+    ],
+    "website" => [
+        "title" => "Website Link (Optional)",
+        "global_class" => "rnform-group",
+        "name"=> "website",
+        "placeholder" => "Enter Website Link",
+        "is_required" => true,
+        "input_type" => "text",
+        "type" => "input",
+        "unique"=>""
+    ],
+    "message" => [
+        "title" => "Your Message",
+        "global_class" => "rnform-group",
+        "class" => "col-lg-6 col-md-12 col-12",
+        "name" => "message",
+        "placeholder" => "CONTACT US DESCRIPTION",
+        "is_required" => true,
+        "input_type" => "txtarea",
+        "type" => "textarea"
+    ],
+];
 
-// $d->create_table("users", $user_registration);
+$products_reply = [
+    // "ID" => ["input_type"=>"hidden", "is_required"=>false],
+    "userID" => ["input_type"=>"hidden", "is_required"=>false],
+    "fname" => [
+        "title" => "Full Name",
+        "global_class" => "rnform-group",
+        // "class"=> "rnform-group",
+        "name"=> "fname",
+        "placeholder" => "Enter your Full Name",
+        "is_required" => true,
+        "input_type" => "text",
+        "type" => "input"
+    ],
+    "email" => [
+        "title" => "Email",
+        "global_class" => "rnform-group",
+        // "class"=> "rnform-group",
+        "name"=> "email",
+        "placeholder" => "Example@email.com",
+        "is_required" => true,
+        "input_type" => "email",
+        "type" => "input",
+        "unique"=>""
+    ],
+    "website" => [
+        "title" => "Website Link (Optional)",
+        "global_class" => "rnform-group",
+        "name"=> "website",
+        "placeholder" => "Enter Website Link",
+        "is_required" => true,
+        "input_type" => "text",
+        "type" => "input",
+        "unique"=>""
+    ],
+    "message" => [
+        "title" => "Your Message",
+        "global_class" => "rnform-group",
+        "class" => "col-lg-6 col-md-12 col-12",
+        "name" => "message",
+        "placeholder" => "CONTACT US DESCRIPTION",
+        "is_required" => true,
+        "input_type" => "txtarea",
+        "type" => "textarea"
+    ],
+];
+
+// $d->create_table("prod_reply", $products_reply);
 // $d->quick_insert("users", "ID, userID, first_name, last_name, password", [uniqid(), uniqid(),  "Tunde", "Ajayi", "tundeajayi@gmail.com", "userPassword"], "Account Created Successfully");

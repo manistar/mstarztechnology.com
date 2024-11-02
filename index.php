@@ -1,5 +1,5 @@
 <?php
-    if(!isset($_GET['p'])) {
+    if(!isset($_GET['p']) || $_GET['p'] == "contact" || $_GET['p'] == "blog") {
         $exclude_session = "";
     }
     require_once "inis/ini.php";

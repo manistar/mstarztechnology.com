@@ -46,7 +46,6 @@
     <!-- /.modal-dialog -->
 </div>
 
-
 <script>
     modalelements = document.querySelectorAll('[data-url]');
     console.log(modalelements);
@@ -58,7 +57,7 @@
         // Check if the event listener has already been added
         if (!element.dataset.listenerAdded) {
             element.addEventListener('click', function(e) {
-              console.log("it is me")
+            //   console.log("it is me")
                 modalcontentv2(element);
             });
 
@@ -86,6 +85,7 @@
         modaltitle.innerHTML = `${title} | `;
         modaltitle.appendChild(reloadButton);
     } 
+   
     if (link.startsWith("index")) {
         scrollToTop = true;
         const sidebarLinks = document.querySelectorAll('.sidebar-item.selected');

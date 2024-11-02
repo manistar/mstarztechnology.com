@@ -184,7 +184,21 @@
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="js/my.js"></script>
+<script src="js/my.js?n=980"></script>
+<script>
+    function handlelikes(action, postID) {
+        likecount = document.getElementById("like-count-"+postID) ?? 0;
+        likecount.innerHTML = parseInt(likecount.innerHTML) + parseInt(action);
+        console.log(likecount.innerHTML);
+    }
+</script>
+<?php if(in_array("payment", $script)) { ?>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script src="js/payment.js?n=11010"></script> 
+<?php }?>
+<!-- This is to be copied and paste in the list -->
+ <!-- <?php $script[] = "payment"?> -->
+
 <script src="https://checkout.flutterwave.com/v3.js"></script>
 <script src="js/payment.js?n=11010"></script>
 
@@ -205,9 +219,41 @@
 <!-- main JS -->
 
 <script src="assets/js/main.js"></script>
+
+
+<!-- reCAPTCHA JavaScript API -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- <script src="https://www.google.com/recaptcha/api.js?render=6LdXUXMqAAAAAH0_pUrz30Oin6y0wF2sGo-TF-3K"></script>
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LdXUXMqAAAAAH0_pUrz30Oin6y0wF2sGo-TF-3K', { action: 'contact' }).then(function(token) {
+            // Don't display or log the token; just send it to the backend
+            const formData = new FormData(document.getElementById('contactForm'));
+            formData.append('g-recaptcha-response', token);
+
+            fetch('/your-contact-endpoint', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show success or error messages without displaying the token
+                if (data.success) {
+                    alert("Message sent successfully!");
+                } else {
+                    alert("CAPTCHA failed. Please try again.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+}); -->
+</script>
+
+<!-- Endof reCAPTCHA JavaScript API --> 
+
 </body>
-
-
-<!-- Mirrored from rainbowit.net/html/inbio/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Sep 2022 06:54:06 GMT -->
-
 </html>

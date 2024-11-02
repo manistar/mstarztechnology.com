@@ -1,4 +1,8 @@
-
+<?php
+// Check if user is logged in
+// $loggedIn = isset($_SESSION['userSession']);  
+// Adjust session key if needed
+?>
 <main class="main-page-wrapper">
 
     <!-- Start Slider Area -->
@@ -225,13 +229,16 @@
 
 
                 <!-- Start Single Portfolio -->
-                <?php 
-                
+                <?php
+
                 foreach ($portfolio as $row) { ?>
                     <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true"
                         class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            <div href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bs-example-modal-md" id="chat_user_<?= $row['ID'] ?>" data-url="modal?p=dashboard&action=view&pID=<?= $row['ID'] ?>" data-title="<?= $row['title'] ?>" data-user-id="<?= $row['ID'] ?>" class="inner">
+                            <div href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bs-example-modal-md"
+                                id="chat_user_<?= $row['ID'] ?>"
+                                data-url="modal?p=dashboard&action=view&pID=<?= $row['ID'] ?>"
+                                data-title="<?= $row['title'] ?>" data-user-id="<?= $row['ID'] ?>" class="inner">
                                 <div class="thumbnail">
                                     <a href="javascript:void(0)">
                                         <img src="upload/portfolio/<?= $row['img']; ?>" alt="Personal Portfolio Images">
@@ -254,7 +261,7 @@
                         </div>
                     </div>
                 <?php }
-                require_once 'content/modal.php'; 
+                require_once 'content/modal.php';
                 ?>
                 <!-- End Single Portfolio -->
 
@@ -414,7 +421,9 @@
 
             <div class="row row--25 mt_md--10 mt_sm--10">
                 <?php if ($product_data->rowCount() > 0) {
-                    foreach ($product_data as $row) { ?>
+                    foreach ($product_data as $row) { 
+                        $likeCount = $d->getall('like_product', 'productID = ?', [$row['ID']], fetch: "");
+                        ?>
                         <!-- Start Single Service -->
                         <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true"
                             class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
@@ -438,22 +447,47 @@
                                         <hr />
 
                                         <div class="product-action-bottom bankbtn">
+
+                                            <!-- <div class="button-group mt--20"> -->
+                                            <form action="passer" method="post" id="foo">
+                                                <input type="hidden" name="likeID" value="<?= $row['ID']; ?>">
+                                                <div id="custommessage"></div>
+                                                <button type="submit" class="rn-btn thumbs-icon like-btn" data-id="<?= $row['ID']; ?>">
+                                                    <span id="like-count-<?= $row['ID']; ?>">
+                                                        <?= $likeCount; ?>
+                                                    </span>
+                                                    <i data-feather="thumbs-up"></i>
+                                                </button>
+                                            </form>
+
+                                            <!-- <div id="custommessage"></div>
+                                            <div class="rn-btn thumbs-icon like-btn" data-id="<?= $row['ID']; ?>">
+                                                <span id="like-count-<?= $row['ID']; ?>">
+                                                    <?= $likeCount; ?>
+                                                </span>
+                                                <i data-feather="thumbs-up"></i>
+                                            </div> -->
+                                            
+                                            <!-- </div> -->
+
                                             <!-- Eye Icon Button -->
-                                       
-                                            <button type="button" class="product-action-btn action-btn-quick-view" data-toggle="modal" data-target="#bankModal">
+
+                                            <button type="button" class="product-action-btn action-btn-quick-view"
+                                                data-toggle="modal" data-target="#bankModal">
                                                 <a href="?p=product-details&ID=<?= $row['ID'] ?>">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                             </button>
 
-                                           
 
 
-                                           
+
+
 
                                             <!-- Add to Cart Button -->
                                             <form action="passer" method="post" class="add-to-cart-form" id="foo">
                                                 <?php
+                                                // session_start();
                                                 $add_cart['input_data']['productID']  = $row['ID'];
                                                 $add_cart['input_data']['no_product'] = $P->get_no_of_product_in_cart($userID, $row['ID']);
                                                 echo $c->create_form($add_cart);
@@ -463,7 +497,7 @@
                                                 <div id="custommessage"></div>
 
                                                 <button type="submit" class="add-to-cart" data-product-id="<?= $row['ID']; ?>"
-                                                    title="Add To Cart">
+                                                    title="Add To Cart" id="addToCartButton">
                                                     <i class="fas fa-shopping-cart"></i>
                                                 </button>
                                             </form>
@@ -483,7 +517,7 @@
             <!-- Modal -->
 
             <!-- Modal -->
-<!-- <div class="modal fade" id="bankModal" tabindex="-1" role="dialog" 
+            <!-- <div class="modal fade" id="bankModal" tabindex="-1" role="dialog" 
     aria-labelledby="bankModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -495,9 +529,9 @@
                 <div class="sd-block-text-desc">
                     <p style="text-align: right;"></p>
                     <hr />
-                    <p style="text-align: right;"><?=$row['description'];?></p>
+                    <p style="text-align: right;"><?= $row['description']; ?></p>
                     <hr />
-                    <p style="text-align: right;">Available Credit Balance: <?=$row['amount'];?></p>
+                    <p style="text-align: right;">Available Credit Balance: <?= $row['amount']; ?></p>
                     <hr />
                 </div>
             </div>
@@ -2509,114 +2543,13 @@
     </div>
     <!-- End client section -->
     <!-- Pricing Area -->
-    
+
     <!-- pricing area -->
 
 
 
     <!-- Start News Area -->
-    <div class="rn-blog-area rn-section-gap section-separator" id="blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true"
-                        class="section-title text-center">
-                        <span class="subtitle">Visit my blog and keep your feedback</span>
-                        <h2 class="title">My Blog</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row row--25 mt--30 mt_md--10 mt_sm--10">
 
-
-                <?php foreach ($news as $row) { ?>
-                    <!-- Start Single blog -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true"
-                        class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-bs-toggle="modal" data-bs-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="upload/blog/<?= $row['img']; ?>" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)"><?= $row['topic']; ?></a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 2 min read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)"><?= $row['title']; ?>
-                                            <i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single blog -->
-                <?php } ?>
-
-
-
-
-
-                <!-- Start Single blog -->
-                <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="150" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-bs-toggle="modal" data-bs-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-02.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Development</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 2 hour read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">The services provide for design <i
-                                        class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- End Single blog -->
-
-                <!-- Start Single blog -->
-                <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-bs-toggle="modal" data-bs-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-03.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Application</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 5 min read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Mobile app landing design & app
-                                            maintain<i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- End Single blog -->
-
-            </div>
-        </div>
-    </div>
     <!-- ENd Mews Area -->
 
 
@@ -3523,3 +3456,13 @@
     <!-- End Modal Area  -->
 
 </main>
+
+<script>
+    // document.getElementById('addToCartButton').addEventListener('click', function (event) {
+    //     <?php if (!$loggedIn): ?>  // If user not logged in, prevent submission
+    //         event.preventDefault();
+    //         // Redirect to login page (rewritten URL)
+    //         window.location.href = "login";
+    //     <?php endif; ?>
+    // });
+</script>

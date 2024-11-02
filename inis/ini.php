@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// error_reporting(0);
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -14,10 +15,12 @@ require_once "consts/shop.php";
 require_once "consts/checkout.php";
 require_once "function/server.php";
 require_once 'function/payment.php';
+require_once "function/reply.php";
 $d = new database;
 $c = new content;
 $P = new Project;
 $p = new payment;
+$R = new Reply;
 
 $data = "";
 $script = [];
@@ -53,6 +56,11 @@ if (isset($_GET['ID'])) {
 if(isset($_GET['pID'])){
     $product_id = $_GET['pID'];
     $portfolio_single = $d->getall("user_details", "ID = ?", [$product_id]);
+}
+
+if(isset($_GET['pID'])){
+    $product_id = $_GET['pID'];
+    $blog_single = $d->getall("user_details", "ID = ?", [$product_id]);
 }
 
     $news = $d->getall("user_details", "label = ?", ["blog"], fetch: "moredetails");

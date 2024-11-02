@@ -68,6 +68,49 @@ if(isset($_POST['create_products'])){
     echo $i->upload_products($store_insert);
     return null;
 }
+
+if(isset($_POST['upload_what'])){
+    require_once "inis/ini.php";
+    echo $b->control_page($what_i_do);
+    return null;
+}
+
+if(isset($_POST['upload_edu'])){
+    require_once "inis/ini.php";
+    echo $b->edu_page($education);
+    return null;
+}
+
+if(isset($_POST['upload_job'])){
+    require_once "inis/ini.php";
+    echo $b->job_page($job_ex);
+    return null;
+}
+
+if(isset($_POST['create_blog'])){
+    require_once "inis/ini.php";
+    echo $b->blog_page($blog);
+    return null;
+}
+
+if(isset($_POST['upload_blog'])){
+    require_once "inis/ini.php";
+    echo $b->blog_page($blog);
+    return null;
+}
+
+if(isset($_POST['upload_testimonial'])){
+    require_once "inis/ini.php";
+    echo $b->testimonial_page($testimonial);
+    return null;
+}
+
+if(isset($_POST['upload_portfolio'])){
+    require_once "inis/ini.php";
+    echo $b->portfolios_page($portfolio);
+    return null;
+}
+
 // print_r($_POST);
 
 if(isset($_POST['newpayment'])){

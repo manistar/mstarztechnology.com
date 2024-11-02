@@ -1,6 +1,11 @@
 <?php
+$exclude_session = true;
+//  require_once "inis/ini.php";
+
+    //   var_dump($_POST);  
         if(isset($_POST['add_to_cart'])) {
             require_once "inis/ini.php";
+            handleLogin();
             require_once "consts/shop.php";
              require_once "function/server.php";
              echo $P->add_to_cart($add_cart);
@@ -19,9 +24,17 @@
     // create account
     if (isset($_POST['userRegister'])) {
         // var_dump($data);
-        require_once "inis/ini.php";
+        require_once "include/auth-ini.php";
         require_once "consts/user.php";
         echo $P->signup($user_registration);
+        return null;
+    }
+
+    if(isset($_POST['submit_reply'])) {
+        require_once "inis/ini.php";
+        require_once "consts/user.php";
+        echo $P->blog_submit($reply_blog);
+        var_dump($data);
         return null;
     }
 
@@ -39,32 +52,54 @@
         return null;
     }
 
+    if(isset($_POST['product_reply'])){
+        require_once "inis/ini.php";
+        // echo "i am here";
+        require_once "consts/user.php";
+        $R->reply_server($products_reply);
+        return null;
+    }
 
 
 // Get the raw POST data
+
+// Fetch the raw POST data
 $data = json_decode(file_get_contents('php://input'), true);
-// $data = $d->getall("user_details", "ID = ?", [$data['portfolio']], fetch: "details");
-if (isset($data['postID'])) {
-    require_once "inis/ini.php";
-    $postID = (int) $data['postID']; // Cast to integer for security
 
-    // Define the update logic
-    $update = $d->update(
-        "user_details", // Table name
-        ["likes" => "likes + 1"], // Increment logic
-        "ID = $postID", // Where clause
-        "Post like incremented successfully" // Optional success message
-    );
-
-    // Respond with appropriate JSON message
-    if ($update) {
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to update likes']);
+if(isset($_POST['likeID'])) {
+    require_once "inis/ini.php";    
+    handleLogin();
+    $postID = $_POST['likeID'];
+    $ip_address = $d->get_visitor_details()['ip_address'];
+    if(!$userID) $userID = "";
+    $data = [$userID , $ip_address, $postID];
+    $check = $d->getall("like_product", "(userID = ? or ip_address = ?) and productID = ?", $data);
+    if(!is_array($check)) {
+        $d->quick_insert("like_product", ['userID'=>$userID, 'ip_address'=>$ip_address, 'productID'=>$postID]);
+        $return =[
+            'message'=>['success', 'Success', 'Product Liked'],
+            'function'=>['handlelikes', 'data'=>[1, $postID]],
+        ];
+        echo json_encode($return);
+        return;
     }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid post ID']);
+    $d->delete('like_product', '(userID = ? or ip_address = ?) and productID = ?', $data);
+    $return =[
+        'message'=>['success', 'Success', 'Product Unliked'],
+        'function'=>['handlelikes', 'data'=>[-1, $postID]],
+    ];
+    echo json_encode($return);
 }
 
+// throw new Exception('Invalid post ID');
 
+function handleLogin() {
+    if(!isset($_SESSION['userSession'])){
+        echo json_encode([
+            "message"=>["error", "Error", "Login First"],
+            "function"=>["loadpage", "data"=>["login", "null"]]
+        ]);
+        exit;
+     }
+}
 ?>

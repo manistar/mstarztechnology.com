@@ -70,7 +70,44 @@
                 <!-- Comment Section Area Start -->
                 <div class="comment-inner">
                     <h3 class="title mb--40 mt--50">Leave a Reply</h3>
-                    <form action="#">
+
+
+                    <!-- <form action="passer" id="foo" onsubmit="return false">
+                            <div class="row">
+                                    <?= $c->create_form($products_reply);?>
+                                    
+                                    <input type="hidden" name="product_reply" value="">
+                                    <div id="custommessage"></div>
+                                <div class="col-lg-12">
+                                    <input type="submit" class="rn-btn" value="SEND MESSAGE">
+                                   
+                                </div>
+                            </div>
+                        </form> -->
+
+                        <form action="passer" id="foo">
+                                            <div class="row">
+                                            <?= $c->create_form($products_reply);?>
+                                                <!-- First row -->
+                                            </div>
+
+                                            <input type="hidden" name="product_reply" value="">
+                                            <div id="custommessage"></div>
+                                            <div class="submit-row">
+                                                <center>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group " style ="padding-left: 15px">
+                                                            <input type="submit" class="btn btn-success"
+                                                                value="SEND MESSAGE">
+                                                                <!-- <i data-feather="arrow-right"></i> -->
+                                                        </div>
+                                                    </div>
+                                                </center>
+                                            </div>
+
+                                        </form>
+
+                    <!-- <form action="#">
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-12">
                                 <div class="rnform-group"><input type="text" placeholder="Name">
@@ -89,7 +126,7 @@
                                 <a class="rn-btn" href="#"><span>SUBMIT NOW</span></a>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
                 <!-- Comment Section End -->
             </div>

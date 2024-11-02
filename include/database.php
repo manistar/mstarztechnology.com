@@ -157,6 +157,25 @@ class database
         return $value;
     }
 
+    public function handle_login_request() {
+        // Create an instance of the handler and process the login
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            
+            // Check if token is provided for Google Sign-In
+            $token = $input['token'] ?? null;
+            if ($token) {
+                // Use Google sign-in method
+                $this->google_signin($token);
+            } else {
+                // Fall back to regular sign-in method if no token
+                $this->signin($input); // Assuming $input contains email and password for traditional login
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+        }
+    }
+    
 
     // USEAGE
     // Insert single data
