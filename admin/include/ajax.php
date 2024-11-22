@@ -3,20 +3,26 @@ require_once 'session.php';
 require_once 'database.php';
 $d = new database;
 
-if (isset($_POST['chatnow'])) {
-    $myuser = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8'); // Sanitize user ID
-    $chat = htmlspecialchars($_POST['chat'], ENT_QUOTES, 'UTF-8'); // Sanitize chat message
+// if (isset($_POST['chatnow'])) {
+//     $myuser = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8'); // Sanitize user ID
+//     $chat = htmlspecialchars($_POST['chat'], ENT_QUOTES, 'UTF-8'); // Sanitize chat message
 
-    // Insert the new chat using the newchat function
-    $response = $d->newchat($chat, $myuser);
+//     // Insert the new chat using the newchat function
+//     $response = $d->newchat($chat, $myuser);
 
-    // Return a JSON response
-    if ($response) {
-        echo json_encode(['status' => 'success', 'message' => 'Message sent successfully']);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to send message.']);
-    }
-    exit; // Ensure no further output
+//     // Return a JSON response
+//     if ($response) {
+//         echo json_encode(['status' => 'success', 'message' => 'Message sent successfully']);
+//     } else {
+//         echo json_encode(['status' => 'error', 'message' => 'Failed to send message.']);
+//     }
+//     exit; // Ensure no further output
+// }
+
+if(isset($_POST['chatnow'])){
+    $myuser = htmlspecialchars($_POST['userID']);
+    $chat = htmlspecialchars($_POST['chat']);
+    $d->newchat($chat, $myuser);
 }
 
 if (isset($_GET['updatechat'])) {

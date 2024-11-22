@@ -20,6 +20,11 @@ require_once "include/ini-users.php";
 $s = new shop; 
 $script = [];
 
+if(isset($_GET['lockscreen'])){
+    $_SESSION['lockscreen'] = $dat['password'];
+    header("Location: lock");
+}
+
 // $adminID = $userID; 
 // $data = $d->getall("admins", "ID = ?", [$adminID], fetch: "details");
 ?>

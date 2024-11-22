@@ -52,7 +52,7 @@ $date = date('Y-m-d');
 
 if(isset($_GET['lockscreen'])){
     $_SESSION['lockscreen'] = $dat['password'];
-    header("Location:lock");
+    header("Location: lock");
 }
 
 $page = "dashboard";

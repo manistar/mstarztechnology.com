@@ -110,121 +110,26 @@ class database
     }
 
 
-    // function newchat($message, $userID)
-    // {
-    //     $database = new database;
+
+function newchat($message, $userID)
+    {
+        $database = new database;
        
-    //     // Determine whois based on the active session
-    //     if (isset($_SESSION['adminSession'])) {
-    //         $whois = "admin";
-    //         $userID = htmlspecialchars($_SESSION['adminSession'], ENT_QUOTES, 'UTF-8');
-    //     } elseif (isset($_SESSION['userSession'])) {
-    //         $whois = "user";
-    //         $userID = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');
-    //     } else {
-    //         // If neither session exists, return false
-    //         return false;
-    //     }
-        
-    //     // Prepare data for insertion
-    //     $data = [
-    //         'userID' => $userID,
-    //         'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
-    //         'whois' => $whois
-    //     ];
-    
-    //     // Insert into the database using `quick_insert`
-    //     $table = "chat";
-    //     $insert = $database->quick_insert($table, $data);
-    
-    //     // Handle the status of the insert operation
-    //     if ($insert) {
-    //         // Optional: Notify success
-    //         // $database->message("Message sent", "success");
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+        $whois    = "admin";
 
+        // Insert into the database using `quick_insert`
+        $table = "chat";
+        $data = [
+                    'userID' => $userID,
+                    'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
+                    'whois' => $whois
+                ];
 
-    // public function newchat($message) {
-    //     // Ensure the database instance is correctly initialized
-    //     $database = new database;
-    
-    //     // Determine the sender's identity and userID
-    //     if (isset($_SESSION['adminSession'])) {
-    //         $whois = "admin";
-    //         $userID = htmlspecialchars($_SESSION['adminSession'], ENT_QUOTES, 'UTF-8');
-    //     } elseif (isset($_SESSION['userSession'])) {
-    //         $whois = "user";
-    //         $userID = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');
-    //     } else {
-    //         // If neither session exists, return false
-    //         return false; // Optional: Handle this scenario or log it
-    //     }
-    
-    //     // Prepare data for insertion (as an associative array)
-    //     $data = [
-    //         'userID' => $userID,
-    //         'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
-    //         'whois' => $whois
-    //     ];
-    
-    //     // Insert into the database using `quick_insert`
-    //     $table = "chat";
-    
-    //     // Pass the data to `quick_insert`
-    //     $insert = $database->quick_insert($table, $data);
-    
-    //     // Optionally handle the status of the insert operation
-    //     if ($insert) {
-    //         return true;
-    //     } else {
-    //         return false; // Optional: Log or handle the failure
-    //     }
-    // }
-    
-    
-
-    function newchat($message, $userID)
-{
-    $database = new database;
-
-    if (isset($_SESSION['userSession'])) {
-        $whois = "admin";
-        $userID = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');
-    } elseif (isset($_SESSION['adminSession'])) {
-        $whois = "user";
-        $userID = htmlspecialchars($_SESSION['adminSession'], ENT_QUOTES, 'UTF-8');
-    } else {
-        return false; // User not authenticated
+        // Perform the insert
+        return $database->quick_insert($table, $data);
     }
+    
 
-    // Prepare data for insertion (as an associative array)
-    $data = [
-        'userID' => $userID,
-        'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
-        'whois' => $whois
-    ];
-
-    // Insert into the database using `quick_insert`
-    $table = "chat";
-    $insert = $database->quick_insert($table, $data);
-
-    if ($insert) {
-        return json_encode(['status' => 'success', 'message' => 'Message sent successfully']);
-    } else {
-        return json_encode(['status' => 'error', 'message' => 'Failed to send message. Please try again later.']);
-    }
-}
-
-    // function updatechat(){
-    //     $database = new database;
-    //     $userID  = htmlspecialchars($_SESSION['userSession']);
-    //     return $chats = $database->getall("chat", "userID = ? ORDER by date asc", [$userID], fetch: "moredetails");
-   
-    // }
 
     function updatechat($userID)
     {

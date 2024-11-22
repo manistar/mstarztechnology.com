@@ -22,6 +22,7 @@ class validate extends database
         }
     }
 
+    
     function lockscreen($screen_locked) {
         $data = $this->validate_form($screen_locked);
         if (!is_array($data)) return null;
@@ -31,7 +32,6 @@ class validate extends database
             $this->message("User not found", "error");
             return;
         }
-        
     
         if(isset($_POST['unlock'])){
             $stored_password = $user['password']; // Assuming 'password' is the column name in the database
@@ -41,7 +41,7 @@ class validate extends database
                 unset($_SESSION['lockscreen']);
                 $_SESSION['adminSession'] = $user['ID'];
                 // echo "Got here";
-                return $this->loadpage("index", "json");
+                return $this->loadpage("index.php", "json");
             } else {
                 $this->message("Password Incorrect", "error");
                 return;
