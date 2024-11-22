@@ -28,7 +28,7 @@ $payments = $d->getall("payment", "userID = ? order by date DESC LIMIT 5", [$use
                 require "consts/payment/list.php";
                 break;
                 case 'invoice':
-                  require "consts/payment/invoice.php";
+                  require "consts/invoice.php";
                   break;
               default:
                 require "consts/payment/list.php";

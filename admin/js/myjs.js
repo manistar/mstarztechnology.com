@@ -32,7 +32,7 @@ $("#foo").submit(function (event) {
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "ajax.php",
+        url: "ajax",
         type: "post",
         data: serializedData
     });
@@ -118,7 +118,7 @@ function notify(title, message, type) {
         // document.getElementById('image'+id).style.display = "none";
         $.ajax({
             type: 'post',
-            url: 'ajax.php',
+            url: 'ajax',
             data: {
                 removeimage: what,
                 id: id,
@@ -138,7 +138,7 @@ function deletecat(id) {
         // document.getElementById('image'+id).style.display = "none";
         $.ajax({
             type: 'post',
-            url: 'ajax.php',
+            url: 'ajax',
             data: {
                 deletecat: what,
                 id: id,
@@ -151,12 +151,12 @@ function deletecat(id) {
     }
 }
 
-// Check ../ajax.php
+// Check ../ajax
 function search(key, contentshow) {
     document.getElementById(contentshow).innerHTML = "Loading...";
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             searchkey: key,
         },
@@ -185,7 +185,7 @@ function toggleCheckbox(box){
 
     $.ajax({
         type: "post",
-        url: "ajax.php",
+        url: "ajax",
         data: data,
         success: function (response) {
             alert("Data Checked");
@@ -200,7 +200,7 @@ function updaterow(id, tname){
     }
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             updaterow: tname,
             id: id,
@@ -253,7 +253,7 @@ function updatetable(tableid, id){
     // element.querySelector("data-card-widget").value = "card-refresh";
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             updatetable: tableid,
             id: id,
@@ -277,7 +277,7 @@ function showcontent(title, link, id) {
     modaltitle = document.getElementById('modal-title').innerHTML = title;
     $.ajax({
         type: 'post', 
-        url: 'modaldisplay.php',
+        url: 'modaldisplay',
         data: {
             urlink: link,
             id: id,
@@ -313,10 +313,10 @@ function modalcontent(id) {
     title += ' | <span class="btn btn-tool" id="'+id+'" data-url="'+link+'" data-id="'+id+'" data-title="'+title+'" onclick="modalcontent(\''+id+'\')"> <li class="nav-icon fas fa-sync"></li> Reload</span>';
     id = value.dataset.id;
     modaltitle = document.getElementById('modal-title').innerHTML = title;
-    document.getElementById("modal-body").innerHTML = "Getting data...";
+    document.getElementById("modal-body").innerHTML = "Processing data...";
     $.ajax({
         type: 'post',
-        url: 'modaldisplay.php',
+        url: 'modaldisplay',
         data: {
             secured:"yes",
             urlink: link,
@@ -341,7 +341,7 @@ function updatestaus(id, where){
    value = document.getElementById(id).value;
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             secured:"yes",
             updatestaus: where,
@@ -363,7 +363,7 @@ function deletecat(id) {
     if (r == true) {
         $.ajax({
             type: 'post',
-            url: 'ajax.php',
+            url: 'ajax',
             data: {
                 deletecat: id,
                 subid: id,
@@ -382,7 +382,7 @@ function deletemaincat(id) {
     if (r == true) {
         $.ajax({
             type: 'post',
-            url: 'ajax.php',
+            url: 'ajax',
             data: {
                 deletemaincat: id,
                 catid: id,
@@ -399,7 +399,7 @@ function editcat(id) {
     catvalue = document.getElementById("input" + id).value;
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             editcat: id,
             catvalue: catvalue,
@@ -420,7 +420,7 @@ function addsubcat() {
     subcatname = document.getElementById("subcatname").value;
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             catid: catid,
             subcatname: subcatname,
@@ -445,7 +445,7 @@ function submitform() {
     document.getElementById("custommessage").innerHTML = "Please wait...";
     var fd = new FormData(myform);
     $.ajax({
-        url: "ajax.php",
+        url: "ajax",
         data: fd,
         cache: false,
         processData: false,
@@ -465,7 +465,7 @@ function checktask(id) {
         paid_amount = document.getElementById('pay-' + id).value;
         $.ajax({
             type: 'post',
-            url: 'ajax.php',
+            url: 'ajax',
             data: {
                 comfirmtask: id,
                 paid_amount: paid_amount,
@@ -490,7 +490,7 @@ function checktask(id) {
 function cooperative_payin_form(id, name, amount) {
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             cooperative_payin_form: id,
             amount: amount,
@@ -506,7 +506,7 @@ function cooperative_payin_form(id, name, amount) {
 function updateinfo(what, id) {
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             what: what,
             id: id,
@@ -529,7 +529,7 @@ function saymyname() {
 
     $.ajax({
         type: 'post',
-        url: 'ajax.php',
+        url: 'ajax',
         data: {
             id: id,
             date: date,

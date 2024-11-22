@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 // error_reporting(0);
 error_reporting(E_ALL);
@@ -16,11 +16,13 @@ require_once "consts/checkout.php";
 require_once "function/server.php";
 require_once 'function/payment.php';
 require_once "function/reply.php";
+require_once "function/FingerprintAuth.php";
 $d = new database;
 $c = new content;
 $P = new Project;
 $p = new payment;
 $R = new Reply;
+$F = new FingerprintAuth;
 
 $data = "";
 $script = [];
@@ -73,4 +75,7 @@ if(isset($_GET['pID'])){
     //  $cart_data = $d->getall("cart", "productID = ?", [$userID], fetch: 'moredetails');
     $cart_data = $d->getall("cart", fetch: "moredetails");
     $product_data = $d->getall("products", fetch: "moredetails");
+    $chats = $d->getall("chat", "userID = ? ORDER by date asc", [$userID], fetch: "moredetails");
+
+    // $acct = $d->fastgetwhere($what_to_get="account", $where="userID = ?", $userID, $status="details");
 ?>

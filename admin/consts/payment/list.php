@@ -26,7 +26,8 @@
                                                         echo "danger";
                                                     } ?>"><span style="display:none">status:</span><?= $row['status'] ?></span></td>
                     <td><?php echo date("F d, Y", strtotime($row['date'])); ?></td>
-                    <td><a href="payment.php?a=invoice&id=<?= $row['ID']; ?>" target="_blank" rel="noopener noreferrer">Invoice</a></td>
+                    <td><a href="?p=payment&action=invoice&id=<?= $row['ID']; ?>" target="_blank" rel="noopener noreferrer">Invoice</a></td>
+                    <!-- <td><a href="consts/payment.php?p=invoice&id=<?= $row['ID']; ?>" target="_blank" rel="noopener noreferrer">Invoice</a></td> -->
                 </tr>
             <?php } ?>
         </tbody>

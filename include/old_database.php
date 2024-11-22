@@ -152,7 +152,7 @@ class Database{
          }
     }
 
-    function smtpmailer($to, $from_name, $subject, $body, $name = "", $message = '')
+    function smtpmailerd($to, $from_name, $subject, $body, $name = "", $message = '')
     {
         // echo $body;
         try {

@@ -111,19 +111,34 @@ $user_registration = [
         "input_type"=>"password",
         "type" => "input"
     ],
-    // "confirm_password" => [
-    //     "title" => "Password",
-    //     "global_class" => "col-md-12",
-    //     "name"=> "password",
-    //     "placeholder" => "Confirm your password",
-    //     "is_required" => true,
-    //     "input_type"=>"password",
-    //     "type" => "input"
-    // ],
-    // "input_data"=>["userID"=>uniqid()],
+  
 ];
 
+$screen_locked = [
+    "email" => [
+        "title" => "Email",
+        "global_class" => "col-md-12",
+        "name" => "email",
+        "placeholder" => "example@email.com",
+        "is_required" => false,
+        "input_type" => "email",
+        "type" => "input",
+        "icon" => ["type" => "icon", "options" => "fas fa-envelope"] // Assign the icon as an array
+    ],
 
+    "password" => [
+        "title" => "Password",
+        "global_class" => "col-md-12",
+        "name" => "password",
+        "placeholder" => "Enter your password",
+        "onfocus" => "if (this.value === 'Password') { this.value = ''; }",
+        "onblur" => "if (this.value === '') { this.value = 'Password'; }",
+        "id" => "validatePass",
+        "is_required" => true,
+        "input_type" => "password",
+        "type" => "input"
+    ],
+];
 
 // $d->create_table("users", $user_registration);
 // $d->quick_insert("users", "ID, userID, first_name, last_name, password", [uniqid(), uniqid(),  "Tunde", "Ajayi", "tundeajayi@gmail.com", "userPassword"], "Account Created Successfully");

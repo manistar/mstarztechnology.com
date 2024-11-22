@@ -735,7 +735,7 @@ class database
     
                 
         }
-    function smtpmailer($to, $subject, $body, $name = "", $message = '', $smtpid = 1)
+    function smtpmailers($to, $subject, $body, $name = "", $message = '', $smtpid = 1)
     {
         $body = htmlspecialchars_decode($body);
         // return $to;

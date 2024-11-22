@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['id'])){
         $id = htmlspecialchars($_POST['id']); 
-        $data = $d->fastgetwhere("products", "ID = ?", $id, "details");
+        $data = $d->getall("products", "ID = ?", [$id], "details");
         if(!is_array($data)){
             return $d->message("Ads not found", "error");
         }

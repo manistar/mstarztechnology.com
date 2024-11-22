@@ -2,10 +2,14 @@
 $d = new database;
 $data = [];
 if (isset($_SESSION['userSession'])) {
+    // $_SESSION['userSession'] = $user_id;
     $userID = htmlspecialchars($_SESSION['userSession']);
 }else{
     $userID = "";
 }
+
+
+
 // $userID = htmlspecialchars($_SESSION['userSession']);
 $add_cart  = [
     // "ID"=>["input_type"=>"number"],

@@ -54,9 +54,12 @@
                     </div>
                 </div>
                 <!-- End Single Blog -->
-            <?php } ?>
+            <?php      
+             }
+             require_once 'content/modal.php';
+            ?>
 
-            <?php require_once 'content/modal.php'; ?>
+            <?php //require_once 'content/modal.php'; ?>
         </div>
     </div>
 </div>

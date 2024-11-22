@@ -6,11 +6,12 @@
       <th>Status</th>
       <th>ID</th>
       <th>Name</th>
-      <th>Phone Number</th>
+      <th>Phone</th>
       <th>Email</th>
       <th>Address</th>
       <th>Status</th>
-      <th>Joined on</th>
+      <th>Ip</th>
+      <th>Date</th>
       <th>Actions</th>
     </tr>
   </thead>

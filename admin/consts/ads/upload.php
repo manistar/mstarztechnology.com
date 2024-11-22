@@ -1,8 +1,8 @@
 <?php if (isset($_GET['upload'])) {
     $id = htmlspecialchars($_GET['upload']);
-    $ads = $d->fastgetwhere("products", "ID = ?", $id, "details");
+    $ads = $d->getall("products", "ID = ?", [$id], fetch: "details");
     if (is_array($ads)) {
-        $images = $d->fastgetwhere("image_upload", "forID = ?", $ads['ID'], "moredetails");
+        $images = $d->getall("image_upload", "forID = ?", [$ads['ID']], fetch: "moredetails");
 ?>
         <link rel="stylesheet" type="text/css" href="../css2/dropzone.css" />
         <link rel="stylesheet" type="text/css" href="../css2/style.css" />

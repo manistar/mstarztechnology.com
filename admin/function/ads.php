@@ -116,6 +116,8 @@ class ads extends database {
             $d->message("No product selected", "error");
         }
     }
+
+    
   
     // update ads status
     function updateadsstatus()

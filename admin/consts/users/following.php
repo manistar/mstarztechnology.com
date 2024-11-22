@@ -2,7 +2,7 @@
 <?php 
     if(isset($_POST['id'])){
         $id = htmlspecialchars($_POST['id']);
-        $follow = $d->fastgetwhere("followers", "userID = ? ORDER BY date ASC", $id, "moredetails");
+        $follow = $d->getall("followers", "userID = ? ORDER BY date ASC", [$id], fetch: "moredetails");
         if($follow != ""){
             echo "<div class='overflow'>";
             foreach ($follow as $row) {

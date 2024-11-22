@@ -1,13 +1,13 @@
 <?php if (isset($_GET['upload']) && htmlspecialchars($_GET['upload']) != "") { 
-    require_once "content/ads/upload.php";
+    require_once "ads/upload.php";
    } else { ?>
     <h4>Post Ads</h4>
     <hr>
     <form method="POST" id="foo">
     <?php
     $value = array();
-    $productcategories = $d->fastget("categories", "ID", ';');
-    $subcategories = $d->fastget("sub_categories", "ID", ';');
+    $productcategories = $d->getall("categories", "ID", []);
+    $subcategories = $d->getall("sub_categories", "ID", []);
     foreach ($productcategories as $row) {
         $id = $row['ID'];
         $name = $row['name'];

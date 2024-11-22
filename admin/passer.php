@@ -14,6 +14,10 @@ if(isset($_POST['update_home'])){
  return null;
 }
 
+if (isset($_POST['create_account'])) {
+    require_once "inis/ini.php";
+    $u->createuser($new_user);
+}
 
 // if(isset($_POST['unlock'])){
 //     require_once "inis/ini.php";
@@ -36,31 +40,41 @@ if(isset($_POST['update_home'])){
 // session_start(); // Start the session
 
 
-if(isset($_POST['unlock'])) {
-    require_once "inis/ini.php";
+// if(isset($_POST['unlock'])) {
+//     require_once "inis/ini.php";
 
-    // Check if $_SESSION['lockscreen'] is set
-    if (isset($_SESSION['lockscreen'])) {
-        $correct = $_SESSION['lockscreen'];
-        $pass = htmlspecialchars($_POST['password']);
-        if (password_verify($pass, $correct)) {
-            unset($_SESSION['lockscreen']);
-            $url = "index.php";
-            echo "<script language=\"Javascript\" type=\"text/javascript\">
-                window.location=\"$url\";
-                </script>";
-            exit; // Add this line to stop further execution after redirection
-        } else {
-            echo $error = '<div class="alert alert-danger">
-                <strong>Warning!</strong> Password Incorrect
-            </div>';
-        }
-    } else {
-        // Handle the case where $_SESSION['lockscreen'] is not set
-        echo $error = '<div class="alert alert-danger">
-            <strong>Warning!</strong> Session lockscreen not set
-        </div>';
-    }
+//     // Check if $_SESSION['lockscreen'] is set
+//     if (isset($_SESSION['lockscreen'])) {
+//         $correct = $_SESSION['lockscreen'];
+//         $pass = htmlspecialchars($_POST['password']);
+//         if (password_verify($pass, $correct)) {
+//             unset($_SESSION['lockscreen']);
+//             $url = "index.php";
+//             echo "<script language=\"Javascript\" type=\"text/javascript\">
+//                 window.location=\"$url\";
+//                 </script>";
+//             exit; // Add this line to stop further execution after redirection
+//         } else {
+//             echo $error = '<div class="alert alert-danger">
+//                 <strong>Warning!</strong> Password Incorrect
+//             </div>';
+//         }
+//     } else {
+//         // Handle the case where $_SESSION['lockscreen'] is not set
+//         echo $error = '<div class="alert alert-danger">
+//             <strong>Warning!</strong> Session lockscreen not set
+//         </div>';
+//     }
+// }
+
+if (isset($_POST['unlock'])) {
+    session_start();
+    require_once "consts/user.php";
+    require_once "include/database.php";
+    require_once "function/autorize.php";
+    $v = new validate;
+    echo $v->lockscreen($screen_locked);
+    return null;
 }
 
 if(isset($_POST['create_products'])){
@@ -68,6 +82,9 @@ if(isset($_POST['create_products'])){
     echo $i->upload_products($store_insert);
     return null;
 }
+
+
+
 
 if(isset($_POST['upload_what'])){
     require_once "inis/ini.php";

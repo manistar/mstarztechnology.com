@@ -13,10 +13,10 @@ class database
     {
         // $this->d = new database;
         $servername = "localhost";
-        $username = "root";
-        $password = ""; //sJjJzBeJx2Qx
+        $username   = "root";
+        $password   = ""; //sJjJzBeJx2Qx
         try {
-            $this->db = new PDO("mysql:host=$servername;dbname=".'tech_dashboard', $username, $password);
+            $this->db = new PDO("mysql:host=$servername;dbname=" . 'tech_dashboard', $username, $password);
             // set the PDO error mode to exception
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             //echo "Connected successfully";php
@@ -28,113 +28,263 @@ class database
         // $this->userID = htmlspecialchars($_SESSION['adminSession']);  
     }
 
-    function categoryname($id, $type = "category"){
+    function categoryname($id, $type = "category")
+    {
         $d = new database;
-        if(empty($id)) return "Not assigned";
-        if($type == "category"){
-            $catname = $d->getall("categories", "ID = ?", [$id], fetch:"details");
-          return  $catname = $catname['name'];
-        }else{
-            $catname = $d->getall("sub_categories", "ID = ?", [$id], fetch:"details");
-            return  $catname = $catname['name'];
+        if (empty($id))
+            return "Not assigned";
+        if ($type == "category") {
+            $catname = $d->getall("categories", "ID = ?", [$id], fetch: "details");
+            return $catname = $catname['name'];
+        } else {
+            $catname = $d->getall("sub_categories", "ID = ?", [$id], fetch: "details");
+            return $catname = $catname['name'];
         }
-        
+
     }
 
-    function get_visitor_details() {
+    function get_visitor_details()
+    {
         // ip, browser, theme, country, postal_code, state, city
         $ip = "37.120.215.171";
         $ip = $_SERVER['REMOTE_ADDR'];
         if (isset($_COOKIE['visitor_details'])) {
             $data = unserialize($_COOKIE['visitor_details']);
-            if($data['ip_address'] == $ip) {
-                return $data;  
+            if ($data['ip_address'] == $ip) {
+                return $data;
             }
-        } 
-        $deviceInfo = $_SERVER['HTTP_USER_AGENT'];
-        $data = ["ip_address"=>$ip, "device"=>$deviceInfo, "browser"=>"",  "theme"=>"light", "country"=>"", "postal_code"=>"", "state"=>"", "city"=>""];
-        $apiUrl = "http://ip-api.com/json/{$ip}";
+        }
+        $deviceInfo   = $_SERVER['HTTP_USER_AGENT'];
+        $data         = ["ip_address" => $ip, "device" => $deviceInfo, "browser" => "", "theme" => "light", "country" => "", "postal_code" => "", "state" => "", "city" => ""];
+        $apiUrl       = "http://ip-api.com/json/{$ip}";
         $locationData = json_decode(file_get_contents($apiUrl));
         // var_dump($locationData);
         if ($locationData && $locationData->status === 'success') {
             // var_dump($locationData);
             $data['country'] = $locationData->country;
-            $data['state'] = $locationData->regionName;
-            $data['city'] = $locationData->city;
-        } 
-        if(isset($_COOKIE['browser_theme'])) {
+            $data['state']   = $locationData->regionName;
+            $data['city']    = $locationData->city;
+        }
+        if (isset($_COOKIE['browser_theme'])) {
             $data['theme'] = htmlspecialchars($_COOKIE['browser_theme']);
         }
-        setcookie("visitor_details",serialize($data), time()+12*60*60);
-    //    var_dump($data);
+        setcookie("visitor_details", serialize($data), time() + 12 * 60 * 60);
+        //    var_dump($data);
         return $data;
     }
 
-    function validate_admin() {
-        if(isset($_SESSION['adminSession'])) { return true; }
+    function validate_admin()
+    {
+        if (isset($_SESSION['adminSession'])) {
+            return true;
+        }
         return false;
     }
-    
-    function new_activity($data) {
-        if(isset($_SESSION['anonymous'])) {return null;}
+
+    function new_activity($data)
+    {
+        if (isset($_SESSION['anonymous'])) {
+            return null;
+        }
         // $data = 'userID', "date_time", "action_name", "link", "action_for", "action_for_ID";
-        if(is_array($data) && isset($data['userID'])) {
+        if (is_array($data) && isset($data['userID'])) {
             $info = [];
-            if($this->getall("users", "ID = ? and acct_type = ?", [$data['userID'], "bot"], fetch: "") > 0) {
+            if ($this->getall("users", "ID = ? and acct_type = ?", [$data['userID'], "bot"], fetch: "") > 0) {
                 return true;
             }
             $info['userID'] = $data['userID'];
             unset($data['userID']);
             // var_dump($this->get_visitor_details());
             $visitor_info = [];
-            if(!isset($_SESSION['adminSession'])) {
+            if (!isset($_SESSION['adminSession'])) {
                 $visitor_info = $this->get_visitor_details();
             }
             $info = array_merge($info, $visitor_info, $data);
-            if(!$this->quick_insert("activities",  $info)){
+            if (!$this->quick_insert("activities", $info)) {
                 return false;
             }
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    function basicuserstatus($userid){
-        $d = new database;
-        $checkuserstatus = $this->getall("users", "ID = ? and status = ?", [$userid, "1"], fetch: "moredetails");
-        if($checkuserstatus > 0){
-                return true;
-        }else{
-            return false;
-        }
+
+    // function newchat($message, $userID)
+    // {
+    //     $database = new database;
+       
+    //     // Determine whois based on the active session
+    //     if (isset($_SESSION['adminSession'])) {
+    //         $whois = "admin";
+    //         $userID = htmlspecialchars($_SESSION['adminSession'], ENT_QUOTES, 'UTF-8');
+    //     } elseif (isset($_SESSION['userSession'])) {
+    //         $whois = "user";
+    //         $userID = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');
+    //     } else {
+    //         // If neither session exists, return false
+    //         return false;
+    //     }
+        
+    //     // Prepare data for insertion
+    //     $data = [
+    //         'userID' => $userID,
+    //         'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
+    //         'whois' => $whois
+    //     ];
+    
+    //     // Insert into the database using `quick_insert`
+    //     $table = "chat";
+    //     $insert = $database->quick_insert($table, $data);
+    
+    //     // Handle the status of the insert operation
+    //     if ($insert) {
+    //         // Optional: Notify success
+    //         // $database->message("Message sent", "success");
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+
+    // public function newchat($message) {
+    //     // Ensure the database instance is correctly initialized
+    //     $database = new database;
+    
+    //     // Determine the sender's identity and userID
+    //     if (isset($_SESSION['adminSession'])) {
+    //         $whois = "admin";
+    //         $userID = htmlspecialchars($_SESSION['adminSession'], ENT_QUOTES, 'UTF-8');
+    //     } elseif (isset($_SESSION['userSession'])) {
+    //         $whois = "user";
+    //         $userID = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');
+    //     } else {
+    //         // If neither session exists, return false
+    //         return false; // Optional: Handle this scenario or log it
+    //     }
+    
+    //     // Prepare data for insertion (as an associative array)
+    //     $data = [
+    //         'userID' => $userID,
+    //         'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
+    //         'whois' => $whois
+    //     ];
+    
+    //     // Insert into the database using `quick_insert`
+    //     $table = "chat";
+    
+    //     // Pass the data to `quick_insert`
+    //     $insert = $database->quick_insert($table, $data);
+    
+    //     // Optionally handle the status of the insert operation
+    //     if ($insert) {
+    //         return true;
+    //     } else {
+    //         return false; // Optional: Log or handle the failure
+    //     }
+    // }
+    
+    
+
+    function newchat($message, $userID)
+{
+    $database = new database;
+
+    if (isset($_SESSION['userSession'])) {
+        $whois = "admin";
+        $userID = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');
+    } elseif (isset($_SESSION['adminSession'])) {
+        $whois = "user";
+        $userID = htmlspecialchars($_SESSION['adminSession'], ENT_QUOTES, 'UTF-8');
+    } else {
+        return false; // User not authenticated
     }
 
-     public function verifyrole($id, $role){
-        $verify = $this->getall("admins", "ID = ?", [$id], fetch: "details");    
-        if($verify['type'] == "admin"){
-            return true;
-        }else{
-            $verify = $this->getall("roles", "userID = ? and therole = ?", ["$id","$role"], fetch: "moredetails"); 
-            if($verify > 0){
-                return true;
-            }else{
-                return false;
-            }
-        }
+    // Prepare data for insertion (as an associative array)
+    $data = [
+        'userID' => $userID,
+        'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
+        'whois' => $whois
+    ];
+
+    // Insert into the database using `quick_insert`
+    $table = "chat";
+    $insert = $database->quick_insert($table, $data);
+
+    if ($insert) {
+        return json_encode(['status' => 'success', 'message' => 'Message sent successfully']);
+    } else {
+        return json_encode(['status' => 'error', 'message' => 'Failed to send message. Please try again later.']);
+    }
+}
+
+    // function updatechat(){
+    //     $database = new database;
+    //     $userID  = htmlspecialchars($_SESSION['userSession']);
+    //     return $chats = $database->getall("chat", "userID = ? ORDER by date asc", [$userID], fetch: "moredetails");
+   
+    // }
+
+    function updatechat($userID)
+    {
+        $database = new database;
+        // $userID  = htmlspecialchars($_GET['userID']);
+        return $chats = $database->getall("chat", "userID = ? ORDER by date asc", [$userID], fetch: "moredetails");
+
     }
    
-   function new_notification(array $data, $what = "quick") {
-        if(is_array($what != "quick")) {
-            if(!isset($_POST['time_set'])) {
+    function basicuserstatus($userid)
+    {
+        $d              = new database;
+        $checkuserstaus = $d->getall("users", "ID = ? and status = ?", [$userid, 1], fetch: "");
+        if ($checkuserstaus > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function basiccontactstatus($userid)
+    {
+        $d              = new database;
+        $checkuserstaus = $d->getall("contact", "ID = ? and status = ?", [$userid, 1], fetch: "");
+        if ($checkuserstaus > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    public function verifyrole($id, $role)
+    {
+        $verify = $this->getall("admins", "ID = ?", [$id], fetch: "details");
+        if ($verify['type'] == "admin") {
+            return true;
+        } else {
+            $verify = $this->getall("roles", "userID = ? and therole = ?", [$id, $role], fetch: "moredetails");
+            if ($verify > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    function new_notification(array $data, $what = "quick")
+    {
+        if (is_array($what != "quick")) {
+            if (!isset($_POST['time_set'])) {
                 $_POST['time_set'] = time();
             }
             $info = $this->validate_form($data, 'notifications', "insert");
-            if($info) {
+            if ($info) {
                 return true;
             }
-        }else{
-            if($this->quick_insert("notifications",  $data)){
+        } else {
+            if ($this->quick_insert("notifications", $data)) {
                 return true;
             }
         }
@@ -147,7 +297,7 @@ class database
     // CODE: $members = $d->getall(from: 'members', fetch: "moredetails");
     // get info from database with  no conditions but with a limit
     // CODE: $members = $d->getall(from: 'members', where: "LIMTI 10" fetch: "moredetails");
-   
+
     function getall($from, $where = "", array $data = [], $select = "*", $fetch = "details")
     {
         if (substr($where, 0, 5) == "LIMIT" || substr($where, 0, 5) == "limit" || $where == "") {
@@ -159,37 +309,45 @@ class database
         return $this->getmethod($q, $fetch);
     }
 
-//    To get the currency
-function getcurrency($id){
-//   $d = new database;
-  return $this->getall("currencies", "ID = ?", [$id], fetch: "details");
-}
+    //    To get the currency
+    function getcurrency($id)
+    {
+        //   $d = new database;
+        return $this->getall("currencies", "ID = ?", [$id], fetch: "details");
+    }
 
-function getsettings($meta_name){
-//   $d = new database;
-  return $this->getall("settings", "meta_name = ?", [$meta_name], fetch: "details");
-}
+    function getsettings($meta_name)
+    {
+        //   $d = new database;
+        return $this->getall("settings", "meta_name = ?", [$meta_name], fetch: "details");
+    }
 
-  function getusername($id){
-    //   $data = $this->getall("users", "ID = ?", [$id], fetch: "details");
-    //   if(is_array($data)){
-    //       return $data['first_name'].' '.$data['last_name'];
-    //   }else{
-    //       $data = $this->getall("grouped", "ID = ?", [$id], fetch: "details");
-    //       if(is_array($data)){
-    //           return $data['group_name'];
-    //       }else{
-    //           return "Not found";
-    //       }
-    //   }
-      
-  }
+    function getusername($id)
+    {
+        $data = $this->getall("users", "ID = ?", [$id], fetch: "details");
+        if (is_array($data)) {
+            return $data['first_name'] . ' ' . $data['last_name'];
+        } else {
+            $data = $this->getall("grouped", "ID = ?", [$id], fetch: "details");
+            if (is_array($data)) {
+                return $data['group_name'];
+            } else {
+                return "Not found";
+            }
+        }
 
-//   function getusername($id){
+    }
+
+    function radmomstring($length = 10) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    }
+
+    
+    //   function getusername($id){
 //     $user_data = $this->getall("users", "ID = ?", [$id], fetch: "details");
 //     $admin_data = $this->getall("admins", "ID = ?", [$id], fetch: "details");
 
-//     if(is_array($user_data)){
+    //     if(is_array($user_data)){
 //         return $user_data['first_name'].' '.$user_data['last_name'];
 //     } elseif(is_array($admin_data)) {
 //         return $admin_data['first_name'].' '.$admin_data['last_name'];
@@ -206,35 +364,40 @@ function getsettings($meta_name){
 
 
 
-// To get number of trending in playlist
-    public function getTrendingMusic($minPlayCount = 5) {
-        $sql = "play_count > ?";
+    // To get number of trending in playlist
+    public function getTrendingMusic($minPlayCount = 5)
+    {
+        $sql    = "play_count > ?";
         $params = [$minPlayCount];
         return $this->getall("playlist", $sql, $params, "*", "moredetails");
     }
 
-    function gettrialamount(){
+    function gettrialamount()
+    {
         $data = $this->getall("settings", "meta_name = ?", ["free_trial"], fetch: "details");
         return $data['meta_value'];
     }
 
-    function getlong($type){
-        if($type == "monthly"){
-          return  $long = "month(s)";
-        }else if($type == "annual"){
-           return $long = "year(s)";
+    function getlong($type)
+    {
+        if ($type == "monthly") {
+            return $long = "month(s)";
+        } else if ($type == "annual") {
+            return $long = "year(s)";
         }
     }
 
-    function calculateplan($id, $amount, $duration){
+    function calculateplan($id, $amount, $duration)
+    {
         return $amount * $duration;
     }
 
-    function getpaymetmethod($method){
+    function getpaymetmethod($method)
+    {
         $value = "flutterwave";
-        if(ctype_digit($method)){
-            $value =  "card";
-        }else{
+        if (ctype_digit($method)) {
+            $value = "card";
+        } else {
             $value = $method;
         }
         return $value;
@@ -275,27 +438,27 @@ function getsettings($meta_name){
     // ]
     // );
 
-    
+
 
     function quick_insert($into, array $data, $message = null)
     {
         if (isset($data[0]) && is_array($data[0])) {
             foreach ($data as $row) {
-                $insert =  $this->insert_data($into, $row);
+                $insert = $this->insert_data($into, $row);
                 if (isset($insert)) {
                     $this->get_message($message);
                 }
             }
             // return true;
         } else {
-            $insert =  $this->insert_data($into, $data);
+            $insert = $this->insert_data($into, $data);
             $this->get_message($message);
             return true;
         }
         return false;
     }
 
-    function get_message($message =  null)
+    function get_message($message = null)
     {
         if ($message == null) {
             return null;
@@ -304,10 +467,11 @@ function getsettings($meta_name){
         return true;
     }
     // $update = $d->update("members", ["firstname"=>"tunde", "email"=>"tunde@gmail.com"], "ID = '4'");
+
     function update($what, $data, $where, $message = null)
     {
         $this->get_index_data($data, "update");
-        $query = $this->db->prepare("UPDATE $what SET $this->index WHERE $where");
+        $query  = $this->db->prepare("UPDATE $what SET $this->index WHERE $where");
         $update = $query->execute($this->data);
         if ($update) {
             $this->get_message($message);
@@ -315,10 +479,39 @@ function getsettings($meta_name){
         }
         return false;
     }
+
+    // public function update($what, $set, $where, $data, $message = ""){
+    //     try {
+    //         // $set = str_replace(",", " = ?", $set).' = ?';
+    //         if($set == "null" || $set == ""){
+    //             foreach($data as $key => $value){
+    //                 $sets[] = "$key = ?,";
+    //                }
+    //               $set = substr(implode(" ", $sets), 0, -1);
+    //         }
+    //          $set;
+    //          $stmt = $this->db->prepare("UPDATE $what SET $set WHERE $where");
+    //         $data = array_values($data);
+    //          $stmt->execute($data);
+    //         if($stmt){
+    //             if($message != ""){
+    //               Database::message($message, "success");
+    //             }
+    //           return true;
+    //         }
+    //         $stmt = null;
+    //         } catch (PDOException $e) {
+    //             // For handling error
+    //             return false;
+    //             //   Database::message("Something went wrong $e", "error");
+    //         }
+    //     }
+
+
     // $d->delete("members", "ID = ? or phonenumber = ?", [3, 3434]);
     function delete($from, $where, array $data)
     {
-        $query = $this->db->prepare("DELETE FROM $from WHERE $where ");
+        $query  = $this->db->prepare("DELETE FROM $from WHERE $where ");
         $delete = $query->execute($data);
         if ($delete) {
             return true;
@@ -347,7 +540,7 @@ function getsettings($meta_name){
 
         $this->index = rtrim($index, ", ");
         $this->marks = rtrim($marks, ", ");
-        $this->data = array_values($data);
+        $this->data  = array_values($data);
         return true;
     }
 
@@ -368,6 +561,9 @@ function getsettings($meta_name){
         return $data;
     }
 
+  
+
+
     function create_table($name, array $data)
     {
         if (!is_array($data)) {
@@ -376,14 +572,14 @@ function getsettings($meta_name){
         if ($this->check_table($name)) {
             return true;
         }
-        $info = $this->get_table_para($data);
-        $query = $this->db->prepare("CREATE TABLE $name($info)");
+        $info   = $this->get_table_para($data);
+        $query  = $this->db->prepare("CREATE TABLE $name($info)");
         $update = $query->execute();
     }
     function check_table($name)
     {
         try {
-            $query = $this->db->prepare("select 1 from $name");
+            $query  = $this->db->prepare("select 1 from $name");
             $update = $query->execute();
             return true;
         } catch (\Throwable $th) {
@@ -394,10 +590,10 @@ function getsettings($meta_name){
     {
         $info = "";
         foreach ($datas as $key => $data) {
-            $type = "VARCHAR(250)";
+            $type          = "VARCHAR(250)";
             $default_value = "";
-            $isNull = "NOT NULL";
-            if($key == "ID" && isset($data['input_type']) && $data['input_type'] == "number"){
+            $isNull        = "NOT NULL";
+            if ($key == "ID" && isset($data['input_type']) && $data['input_type'] == "number") {
                 $isNull .= " AUTO_INCREMENT";
             }
             $primaryKey = "";
@@ -417,8 +613,8 @@ function getsettings($meta_name){
         }
         $info .= "`date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,";
         if (isset($datas['ID'])) {
-            $info  .= "PRIMARY KEY(ID),";
-            
+            $info .= "PRIMARY KEY(ID),";
+
         }
 
         return rtrim($info, ',');
@@ -438,9 +634,10 @@ function getsettings($meta_name){
         }
     }
 
-    function options_list($table, $key = "ID", $value = "name") {
-        if($table->rowCount() > 0) {
-            foreach($table as $row) {
+    function options_list($table, $key = "ID", $value = "name")
+    {
+        if ($table->rowCount() > 0) {
+            foreach ($table as $row) {
                 $data[$row[$key]] = $row[$value];
             }
         }
@@ -570,43 +767,47 @@ function getsettings($meta_name){
         return null;
     }
 
-    private function database_action($action, $data, $what) {
-        if(!is_array($data) || empty($what) || $action == null ) {
+
+
+    private function database_action($action, $data, $what)
+    {
+        if (!is_array($data) || empty($what) || $action == null) {
             return true;
         }
         switch ($action) {
             case 'insert':
-                if(!$this->quick_insert($what, $data)) {
+                if (!$this->quick_insert($what, $data)) {
                     return false;
                 }
                 return true;
-               
-                case 'update':
-                    if(!isset($data['ID'])) {
-                        return false;
-                    }
-                    $id = $data['ID'];
-                   if(!$this->update($what, $data, "ID = '$id'")) {
-                        return false;
-                   }
-                   return true;
+
+            case 'update':
+                if (!isset($data['ID'])) {
+                    return false;
+                }
+                $id = $data['ID'];
+                if (!$this->update($what, $data, "ID = '$id'")) {
+                    return false;
+                }
+                return true;
             default:
                 return true;
-              
+
         }
     }
 
-    function getaddress($data){
+    function getaddress($data)
+    {
         $address = "";
-        $d = new database;
-        if(is_array($data)){
+        $d       = new database;
+        if (is_array($data)) {
             foreach ($data as $key => $value) {
-               $c = $this->getall($key, "ID = ?", [$value], fetch: "details");
-                if(is_array($c)){
-                    $address .= $c['name']." ";
+                $c = $this->getall($key, "ID = ?", [$value], fetch: "details");
+                if (is_array($c)) {
+                    $address .= $c['name'] . " ";
                 }
             }
-        }else{
+        } else {
             $address = "No address";
         }
         return $address;
@@ -622,8 +823,8 @@ function getsettings($meta_name){
     function validate_database_data($what, $wait, $datas, $info, $error_message = true): bool
     {
         $error = false;
-        $idc = "";
-        $idv = "";
+        $idc   = "";
+        $idv   = "";
         if (isset($datas['ID']) && isset($info['ID'])) {
             $idc = "ID != ? and ";
             $idv = $info["ID"];
@@ -652,7 +853,7 @@ function getsettings($meta_name){
                     return false;
                 }
 
-                if ((int)array_search($key, array_keys($datas)) > (int)array_search($against, array_keys($datas))) {
+                if ((int) array_search($key, array_keys($datas)) > (int) array_search($against, array_keys($datas))) {
 
                     $datacheck = [$info[$against], $info[$key]];
                     if ($idv != "") {
@@ -676,8 +877,8 @@ function getsettings($meta_name){
             }
             if ($check > 0) {
                 $error = true;
-                if($error_message == true){
-                    echo $this->message("This exact ".$this->clean_str($what)." already exist", "error");
+                if ($error_message == true) {
+                    echo $this->message("This exact " . $this->clean_str($what) . " already exist", "error");
                 }
                 $check = null;
             }
@@ -688,10 +889,11 @@ function getsettings($meta_name){
         return true;
     }
 
-    function settings($value){
+    function settings($value)
+    {
         // $d = new database;
         return $this->getall("settings", "meta_name = ?", [$value], fetch: "details");
-      }
+    }
 
     function clean_str($string)
     {
@@ -795,7 +997,7 @@ function getsettings($meta_name){
 
     function sendverifyemail($userID)
     {
-        $d = new database;
+        $d    = new database;
         $user = $d->getall("users", "ID = ?", [$userID]);
         if (!is_array($user)) {
             $d->message("User not found please login and try again", "error");
@@ -811,7 +1013,7 @@ function getsettings($meta_name){
             $token = $d->randcar(40);
             $d->update("users", "", "ID = '$userID'", ["token" => $token]);
         }
-        $email = $user['email'];
+        $email     = $user['email'];
         $sendemail = $d->smtpmailer(1, $user['email'], "Account Email Verification", "Please verify your account with the link provided below <br> <a href='verify.php?token=$token&e=$email'>verify Account</a>");
         if ($sendemail) {
             $d->message("Email Sent Successfully", "success");
@@ -840,22 +1042,23 @@ function getsettings($meta_name){
         }
     }
 
-    function verifyassign($adminid, $customerid){
-        $d = new database; 
-        $verify = $d->getall("admins", "ID = ?", [$adminid], fetch: "details");    
-        if($verify['type'] == "admin"){
+    function verifyassign($adminid, $customerid)
+    {
+        $d      = new database;
+        $verify = $d->getall("admins", "ID = ?", [$adminid], fetch: "details");
+        if ($verify['type'] == "admin") {
             return true;
-        }else{
-            $verify = $d->getall("people_assign", "adminID = ? and userID = ?", ["$adminid","$customerid"], ""); 
-            if($verify > 0){
+        } else {
+            $verify = $d->getall("people_assign", "adminID = ? and userID = ?", ["$adminid", "$customerid"], "");
+            if ($verify > 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
-}
+    }
 
-// function userID($type = "admin"){
+    // function userID($type = "admin"){
 //     if($type == "users" || $type == "customers"){
 //         return  $this->userID = htmlspecialchars($_SESSION['userSession']);  
 //     }else{
@@ -863,13 +1066,14 @@ function getsettings($meta_name){
 //     }
 // }
 
-function userID($type = "admin") {
-    if ($type == "users" || $type == "customers") {
-        return isset($_SESSION['userSession']) ? htmlspecialchars($_SESSION['userSession']) : null;
-    } else {
-        return isset($_SESSION['adminSession']) ? htmlspecialchars($_SESSION['adminSession']) : null;
+    function userID($type = "admin")
+    {
+        if ($type == "users" || $type == "customers") {
+            return isset($_SESSION['userSession']) ? htmlspecialchars($_SESSION['userSession']) : null;
+        } else {
+            return isset($_SESSION['adminSession']) ? htmlspecialchars($_SESSION['adminSession']) : null;
+        }
     }
-}
 
 
 
@@ -880,18 +1084,26 @@ function userID($type = "admin") {
             . '0123456789'); // and any other characters
         shuffle($seed); // probably optional since array_is randomized; this may be redundant
         $rand = '';
-        foreach (array_rand($seed, $no) as $k) $rand .= $seed[$k];
+        foreach (array_rand($seed, $no) as $k)
+            $rand .= $seed[$k];
         return "3" . $rand;
     }
-    
-    function send_email($userID, $subject, $message) {
-            $smessage = $this->get_email_template("default")['template'];
-            $user =  $this->getall("users", "ID = ?", [$userID], "first_name, last_name, email");
-            if(!is_array($user)){ return false; }
-            // ${amount} ${reason} ${website_url} 
-            $smessage = $this->replace_word(['${first_name}'=>$user['first_name'], '${last_name}'=>$user['last_name'], '${message_here}'=>$message, '${website_url}'=>$this->get_settings("website_url")], $smessage);
-            $sendmessage = $this->smtpmailer($user['email'], $subject, $smessage);
-            if($sendmessage) { return true; }else{ return false; }
+
+    function send_email($userID, $subject, $message)
+    {
+        $smessage = $this->get_email_template("default")['template'];
+        $user     = $this->getall("users", "ID = ?", [$userID], "first_name, last_name, email");
+        if (!is_array($user)) {
+            return false;
+        }
+        // ${amount} ${reason} ${website_url} 
+        $smessage    = $this->replace_word(['${first_name}' => $user['first_name'], '${last_name}' => $user['last_name'], '${message_here}' => $message, '${website_url}' => $this->get_settings("website_url")], $smessage);
+        $sendmessage = $this->smtpmailer($user['email'], $subject, $smessage);
+        if ($sendmessage) {
+            return true;
+        } else {
+            return false;
+        }
     }
     function smtpmailer($to, $subject, $body, $name = "", $message = '', $smtpid = 1)
     {
@@ -983,33 +1195,40 @@ function userID($type = "admin") {
         }
     }
 
-    protected function proccess_single_image($key, $value, $datas)
-    {
-        if (!$this->check_if_required($value)) {
+    protected function proccess_single_image($key, $value, $datas) 
+{
+    // Check if the required image is not set or empty
+    if (!$this->check_if_required($value)) {
 
-            if ($_FILES[$key]['name'] == "" && isset($datas['input_data'][$key]) && $datas['input_data'][$key] != "") {
+        // Verify that $_FILES contains the key before accessing it
+        if (!isset($_FILES[$key]) || $_FILES[$key]['name'] == "") {
+            if (isset($datas['input_data'][$key]) && $datas['input_data'][$key] != "") {
                 return $datas['input_data'][$key];
             }
-            // var_dump($key);
-            if ($_FILES[$key]['name'] == "") {
-                return  "no--value";
-            }
 
-            return "upload--this--file";
+            return "no--value";
         }
 
-        if (!isset($_FILES[$key]['name']) || $_FILES[$key]['name'] == "") {
-            $key = str_replace("_", " ", $key);
-            database::message("You need to upload $key", "error");
-            return false;
-        }
-        if (!isset($value['path']) || $value['path'] == "") {
-            $key = str_replace("_", " ", $key);
-            $this->message("Intr: No path set for $key. <br> Note: this error is an internal error, you are not the reason for the error. <br> Please report to us on <a href='mailto:" . $this->get_settings("support_email") . "' target='_BLANK'>" . $this->get_settings("support_email") . "</a>", "error");
-            return false;
-        }
         return "upload--this--file";
     }
+
+    // Double-check that $_FILES[$key] exists before using it
+    if (!isset($_FILES[$key]) || $_FILES[$key]['name'] == "") {
+        $key_display = str_replace("_", " ", $key);
+        database::message("You need to upload $key_display", "error");
+        return false;
+    }
+
+    // Verify that 'path' is set in the $value array
+    if (!isset($value['path']) || $value['path'] == "") {
+        $key_display = str_replace("_", " ", $key);
+        $this->message("Intr: No path set for $key_display. <br> Note: this error is an internal error, you are not the reason for the error. <br> Please report to us on <a href='mailto:" . $this->get_settings("support_email") . "' target='_BLANK'>" . $this->get_settings("support_email") . "</a>", "error");
+        return false;
+    }
+
+    return "upload--this--file";
+}
+
     protected function check_multiple_files($names)
     {
         $error = false;
@@ -1036,7 +1255,7 @@ function userID($type = "admin") {
     {
         //file to place within the server
         // echo $name;
-        if($valid_formats1 == null) {
+        if ($valid_formats1 == null) {
             $valid_formats1 = ["JPG", "jpg", "png", "jpeg", "JPEG", "PNG", "svg", "SVG"];
         }
         if ($_FILES["$name"]["name"] == "") {
@@ -1044,12 +1263,12 @@ function userID($type = "admin") {
         }
         if ($i == 0 && $name != "uploaded_file") {
             $image = $_FILES["$name"]["name"]; //input file name in this code is file1
-            $size = $_FILES["$name"]["size"];
-            $tmp = $_FILES["$name"]["tmp_name"];
+            $size  = $_FILES["$name"]["size"];
+            $tmp   = $_FILES["$name"]["tmp_name"];
         } else {
             $image = $_FILES["$name"]["name"][$i]; //input file name in this code is file1
-            $size = $_FILES["$name"]["size"][$i];
-            $tmp = $_FILES["$name"]["tmp_name"][$i];
+            $size  = $_FILES["$name"]["size"][$i];
+            $tmp   = $_FILES["$name"]["tmp_name"][$i];
         }
         //list of file extention to be accepted
         if (empty($image)) {
@@ -1060,14 +1279,14 @@ function userID($type = "admin") {
 
             if ($size < 7500000) {
                 $fileInfo = pathinfo($image);
-                $ext = $fileInfo['extension'];
+                $ext      = $fileInfo['extension'];
 
                 if (in_array($ext, $valid_formats1)) {
                     if ($path == "check") {
                         return true;
                     }
-                    $titlename = str_replace(" ", "_", $title);
-                    $actual_image_name =  $titlename . "." . $ext;
+                    $titlename         = str_replace(" ", "_", $title);
+                    $actual_image_name = $titlename . "." . $ext;
 
                     if (move_uploaded_file($tmp, $path . $actual_image_name)) {
                         return $actual_image_name;
@@ -1090,7 +1309,7 @@ function userID($type = "admin") {
 
     // addtion functions
 
-    function get_settings($value = "company_name", $where = "settings",  $who = "all")
+    function get_settings($value = "company_name", $where = "settings", $who = "all")
     {
         $data = $this->getall("$where", "meta_name = ? and meta_for = ?", [htmlspecialchars($value), $who], "meta_value");
         if (!is_array($data)) {
@@ -1099,13 +1318,16 @@ function userID($type = "admin") {
         return $data['meta_value'];
     }
 
-    function create_settings($data, $what) {
-        if(!is_array($data))  {return null; }
+    function create_settings($data, $what)
+    {
+        if (!is_array($data)) {
+            return null;
+        }
         foreach ($data as $key => $value) {
-            if($this->getall($what, "meta_name = ?",  [$key], fetch: "") > 0) {
-                continue ;
+            if ($this->getall($what, "meta_name = ?", [$key], fetch: "") > 0) {
+                continue;
             }
-            $this->quick_insert($what, ["meta_name"=>$key, "meta_value"=>"placeholder"]);
+            $this->quick_insert($what, ["meta_name" => $key, "meta_value" => "placeholder"]);
         }
     }
 
@@ -1122,7 +1344,7 @@ function userID($type = "admin") {
         // var_dump($word);
         return $word;
     }
-  
+
 
     function get_email_template($name)
     {
@@ -1130,9 +1352,9 @@ function userID($type = "admin") {
     }
     function getcoins($coinID = "")
     {
-        $service_url     = 'https://api.coincap.io/v2/assets';
+        $service_url = 'https://api.coincap.io/v2/assets';
         if ($coinID) {
-            $service_url     = 'https://api.coincap.io/v2/assets/' . $coinID;
+            $service_url = 'https://api.coincap.io/v2/assets/' . $coinID;
         }
         $json_objekat = $this->api_call($service_url);
         return $data = $json_objekat->data;
@@ -1140,11 +1362,11 @@ function userID($type = "admin") {
 
     function api_call($service_url)
     {
-        $curl            = curl_init($service_url);
+        $curl = curl_init($service_url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $curl_response   = curl_exec($curl);
+        $curl_response = curl_exec($curl);
         curl_close($curl);
         return $json_objekat = json_decode($curl_response);
         // return $data = $json_objekat->data;
@@ -1152,7 +1374,7 @@ function userID($type = "admin") {
 
     function newcoin()
     {
-        $d = new database;
+        $d     = new database;
         $check = $d->checkmessage(["coinID_null", "name", "short_name"]);
         if (!is_array($check)) {
             return false;
@@ -1172,8 +1394,8 @@ function userID($type = "admin") {
     {
         $data = $this->getcoins();
         foreach ($data as $coin) {
-            $_POST['coinID'] = $coin->id;
-            $_POST['name'] = $coin->name;
+            $_POST['coinID']     = $coin->id;
+            $_POST['name']       = $coin->name;
             $_POST['short_name'] = $coin->symbol;
             $this->newcoin();
         }
@@ -1201,7 +1423,7 @@ function userID($type = "admin") {
         }
         $options = [];
         foreach ($wallet as $row) {
-            $id = $row['ID'];
+            $id   = $row['ID'];
             $coin = $this->getall("coins", 'coinID = ?', [$row['coin_name']]);
             if (!is_array($coin)) {
                 continue;
@@ -1213,10 +1435,10 @@ function userID($type = "admin") {
 
     function money_format($amount, $currency = '$')
     {
-        $tamount = number_format((float)$amount, 2,);
-        $parts = explode(".", $tamount);
-        if($parts[1] == "00"){
-            $tamount = number_format((float)$amount);
+        $tamount = number_format((float) $amount, 2, );
+        $parts   = explode(".", $tamount);
+        if ($parts[1] == "00") {
+            $tamount = number_format((float) $amount);
         }
         return $currency . $tamount;
 
@@ -1228,68 +1450,114 @@ function userID($type = "admin") {
         return date_format($date, "D, d M Y h:i:sa");
     }
 
-    function calculateProfitPercentage($buyingPrice, $sellingPrice) {
+    function calculateProfitPercentage($buyingPrice, $sellingPrice)
+    {
         $profitPercentage = (($sellingPrice - $buyingPrice) / $buyingPrice) * 100;
         return $profitPercentage;
     }
 
-    function calculateIncreasedValue($originalValue, $percentageIncrease) {
-         $percentageIncrease = $percentageIncrease / 100;
-          $hold = $originalValue * $percentageIncrease;
-        $increasedValue = $originalValue + $hold;
+    function calculateIncreasedValue($originalValue, $percentageIncrease)
+    {
+        $percentageIncrease = $percentageIncrease / 100;
+        $hold               = $originalValue * $percentageIncrease;
+        $increasedValue     = $originalValue + $hold;
         return $hold;
     }
 
     // function loadpage($url) {
     //     echo '<script>window.location.href = "'.$url.'";</script>';
     // }
-    function loadpage($url, $type = "normal") {
-        if($type == "json") {
-            $json = ["function"=>["loadpage", "data"=>[$url, ""]]];
+    function loadpage($url, $type = "normal")
+    {
+        if ($type == "json") {
+            $json = ["function" => ["loadpage", "data" => [$url, ""]]];
             return json_encode($json);
         }
-        echo '<script>window.location.href = "'.$url.'";</script>';
+        echo '<script>window.location.href = "' . $url . '";</script>';
     }
+
+    // function ago($time)
+    // {
+    //     if ($time == "") {
+    //         return "";
+    //     }
+    //     // $time = strtotime($time);
+    //     $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+    //     $lengths = array("60", "60", "24", "7", "4.35", "12", "10");
+    //     $now     = time();
+
+    //     $difference = $now - $time;
+    //     $tense      = "ago";
+
+    //     for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths) - 1; $j++) {
+    //         $difference /= $lengths[$j];
+    //     }
+
+    //     $difference = round($difference);
+    //     if ($periods[$j] == "second") {
+    //         return "Just now";
+    //     }
+
+    //     if ($difference != 1) {
+    //         $periods[$j] .= "s";
+    //     }
+
+
+
+    //     $value = "$difference $periods[$j] ago";
+    //     if ($value == "1 second ago") {
+    //         return "Just now";
+    //     } else {
+    //         return $value;
+    //     }
+    // }
 
     function ago($time)
-    {
-       if($time == "") {
-        return "";
-       }
-        // $time = strtotime($time);
-        $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
-        $lengths = array("60", "60", "24", "7", "4.35", "12", "10");
-        $now = time();
-
-        $difference     = $now - $time;
-        $tense         = "ago";
-
-        for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths) - 1; $j++) {
-            $difference /= $lengths[$j];
-        }
-
-        $difference = round($difference);
-        if($periods[$j] == "second") {
-            return "Just now";
-        }
-
-        if ($difference != 1) {
-            $periods[$j] .= "s";
-        }
-
-        
-
-        $value =  "$difference $periods[$j] ago";
-        if($value == "1 second ago") {
-            return "Just now";
-        }else{
-           return $value;
-        }
+{
+    if ($time == "") {
+        return "Offline";
     }
+
+    $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+    $lengths = array("60", "60", "24", "7", "4.35", "12", "10");
+    $now     = time();
+    
+    $difference = $now - $time;
+
+    // Determine online status (within the last 5 minutes)
+    if ($difference <= 300) { // 300 seconds = 5 minutes
+        return "Online";
+    }
+
+    $tense = "ago";
+    for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths) - 1; $j++) {
+        $difference /= $lengths[$j];
+    }
+
+    $difference = round($difference);
+
+    if ($periods[$j] == "second") {
+        return "Just now";
+    }
+
+    if ($difference != 1) {
+        $periods[$j] .= "s";
+    }
+
+    $value = "$difference $periods[$j] ago";
+    if ($value == "1 second ago") {
+        return "Just now";
+    } else {
+        return $value;
+    }
+}
+
+
 
     // short a text
 
-    function short_text($text, $maxCharacters = 30) {
+    function short_text($text, $maxCharacters = 30)
+    {
         if (strlen($text) > $maxCharacters) {
             $shortenedText = substr($text, 0, $maxCharacters) . "...";
         } else {
@@ -1299,33 +1567,42 @@ function userID($type = "admin") {
         return $shortenedText;
     }
 
-    function short_no( $no, $maxno = 99) {
-        if($no == 0) { $no = ""; }
-        if($no > $maxno) { $no = "$maxno+"; }
+    function short_no($no, $maxno = 99)
+    {
+        if ($no == 0) {
+            $no = "";
+        }
+        if ($no > $maxno) {
+            $no = "$maxno+";
+        }
     }
 
-    function generateRandomDateTime($startDate = '2022-01-01 09:00:00', $endDate = null) {
-        if($endDate == null) { $endDate =  date('Y-m-d H:i:s');}
+    function generateRandomDateTime($startDate = '2022-01-01 09:00:00', $endDate = null)
+    {
+        if ($endDate == null) {
+            $endDate = date('Y-m-d H:i:s');
+        }
         // '2022-01-01 09:00:00', date('Y-m-d H:i:s')
-        $startTimestamp = strtotime($startDate);
-        $endTimestamp = strtotime($endDate);
+        $startTimestamp  = strtotime($startDate);
+        $endTimestamp    = strtotime($endDate);
         $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
-        $randomDateTime = date('Y-m-d H:i:s', $randomTimestamp);
-        
+        $randomDateTime  = date('Y-m-d H:i:s', $randomTimestamp);
+
         return $randomDateTime;
     }
-    
 
-    function addMinutes($datetimeStr, $minutes) {
+
+    function addMinutes($datetimeStr, $minutes)
+    {
         // Create DateTime object from the input string
         $originalDatetime = new DateTime($datetimeStr);
-    
+
         // Add the specified number of minutes
         $newDatetime = $originalDatetime->modify("+$minutes minutes");
-    
+
         // Format the new datetime as desired
         $newDatetimeStr = $newDatetime->format('Y-m-d H:i:s');
-    
+
         return $newDatetimeStr;
     }
 }

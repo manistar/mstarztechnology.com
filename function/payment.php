@@ -26,8 +26,6 @@
                 "address"=>"",
                 "status"=>"pending",
             ];
-            // "input_data" => $payment,
-
             $carts = $this->getall("cart", "userID = ?", [$userID], fetch: "moredetails");
             if($carts->rowCount() == 0){
                 $json['message'] = "Your cart is empty.";
@@ -56,7 +54,6 @@
             $json['data'] = $payment;
             return json_encode($json);
 
-            
         }
 
         function update_new_payment($transID, $ref, $userID) : bool {
@@ -78,9 +75,6 @@
         $amount = (float)$amount;
         $curl = curl_init();
 
-        // Use the correct API key (test or live)
-        $secret_key = "FLWPUBK-02144b48bbc7d4724e02fec82e7fd57d-X";  // Replace with live key if needed
-
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$transID/verify",
             CURLOPT_RETURNTRANSFER => true,
@@ -92,7 +86,7 @@
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "Content-Type: application/json",
-                "Authorization: Bearer FLWSECK-8bbe0e2d5613da74a173aeff95e1de3e-192ca832cd7vt-X",
+                "Authorization: Bearer FLWSECK_TEST-47acd6b17c2263c000211a6e6027292b-X",
             ),
         ));
 

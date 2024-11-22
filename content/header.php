@@ -20,6 +20,9 @@ $title = "MSTARZ TECH";
     ============================================ -->
         <!-- Cart icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <!-- Link to Font Awesome for icons (optional) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <!--  -->
         <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/vendor/slick.css">
@@ -29,12 +32,362 @@ $title = "MSTARZ TECH";
         <!-- Style css -->
         <link rel="stylesheet" href="assets/css/style.css">
         <style>
+            /* Chat Icon */
+            #chat-icon {
+                /* position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: #f46b2c;
+                color: white;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                z-index: 9999;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
+
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: #ff5722;
+                color: white;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+/* General chat container */
+.msg_card_body {
+    background-color: #e5ddd5; /* WhatsApp-like background */
+    padding: 10px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+/* Admin's chat bubble */
+.msg_cotainer {
+    max-width: 55%; /* Slightly narrower width */
+    background-color: #ffffff; /* White background for admin */
+    color: #000000;
+    padding: 10px 15px;
+    border-radius: 10px 10px 10px 0; /* Rounded edges */
+    position: relative;
+    word-wrap: break-word;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* User's chat bubble */
+.msg_cotainer_send {
+    max-width: 45%; /* Slightly narrower width */
+    background-color: #dcf8c6; /* WhatsApp green for user */
+    color: #000000;
+    padding: 10px 15px;
+    border-radius: 10px 10px 0 10px; /* Rounded edges */
+    position: relative;
+    word-wrap: break-word;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Timestamp styling inside the chat bubble */
+.msg_time, .msg_time_send {
+    font-size: 12px;
+    color: #6c757d !important; /* Ensure timestamp is always grey */
+    display: block; /* Keeps it inside the bubble */
+    text-align: right;
+    margin-top: 5px; /* Space above the timestamp */
+}
+
+.msg_cotainer, .msg_cotainer_send {
+    max-width: calc(100% - 30px); /* Prevent overflow on very long messages */
+    width: fit-content;
+}
+
+body.dark-mode .msg_card_body {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .msg_cotainer {
+    background-color: #2c2c2c;
+    color: #ffffff;
+}
+
+body.dark-mode .msg_cotainer_send {
+    background-color: #056162;
+    color: #ffffff;
+}
+
+body.dark-mode .msg_time, body.dark-mode .msg_time_send {
+    color: #6c757d !important; /* Grey color for dark mode too */
+}
+
+/* Alignments for chat messages */
+.d-flex.justify-content-start {
+    justify-content: flex-start !important;
+    margin-bottom: 20px;
+}
+
+.d-flex.justify-content-end {
+    justify-content: flex-end !important;
+    margin-bottom: 20px;
+}
+
+/* Ensure smooth scrolling */
+#chatdiv {
+    height: 400px; /* Adjust to your desired height */
+    overflow-y: scroll;
+    scrollbar-width: thin; /* For Firefox */
+    -ms-overflow-style: none; /* For IE/Edge */
+}
+
+#chatdiv::-webkit-scrollbar {
+    width: 5px;
+}
+
+#chatdiv::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+#chatdiv::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.msg_cotainer:hover, .msg_cotainer_send:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .msg_cotainer, .msg_cotainer_send {
+        max-width: 85%; /* Adjust bubble width for smaller screens */
+    }
+}
+
+
+
+
+            /* Chat Box */
+            #chat-box {
+                display: none;
+                flex-direction: column;
+                /* Ensures proper layout when displayed */
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 350px;
+                max-width: 90%;
+                /* Mobile responsive */
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                overflow: hidden;
+            }
+
+            #chat-box.visible {
+                display: flex;
+            }
+
+            /* Chat Header */
+            .chat-header {
+                background-color: #f46b2c;
+                color: white;
+                padding: 10px;
+                font-size: 16px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .chat-logo {
+                font-size: 20px;
+            }
+
+            .chat-title {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .close-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+            }
+
+            /* Chat Body */
+            .chat-body {
+                padding: 15px;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+
+            .chat-body p {
+                margin-bottom: 8px;
+                font-size: 14px;
+                /* Fixed invalid size */
+                line-height: 1.5;
+            }
+
+            .chat-link {
+                color: #f46b2c;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            .chat-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .chat-tag {
+                background-color: #f5f5f5;
+                padding: 5px 10px;
+                border-radius: 15px;
+                font-size: 12px;
+                color: #555;
+                cursor: pointer;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            .chat-tag:hover {
+                background-color: #f46b2c;
+                color: white;
+            }
+
+            /* Chat Footer */
+            .chat-footer {
+                padding: 10px;
+                border-top: 1px solid #ddd;
+                background-color: #f9f9f9;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .chat-footer input {
+                flex: 1;
+                /* Takes the remaining space */
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+
+            #send-button {
+                background-color: #f46b2c;
+                border: none;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            #send-button:hover {
+                background-color: #e35a1f;
+            }
+
+            #send-button img {
+                width: 20px;
+                height: 20px;
+            }
+
+            /* Name and Email Form Styling */
+            #details-form {
+                display: none;
+                padding: 10px;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+            }
+
+            #details-form.hidden {
+                display: none;
+            }
+
+            #details-form:not(.hidden) {
+                display: block;
+            }
+
+            #details-form label {
+                font-size: 14px;
+                color: #555;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            #details-form input {
+                width: calc(100% - 20px);
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            #submit-details {
+                width: 100%;
+                padding: 10px;
+                background-color: #f46b2c;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                transition: background-color 0.2s;
+            }
+
+            #submit-details:hover {
+                background-color: #e35a1f;
+            }
+
+            /* Ensure Responsiveness */
+            @media (max-width: 768px) {
+                #chat-box {
+                    width: 90%;
+                    /* Reduce size for smaller screens */
+                    bottom: 10px;
+                    right: 10px;
+                }
+
+                #chat-icon {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+
+
+            /* Ends here */
+
             /* Avatar */
             .user-avatar {
                 width: 40px;
                 height: 40px;
                 border-radius: 50%;
                 border: 2px solid green;
+                object-fit: cover;
+            }
+
+
+            .chat-avatar {
+                width: 50px;
+                height: 35px;
+                border-radius: 50%;
+                border: 2px;
                 object-fit: cover;
             }
 
@@ -311,6 +664,54 @@ $title = "MSTARZ TECH";
                     /* Center the links */
                 }
             }
+
+
+            /* Style for bottom navigation */
+            .bottom-nav {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                background-color: ##212428;
+                /* background-color: #2d3c4d; */
+                /* Background color similar to WhatsApp's dark mode */
+                display: flex;
+                justify-content: space-around;
+                padding: 10px 0;
+                box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+                display: none;
+                /* Hide by default */
+            }
+
+            /* Style for each navigation item */
+            .bottom-nav a {
+                text-decoration: none;
+                color: #ccc;
+                font-size: 14px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Icons and text */
+            .bottom-nav i {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+
+            /* Active item */
+            .bottom-nav a.active {
+                color: #00af9c;
+                /* Highlight color */
+            }
+
+            /* Media query for mobile devices */
+            @media (max-width: 768px) {
+                .bottom-nav {
+                    display: flex;
+                    /* Show only on screens smaller than 768px */
+                }
+            }
         </style>
     </head>
 
@@ -362,11 +763,12 @@ $title = "MSTARZ TECH";
                                     </a>
                                     <!-- Dropdown -->
                                     <div class="header__drop">
-                                        <a href="#">Welcome <?= $data['first_name'] ?>!</a>
-                                        <a href="?p=profile.php"><i class="fas fa-user"></i> My Profile</a>
-                                        <a href="?p=profile-settings"><i class="fas fa-cog"></i> Profile Settings</a>
-                                        <a href="?p=favourites.php"><i class="fas fa-heart"></i> My Favourites</a>
+                                        <a href="#">Welcome <?= $fname = $data["first_name"] . " " . $data["last_name"]; ?>!</a>
+                                        <a href="?p=profile"><i class="fas fa-user"></i> My Profile</a>
+                                        <!-- <a href="?p=profile-setting"><i class="fas fa-cog"></i> Profile Settings</a> -->
+                                        <!-- <a href="?p=favourites.php"><i class="fas fa-heart"></i> My Favourites</a> -->
                                         <a href="?p=cart"><i class="fas fa-shopping-cart"></i> My Orders</a>
+                                        <a href="reg_finger"><i class="fas fa-fingerprint"></i> Register Finger Print</a>
                                         <a href="index?logout"><i class="fas fa-lock"></i> Logout</a>
                                     </div>
                                 <?php else: ?>
@@ -486,3 +888,72 @@ $title = "MSTARZ TECH";
             </div>
         </div>
         <!-- End Popup Mobile Menu  -->
+
+        <!-- Chatbox -->
+
+        <div id="chat-box">
+            <!-- Notification Sound -->
+    <audio id="notification-sound" src="assets/audio/notification.mp3" preload="auto"></audio>
+    <?php if (is_array($data)): ?>
+        <div class="chat-header">
+            <span class="chat-logo"><img src="upload/profile/<?= $data['upload_image'] ?>"
+            class="chat-avatar"></span>
+            <span class="chat-title">Hello, <?php echo $fname; ?></span>
+            <button class="close-btn" onclick="toggleChatBox()">×</button>
+            <!-- <?=$data['userID'];?> -->
+            <!-- <?=$data = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');?> -->
+        </div>
+    <?php else: ?>
+        <div class="chat-header">
+            <span class="chat-logo">🤖</span>
+            <span class="chat-title">Hello,</span>
+            <button class="close-btn" onclick="toggleChatBox()">×</button>
+        </div>
+        <div class="chat-body">
+            <p>Welcome to our live chat!<br>
+                <a href="#" class="chat-link">Log in</a> if you have an account, or
+                <a href="#" class="chat-link" onclick="showDetailsForm()">provide your details</a>
+            </p>
+        </div>
+    <?php endif; ?>
+
+    <div class="card-body msg_card_body" style="overflow-y: auto; height: 150px;" id="chatdiv">
+        <?php if (is_array($chats)): ?>
+            <?php foreach ($chats as $row): ?>
+                <?php $whois = $row['whois']; ?>
+                <?php if ($whois === "admin"): ?>
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="msg_cotainer">
+                            <?= htmlspecialchars($row['chat']); ?>
+                            <span class="msg_time_send"><?= date('H:i', strtotime($row['date'])); ?></span>
+
+                            <!-- <span class="msg_time"><?= htmlspecialchars($row['date']); ?></span> -->
+                        </div>
+                    </div>
+                <?php elseif ($whois === "user"): ?>
+                    <div class="d-flex justify-content-end mb-4">
+                        <div class="msg_cotainer_send">
+                            <?= htmlspecialchars($row['chat']); ?>
+                            <span class="msg_time_send"><?= date('H:i', strtotime($row['date'])); ?></span>
+
+                            <!-- <span class="msg_time_send"><?= htmlspecialchars($row['date']); ?></span> -->
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No chats available yet.</p>
+        <?php endif; ?>
+    </div>
+
+    <div class="chat-footer">
+        <div id="message"></div>
+        <input type="text" id="chat" placeholder="What can we help you with?" />
+        <button id="send-button" onclick="newchat();">
+            <img src="https://img.icons8.com/ios-filled/50/FFFFFF/sent.png" alt="Send" />
+        </button>
+    </div>
+</div>
+
+
+        <!--  -->

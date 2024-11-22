@@ -20,6 +20,7 @@ require_once "inis/ini.php";
                     $postTime = strtotime($blog_single['created_at']);  
                     $timeAgo = $d->ago($postTime);  // Get the "time ago" message
                     ?>
+                    
                 <div class="modal-body">
                 
                     <img src="upload/blog/<?= htmlspecialchars($blog_single['img']); ?>" alt="news modal" class="img-fluid modal-feat-img">

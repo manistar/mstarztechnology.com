@@ -281,6 +281,7 @@ class content extends database
                     <td><?= $row['email'] ?></td>
                     <td><?= $row['street'] . ' ' . $d->getaddress(["cities" => $row['city'], "states" => $row['state'], "countries" => $row['country']]); ?></td>
                     <th><?= $row['status']; ?></th> 
+                    <th><?= $row['ip_address']; ?></th> 
                     <td><?php echo date("F d, Y", strtotime($row['date'])); ?></td>
                     <td>
                         <div class="btn-group">
@@ -290,12 +291,18 @@ class content extends database
                             </button>
                             <div class="dropdown-menu" role="menu">
                                 
-                           
+                            
                               
                                 <!-- <a class="dropdown-item" href="users.php?p=edit&id=<?php echo $row['ID']; ?>">Edit Account</a> -->
                                 <a class="dropdown-item" href="?p=users&action=edit&id=<?php echo $row['ID']; ?>">Edit Account</a>
-                                <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="users/status" data-id="<?= $row['ID']; ?>" data-title="User Status" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Active/Deactive Account</button>
-                                <a class="dropdown-item" href="?p=users&action=post&id=<?php echo $row['ID']; ?>">Post ADS</a>
+                                <div class="dropdown-divider"></div>
+                                
+                                   
+                                   
+                                   <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="users/status" data-id="<?= $row['ID']; ?>" data-title="User Status" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Active/Deactive Account</button>
+                                   <div class="dropdown-divider"></div>
+                                   
+                                <a class="dropdown-item" href="?p=ads&action=post&id=<?php echo $row['ID']; ?>">Post ADS</a>
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="?p=users&action=view&id=<?= $row['ID'] ?>">View Account</a>
@@ -303,7 +310,8 @@ class content extends database
                         </div>
                     </td>
                 </tr>
-            <?php  }
+            <?php }
+        
        
 
     //
@@ -326,10 +334,16 @@ class content extends database
                 </td>
                 <td><?php echo $id = $row['ID']; ?></td>
                 <td><a href="users.php?a=view&id=<?= $row['userID']; ?>"><?php echo $name = $d->getusername($row['userID']); ?></a></td>
-                <td><?php echo $row['fname'] ?></td>
-                <td><?php echo $row['phone']; ?></td>
-                <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['topic'] ?></td>
+                <td><?php echo $row['title'] ?></td>
+                <td><?php echo $row['categories']; ?></td>
+                <td><img src="../upload/cart/<?= $row['upload_image']; ?>" style="width: 55px; height: 50px !important;" alt="Image-HasTech"></td>
+                <!-- <td><?php echo $row['likes'] ?></td> -->
+                <td><?php echo $row['amount'] ?></td>
+                <td><?php echo $row['description'] ?></td>
+                
+                
+                
+                
                 <td><?php echo date("F d, Y", strtotime($row['date'])); ?></td>
                 <td>
                     <div class="btn-group">
@@ -341,9 +355,16 @@ class content extends database
                             <!-- <a class="dropdown-item" href="staff.php">Assign to staff</a> -->
                             <!-- <a class="dropdown-item" href="#">Loan</a> -->
                             <!-- <a class="dropdown-item" href="ads.php?a=edit&id=<?php echo $row['ID']; ?>"></a> -->
-                            <button class="dropdown-item" id="e<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $name ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button>
-                            <a class="dropdown-item" href="users.php?a=post&upload=<?= $row['ID'] ?>&id=<?= $row['userID'] ?>">Manage Image</a>
-                            <button class="dropdown-item" id="s<?= $row['ID'] ?>" data-url="ads/status" data-id="<?= $row['ID']; ?>" data-title="Update Ads Status" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Update status</button>
+                            <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $row['userID'] ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button>
+                            <div class="dropdown-divider"></div>
+                            <!-- <button class="dropdown-item" id="e<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $name ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button> -->
+                            <a class="dropdown-item" href="?p=ads&action=upload=<?= $row['ID'] ?>&id=<?= $row['userID'] ?>">Manage Image</a>
+                            <div class="dropdown-divider"></div>
+                            <!-- <a class="dropdown-item" href="?p=contact&id=<?= $row['ID'] ?>">View Account</a> -->
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <a class="dropdown-item" href="?p=ads&pID=<?=$row['ID']; ?>&products">Delete Account</a>
+                            <!-- <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="users/ban" data-id="<?= $row['ID']; ?>" data-title="User Status" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Ban Account</button> -->
+                            <!-- <button class="dropdown-item" id="s<?= $row['ID'] ?>" data-url="users/status" data-id="<?= $row['ID']; ?>" data-title="Update Ads Status" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Update status</button> -->
                             <!-- <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="users/status" data-id="<?= $row['ID']; ?>" data-title="User Status" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Remove</button> -->
                             <!-- <a class="dropdown-item" href="#"></a> -->
                             <div class="dropdown-divider"></div>
@@ -354,8 +375,174 @@ class content extends database
             </tr>
             <?php  
             // }
+            // require_once 'content/modal.php';
+           
+    }
+
+    function feedback($row)
+    {
+        $d = new database;
+        // if (is_array($row)) {
+             ?>
+            <tr id="row<?= $row['ID']; ?>" data-widget="expandable-table" aria-expanded="false">
+                <!-- <td> -->
+                    <?php //if ($row['status'] == "1") { ?>
+                        <!-- <span class="badge bg-success float-right"> <span style="display:none">status:</span>View</span> -->
+                    <?php //} else if ($row['status'] == "2") { ?>
+                        <!-- <span class="badge bg-primary float-right"> <span style="display:none">status:</span>Delete</span> -->
+                    <?php //} else if ($row['status'] == "3") { ?>
+                        <!-- <span class="badge bg-dark float-right"> <span style="display:none">status:</span>Draft</span> -->
+                    <?php// } else { ?>
+                        <!-- <span class="badge bg-danger float-right"> <span style="display:none">status:</span>Blocked</span> -->
+                    <?php //} ?>
+                <!-- </td> -->
+                <td><?php echo $id = $row['ID']; ?></td>
+                <!-- <td><a href="users.php?a=view&id=<?= $row['userID']; ?>"><?php echo $name = $d->getusername($row['userID']); ?></a></td> -->
+                <td><?php echo $row['fname'] ?></td>
+                <td><?php echo $row['email']; ?></td>
+                <!-- <td><img src="../upload/cart/<?= $row['upload_image']; ?>" style="width: 55px; height: 50px !important;" alt="Image-HasTech"></td> -->
+                <td><?php echo $row['website'] ?></td>
+                <td><?php echo $row['message'] ?></td>
+                <td><?php echo $row['ip_address'] ?></td>
+                
+                
+                
+                
+                <td><?php echo date("F d, Y", strtotime($row['date'])); ?></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" id="" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <!-- <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $row['userID'] ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button> -->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="?p=ads&pID=<?=$row['ID']; ?>&products">Delete Account</a>
+                            <div class="dropdown-divider"></div>
+                           
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php  
+            // }
+            // require_once 'content/modal.php';
+           
+    }
+
+    function contacttable($row)
+    {
+        $d = new database;
+        // if (is_array($row)) {
+             ?>
+            <tr id="row<?= $row['ID']; ?>" data-widget="expandable-table" aria-expanded="false">
+                <td>
+                    <?php if ($row['status'] == "1") { ?>
+                        <span class="badge bg-success float-right"> <span style="display:none">status:</span>View</span>
+                    <?php } else if ($row['status'] == "2") { ?>
+                        <span class="badge bg-primary float-right"> <span style="display:none">status:</span>Delete</span>
+                    <?php } else if ($row['status'] == "3") { ?>
+                        <!-- <span class="badge bg-dark float-right"> <span style="display:none">status:</span>Draft</span> -->
+                    <?php } else { ?>
+                        <span class="badge bg-danger float-right"> <span style="display:none">status:</span>Blocked</span>
+                    <?php } ?>
+                </td>
+                <td><?php echo $id = $row['ID']; ?></td>
+                <!-- <td><a href="users.php?a=view&id=<?= $row['userID']; ?>"><?php echo $name = $d->getusername($row['userID']); ?></a></td> -->
+                <td><?php echo $row['fname'] ?></td>
+                <td><?php echo $row['ip_address']; ?></td>
+                <td><?= $row['email']; ?></td>
+                <td><?php echo $row['phone'] ?></td>
+                <!-- <td><?php echo $row['description'] ?></td> -->
+                
+                
+                
+                
+                <td><?php echo date("F d, Y", strtotime($row['date'])); ?></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" id="" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                        
+                            <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $row['userID'] ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="users.php?a=post&upload=<?= $row['ID'] ?>&id=<?= $row['userID'] ?>">Manage Image</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="?p=contact&id=<?= $row['ID'] ?>">View Account</a>
+                            
+                            <!-- <a class="dropdown-item" href="#"></a> -->
+                            <div class="dropdown-divider"></div>
+                            <!-- <a class="dropdown-item" href="users.php?a=view&id=<?= $row['ID'] ?>">View Ads</a> -->
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php  
+            // }
+            // require_once 'content/modal.php';
+           
     }
     
+
+    function carttable($carting)
+    {
+        $d = new database;
+        // if (is_array($row)) {
+             ?>
+            <tr id="row<?= $carting['productID']; ?>" data-widget="expandable-table" aria-expanded="false">
+                <!-- <td>
+                    <?php if ($carting['status'] == "1") { ?>
+                        <span class="badge bg-success float-right"> <span style="display:none">status:</span>View</span>
+                    <?php } else if ($carting['status'] == "2") { ?>
+                        <span class="badge bg-primary float-right"> <span style="display:none">status:</span>Delete</span>
+                    <?php } else if ($carting['status'] == "3") { ?>
+                        <!-- <span class="badge bg-dark float-right"> <span style="display:none">status:</span>Draft</span> -->
+                    <?php } else { ?>
+                        <span class="badge bg-danger float-right"> <span style="display:none">status:</span>Blocked</span>
+                    <?php } ?>
+                </td> -->
+                <td><?php echo $id = $carting['productID']; ?></td>
+                <!-- <td><a href="users.php?a=view&id=<?= $row['userID']; ?>"><?php echo $name = $d->getusername($row['userID']); ?></a></td> -->
+                <!-- <td><?php echo $carting['title'] ?></td> -->
+                <td><?php echo $carting['userID']; ?></td>
+                <!-- <td><?= $carting['category']; ?></td> -->
+                <!-- <td><?php echo $row['phone'] ?></td> -->
+                <!-- <td><?php echo $row['description'] ?></td> -->
+                
+                
+                
+                
+                <td><?php echo date("F d, Y", strtotime($carting['date'])); ?></td>
+                <!-- <td> -->
+                    <!-- <div class="btn-group"> -->
+                        <!-- <button type="button" id="" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button> -->
+                        <!-- <div class="dropdown-menu" role="menu"> -->
+                        
+                            <!-- <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $row['userID'] ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button> -->
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <!-- <a class="dropdown-item" href="users.php?a=post&upload=<?= $row['ID'] ?>&id=<?= $row['userID'] ?>">Manage Image</a> -->
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <!-- <a class="dropdown-item" href="?p=contact&id=<?= $row['ID'] ?>">View Account</a> -->
+                            
+                            <!-- <a class="dropdown-item" href="#"></a> -->
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <!-- <a class="dropdown-item" href="users.php?a=view&id=<?= $row['ID'] ?>">View Ads</a> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                <!-- </td> -->
+            </tr>
+            <?php  
+            // }
+            // require_once 'content/modal.php';
+           
+    }
     
 
     function countries()

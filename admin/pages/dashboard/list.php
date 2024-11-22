@@ -1,8 +1,8 @@
-<?php 
+<?php
 //This is for pagination 
 $start = 0;
-if(isset($_GET['s'])) {
-  $start = (int)htmlspecialchars($_GET['s']);
+if (isset($_GET['s'])) {
+  $start = (int) htmlspecialchars($_GET['s']);
 }
 $ads = $d->getall("products", "date != ? order by date desc LIMIT $start, 5", [""], fetch: "moredetails");
 $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
@@ -13,6 +13,7 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
   input[type="checkbox"] {
     display: none !important;
   }
+
   tbody tr td {
     padding-left: 20px;
   }
@@ -54,7 +55,7 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="?p=students.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="?p=student" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -62,14 +63,14 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
           <!-- small box -->
           <div class="small-box bg-dark">
             <div class="inner">
-              <h3><?= $Tcontact ?></h3>
+              <h3><?= $Tproducts ?></h3>
 
-              <p>Total Contacts</p>
+              <p>Total Products</p>
             </div>
             <div class="icon">
               <i class="fas fa-bullhorn"></i>
             </div>
-            <a href="?p=contact.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="?p=ads" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -77,14 +78,15 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3><?= $Terrorp; ?></h3>
+              <h3><?= $totalSuccessPayments = $Tsucessp['total_success'] ?? 0; ?></h3>
+
 
               <p>Total Payment</p>
             </div>
             <div class="icon">
               <i class="far fa-check-circle"></i>
             </div>
-            <a href="?p=payment.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="?p=payment" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -114,30 +116,19 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <i class="fas fa-home"></i>
-                Home Control
+                <i class="fas fa-chart-pie mr-1"></i>
+                Payment
               </h3>
             </div><!-- /.card-header -->
             <div class="card-body">
               <div class="tab-content p-0">
                 <!-- Morris chart - Sales -->
-
-                <form action="passer" id="foo">
-                    <?= $c->create_form($frontboard); ?> 
-                    <input type="hidden" name="update_home" value="">
-                        <div id="custommessage"></div>
-                        <input type="submit" style ="width:100%;" class="btn btn-primary" value="submit">
-                    </form>
-
-               
-
-                
-                <!-- <div class="chart tab-pane active" id="piechart" style="position: relative; height: 300px;">
+                <div class="chart tab-pane active" id="piechart" style="position: relative; height: 300px;">
 
                 </div>
                 <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
                   <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                </div> -->
+                </div>
               </div>
             </div><!-- /.card-body -->
           </div>
@@ -145,33 +136,25 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
 
 
 
+          <!-- I removed  Upload Home Control here -->
           <!-- Custom tabs (Charts with tabs)-->
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <i class="fas fa-upload"></i>
-                Upload Home Control
+                <i class="fas fa-chart-pie mr-1"></i>
+                ADS
               </h3>
 
             </div><!-- /.card-header -->
             <div class="card-body">
               <div class="tab-content p-0">
-              
-              <form id="formid" role="form" method="POST" action="passer" enctype='multipart/form-data'>
-              <p class="Up-load">Choose location to upload at the Client Area Side</p>
-                    <div class="form-group">
-                      <select id="selectid" class="form-control" onchange="check()">
-                          <option value="">Select Page to Control</option>
-                          <option value="?p=what-i-do.php">What I Do</option>
-                          <option value="?p=portfolio.php">My Portfolio</option>
-                          <option value="?p=education.php">Education</option>
-                          <option value="?p=job-exp.php">Job Experience</option>
-                          <option value="?p=testimonial.php">Testonials</option>
-                          <option value="?p=blog.php">Blog</option>
-                      </select>
-                    </div> 
-              </form>
-              <!--  -->
+                <!-- Morris chart - Sales -->
+                <div class="chart tab-pane active" id="chart_div" style="position: relative; height: 300px;">
+
+                </div>
+                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                  <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                </div>
               </div>
             </div><!-- /.card-body -->
           </div>
@@ -204,17 +187,25 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach ($rpayment as $row) { ?>
-                      <a href="payment.php?a=invoice&id=<?= $row['ID'] ?>">
+
+
+
+                    <?php
+
+                    foreach ($rpayment as $row) {
+
+                      ?>
+
+                      <a href="?p=payment?a=invoice&id=<?= $row['ID'] ?>">
                         <tr>
                           <td><a href="#"><?= currency['symbol'] . number_format($row['price']) ?></a></td>
                           <td><?= $d->getusername($row['userID']) ?></td>
                           <td><?= $row['payfor'] ?></td>
                           <td><span class="badge badge-<?php if ($row['status'] == "success") {
-                                                          echo "success";
-                                                        } else {
-                                                          echo "danger";
-                                                        } ?>"><?= $row['status'] ?></span></td>
+                            echo "success";
+                          } else {
+                            echo "danger";
+                          } ?>"><?= $row['status'] ?></span></td>
                           <td><?php echo date("F d, Y", strtotime($row['date'])); ?></td>
                         </tr>
                       </a>
@@ -225,6 +216,8 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
             </div>
             <!-- /.card-body -->
           </div>
+          <!-- /.card -->
+
           <!-- /.card -->
 
 
@@ -256,10 +249,11 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
                 <?php foreach ($student as $row) { ?>
                   <li>
                     <img src="../students/profile/<?= $row['upload_image']; ?>" alt="User Image">
-                    <a class="users-list-name" title="<?= $row['fname'] . '.' . $row['lname']; ?>" href="users.php?a=view&id=<?= $row['ID'] ?>"><?= $row['fname'] . ' ' . $row['lname']; ?></a>
+                    <a class="users-list-name" title="<?= $row['fname'] . '.' . $row['lname']; ?>"
+                      href="users.php?a=view&id=<?= $row['ID'] ?>"><?= $row['fname'] . ' ' . $row['lname']; ?></a>
                     <span class="users-list-date"><?php echo date("F d, Y", strtotime($row['date'])); ?></span>
                   </li>
-                <?php }  ?>
+                <?php } ?>
               </ul>
 
             </div>
@@ -291,14 +285,14 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
                 <table class="table-responsive">
                   <tbody>
 
-                <?php 
-                // if(is_array($passengers) || $ads->rowCount() > 0) {
-                  // require_once "function/products.php";
-                  // $p = new products;
-                  foreach ($passengers as $row) {
-                  // var_dump($ads->rowCount());
-                  $c->adstable($row);
-                    // } 
+                    <?php
+                    // if(is_array($passengers) || $ads->rowCount() > 0) {
+                    // require_once "function/products.php";
+                    // $p = new products;
+                    foreach ($passengers as $row) {
+                      // var_dump($ads->rowCount());
+                      $c->contacttable($row);
+                      // } 
                     } ?>
                   </tbody>
                 </table>
@@ -313,6 +307,65 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
           </div>
           <!-- /.card -->
 
+          <!-- Recent cart Added -->
+
+          <!-- recent ADS card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Carts <a href="ads.php">See all</a></h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body" style="display: block;">
+              <ul class="products-list product-list-in-card pl-2 pr-2">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>ProductID</th>
+                      <th>UserID</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  <?php
+                    if ($cart_data->rowCount() > 0) {
+                        foreach ($cart_data as $row) {
+                            $carting = $d->getall("products", "ID = ?", [$row['productID']]);
+
+                            // Check if product data was successfully retrieved
+                            if (!empty($carting)) {
+                                $c->carttable($row);
+                            }
+                        }
+                    } else {
+                        echo "No products in Cart";
+                    }
+                  ?>
+                  </tbody>
+                </table>
+                <!-- /.item -->
+              </ul>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer text-center">
+              <a href="?p=ads.php">View All Users</a>
+            </div>
+            <!-- /.card-footer -->
+          </div>
+          <!-- /.card -->
+
+          <!-- End of Cart -->
+
+
+
 
           <!-- /.card -->
         </section>
@@ -325,93 +378,6 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
 
 </div>
 
-
-</body>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load('current', {
-    'packages': ['corechart']
-  });
-  google.charts.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-  
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['success', <?= $Tsucessp; ?>],
-      ['Error/Failed', <?= $Terrorp; ?>],
-    ]);
-
-    var options = {
-      // is3D: true,
-      pieHole: 0.4,
-      // title: 'My Daily Activities'
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-    chart.draw(data, options);
-  }
-
-
-
-
-  // ads 
-  google.charts.load("current", {
-    packages: ['corechart']
-  });
-  google.charts.setOnLoadCallback(drawChartAds);
-
-  function drawChartAds() {
-    var data = google.visualization.arrayToDataTable([
-      ["Element", "Density", {
-        role: "style"
-      }],
-      ["Active", <?= $activeADS ?>, "#007bff"],
-      ["Souldout", <?= $soldoutADS ?>, "#007bff"],
-      ["Draft", <?= $draftADS ?>, "#007bff"],
-      ["Blocked", <?= $blockedADS ?>, "color: red "]
-    ]);
-
-    var view = new google.visualization.DataView(data);
-    view.setColumns([0, 1,
-      {
-        calc: "stringify",
-        sourceColumn: 1,
-        type: "string",
-        role: "annotation"
-      },
-      2
-    ]);
-
-    var options = {
-      title: "ADS Status Chart",
-      width: 500,
-      height: 300,
-      bar: {
-        groupWidth: "80%"
-      },
-      legend: {
-        position: "none"
-      },
-    };
-    var chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
-    chart.draw(view, options);
-  }
-</script>
-<footer>
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
-  <script src="js/myjs.js"></script>
-</footer>
-
-</html>
 
 <div class="modal fade" id="modal-lg">
   <div class="modal-dialog modal-lg">
@@ -439,4 +405,4 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal --> 
+<!-- /.modal -->

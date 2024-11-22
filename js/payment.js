@@ -1,7 +1,7 @@
 var payBtn = document.getElementById("payBtn");
 var payment_info = {
-    public_key: "FLWPUBK-02144b48bbc7d4724e02fec82e7fd57d-X",
-    tx_ref: "TX-" + new Date().getTime(),  // Unique transaction reference
+    public_key: "FLWPUBK_TEST-9b9efaabfbb3b031e6a9fba2f9dafb60-X",
+    tx_ref: "",
     amount: 0,
     currency: "NGN",
     payment_options: "card, account, banktransfer, ussd",
@@ -15,8 +15,8 @@ var payment_info = {
         name: "",
     },
     customizations: {
-        title: "Mstarz Technology",
-        description: "Payment for items in your cart",
+        title: "",
+        description: "",
         logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
     },
 };

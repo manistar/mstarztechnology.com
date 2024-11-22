@@ -13,5 +13,4 @@ require_once "function/users.php";
         $ads = $d->getall("products", "date != ? order by date desc", [""], fetch: "moredetails");
      }
  } 
-
 ?>

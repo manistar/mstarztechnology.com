@@ -27,6 +27,7 @@
                     <p class="register-text">
                         New to Login? <a href="register">Register Here</a>
                     </p>
+                    
                     <!-- Google SignIn -->
                     <div id="g_id_onload" data-client_id="109908398316-4qh8o3a339uqtrrtr5ngmi90mtdocop1.apps.googleusercontent.com" 
                     data-login_uri="http://localhost/mstarztech.com/google_callback"></div>

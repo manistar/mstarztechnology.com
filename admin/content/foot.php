@@ -1,5 +1,5 @@
 
-</html>
+
 
 <div class="modal fade" id="modal-lg">
   <div class="modal-dialog modal-lg">
@@ -90,7 +90,7 @@
     }
   }
 </script>
-<script src="../js/address.js"></script>
+<!-- <script src="../js/address.js"></script> -->
 <script>
   function switchtab(show, hide) {
       document.getElementById(show).style.display = "block";
@@ -98,341 +98,228 @@
   }
 </script>
 
+
+
 <script>
-            function check() {
-                var f = document.getElementById('formid');
-                var s = document.getElementById('selectid');
-                if( s.selectedIndex == 1) { 
-                f.setAttribute("action",s.options[1].value) ;  
 
-                
-                f.submit();
-                }
-                if( s.selectedIndex == 2) { 
-                location.href = s.options[2].value;
-                }
+function newchat() {
+    const chat = document.getElementById("chat")?.value || "";
+    const userID = document.getElementById("ID")?.value || "";
 
-                if( s.selectedIndex == 3) { 
-                location.href = s.options[3].value;
-                }
+    // Debugging: Verify inputs
+    console.log("Chat Message:", chat);
+    console.log("User ID:", userID);
 
-                if( s.selectedIndex == 4) { 
-                location.href = s.options[4].value;
-                }
+    if (!chat || !userID) {
+        document.getElementById("message").innerHTML = "Message or User ID is missing.";
+        return;
+    }
 
-                if( s.selectedIndex == 5) { 
-                location.href = s.options[5].value;
-                }
-
-                if( s.selectedIndex == 6) { 
-                location.href = s.options[6].value;
-                }
-
-                if( s.selectedIndex == 7) { 
-                location.href = s.options[7].value;
-                }
-            }
-
-
-$('#custtomtextarea').richText({
-
-// text formatting
-bold: true,
-italic: true,
-underline: true,
-
-// text alignment
-leftAlign: true,
-centerAlign: true,
-rightAlign: true,
-justify: true,
-
-// lists
-ol: true,
-ul: true,
-
-// title
-heading: true,
-
-// fonts
-fonts: true,
-fontList: [
-    "Arial", 
-    "Arial Black", 
-    "Comic Sans MS", 
-    "Courier New", 
-    "Geneva", 
-    "Georgia", 
-    "Helvetica", 
-    "Impact", 
-    "Lucida Console", 
-    "Tahoma", 
-    "Times New Roman",
-    "Verdana"
-],
-fontColor: true,
-fontSize: true,
-
-// uploads
-imageUpload: true,
-fileUpload: true,
-
-// media
-videoEmbed: true,
-
-// link
-urls: true,
-
-// tables
-table: true,
-
-// code
-removeStyles: true,
-code: true,
-
-// colors
-colors: [],
-
-// dropdowns
-fileHTML: '',
-imageHTML: '',
-
-// translations
-translations: {
-    'title': 'Title',
-    'white': 'White',
-    'black': 'Black',
-    'brown': 'Brown',
-    'beige': 'Beige',
-    'darkBlue': 'Dark Blue',
-    'blue': 'Blue',
-    'lightBlue': 'Light Blue',
-    'darkRed': 'Dark Red',
-    'red': 'Red',
-    'darkGreen': 'Dark Green',
-    'green': 'Green',
-    'purple': 'Purple',
-    'darkTurquois': 'Dark Turquois',
-    'turquois': 'Turquois',
-    'darkOrange': 'Dark Orange',
-    'orange': 'Orange',
-    'yellow': 'Yellow',
-    'imageURL': 'Image URL',
-    'fileURL': 'File URL',
-    'linkText': 'Link text',
-    'url': 'URL',
-    'size': 'Size',
-    'responsive': 'Responsive',
-    'text': 'Text',
-    'openIn': 'Open in',
-    'sameTab': 'Same tab',
-    'newTab': 'New tab',
-    'align': 'Align',
-    'left': 'Left',
-    'center': 'Center',
-    'right': 'Right',
-    'rows': 'Rows',
-    'columns': 'Columns',
-    'add': 'Add',
-    'pleaseEnterURL': 'Please enter an URL',
-    'videoURLnotSupported': 'Video URL not supported',
-    'pleaseSelectImage': 'Please select an image',
-    'pleaseSelectFile': 'Please select a file',
-    'bold': 'Bold',
-    'italic': 'Italic',
-    'underline': 'Underline',
-    'alignLeft': 'Align left',
-    'alignCenter': 'Align centered',
-    'alignRight': 'Align right',
-    'addOrderedList': 'Add ordered list',
-    'addUnorderedList': 'Add unordered list',
-    'addHeading': 'Add Heading/title',
-    'addFont': 'Add font',
-    'addFontColor': 'Add font color',
-    'addFontSize' : 'Add font size',
-    'addImage': 'Add image',
-    'addVideo': 'Add video',
-    'addFile': 'Add file',
-    'addURL': 'Add URL',
-    'addTable': 'Add table',
-    'removeStyles': 'Remove styles',
-    'code': 'Show HTML code',
-    'undo': 'Undo',
-    'redo': 'Redo',
-    'close': 'Close'
-},
-          
-// privacy
-youtubeCookies: false,
-  
-// preview
-preview: false,
-
-// placeholder
-placeholder: '',
-
-// developer settings
-useSingleQuotes: false,
-height: 0,
-heightPercentage: 0,
-adaptiveHeight: false,
-id: "",
-class: "",
-useParagraph: false,
-maxlength: 0,
-callback: undefined,
-useTabForNext: false
-});
-</script>
-<!--Rich Text Editor Script Above-->
-
-  <script>
-    $(function() {
-      //Initialize Select2 Elements
-      $('.select2').select2()
-
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
-
-      //Datemask dd/mm/yyyy
-      $('#datemask').inputmask('dd/mm/yyyy', {
-        'placeholder': 'dd/mm/yyyy'
-      })
-      //Datemask2 mm/dd/yyyy
-      $('#datemask2').inputmask('mm/dd/yyyy', {
-        'placeholder': 'mm/dd/yyyy'
-      })
-      //Money Euro
-      $('[data-mask]').inputmask()
-
-      //Date picker
-      $('#reservationdate').datetimepicker({
-        format: 'L'
-      });
-
-      //Date and time picker
-      $('#reservationdatetime').datetimepicker({
-        icons: {
-          time: 'far fa-clock'
-        }
-      });
-
-      //Date range picker
-      $('#reservation').daterangepicker()
-      //Date range picker with time picker
-      $('#reservationtime').daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        locale: {
-          format: 'MM/DD/YYYY hh:mm A'
-        }
-      })
-      //Date range as a button
-      $('#daterange-btn').daterangepicker({
-          ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          },
-          startDate: moment().subtract(29, 'days'),
-          endDate: moment()
+    $.ajax({
+        type: 'POST',
+        url: 'include/ajax',
+        data: {
+            chatnow: true,
+            chat: chat,
+            userID: userID, // Ensure correct key matches backend expectations
         },
-        function(start, end) {
-          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        success: function (response) {
+            console.log("Response:", response); // Debug server response
+            try {
+                const result = JSON.parse(response);
+                if (result.status === "success") {
+                    document.getElementById("message").innerHTML = "Message sent successfully.";
+                    updatechat();
+                    document.getElementById("chat").value = ""; // Clear input
+                } else {
+                    document.getElementById("message").innerHTML = result.message;
+                }
+            } catch (e) {
+                console.error("Error parsing response:", e);
+                document.getElementById("message").innerHTML = "An error occurred while processing the response.";
+            }
+        },
+        error: function () {
+            document.getElementById("message").innerHTML = "An error occurred while sending the message.";
         }
-      )
+    });
+}
 
-      //Timepicker
-      $('#timepicker').datetimepicker({
-        format: 'LT'
-      })
- 
-      //Bootstrap Duallistbox
-      $('.duallistbox').bootstrapDualListbox()
 
-      //Colorpicker
-      $('.my-colorpicker1').colorpicker()
-      //color picker with addon
-      $('.my-colorpicker2').colorpicker()
 
-      $('.my-colorpicker2').on('colorpickerChange', function(event) {
-        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-      })
+function updatechat() {
+    const userID = document.getElementById("ID")?.value || "";
 
-      $("input[data-bootstrap-switch]").each(function() {
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-      })
-
-    })
-    // BS-Stepper Init
-    document.addEventListener('DOMContentLoaded', function() {
-      window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
-
-    // DropzoneJS Demo Code Start
-    Dropzone.autoDiscover = false
-
-    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-    var previewNode = document.querySelector("#template")
-    previewNode.id = ""
-    var previewTemplate = previewNode.parentNode.innerHTML
-    previewNode.parentNode.removeChild(previewNode)
-
-    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-      url: "/target-url", // Set the url
-      thumbnailWidth: 80,
-      thumbnailHeight: 80,
-      parallelUploads: 20,
-      previewTemplate: previewTemplate,
-      autoQueue: false, // Make sure the files aren't queued until manually added
-      previewsContainer: "#previews", // Define the container to display the previews
-      clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-    })
-
-    myDropzone.on("addedfile", function(file) {
-      // Hookup the start button
-      file.previewElement.querySelector(".start").onclick = function() {
-        myDropzone.enqueueFile(file)
-      }
-    })
-
-    // Update the total progress bar
-    myDropzone.on("totaluploadprogress", function(progress) {
-      document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-    })
-
-    myDropzone.on("sending", function(file) {
-      // Show the total progress bar when upload starts
-      document.querySelector("#total-progress").style.opacity = "1"
-      // And disable the start button
-      file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-    })
-
-    // Hide the total progress bar when nothing's uploading anymore
-    myDropzone.on("queuecomplete", function(progress) {
-      document.querySelector("#total-progress").style.opacity = "0"
-    })
-
-    // Setup the buttons for all transfers
-    // The "add files" button doesn't need to be setup because the config
-    // `clickable` has already been specified.
-    document.querySelector("#actions .start").onclick = function() {
-      myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+    if (!userID) {
+        console.error("User ID is missing for update.");
+        return;
     }
-    document.querySelector("#actions .cancel").onclick = function() {
-      myDropzone.removeAllFiles(true)
-    }
-    // DropzoneJS Demo Code End
-  </script>
 
-</footer>
+    $.ajax({
+        type: "GET",
+        url: "include/ajax",
+        data: { updatechat: true, ID: userID },
+        success: function (response) {
+            console.log("Raw Response:", response); // Debugging
+            document.getElementById("chatdiv").innerHTML = response;
+
+            try {
+                const result = JSON.parse(response);
+
+                if (result.status === "success") {
+                    const chats = result.chats || [];
+                    let chatHtml = "";
+
+                    chats.forEach(chat => {
+                        chatHtml += chat.whois === "admin"
+                            ? `<div class="d-flex justify-content-start mb-4">
+                                    <div class="msg_cotainer">
+                                        ${chat.chat}
+                                        <span class="msg_time">${chat.date}</span>
+                                    </div>
+                               </div>`
+                            : `<div class="d-flex justify-content-end mb-4">
+                                    <div class="msg_cotainer_send">
+                                        ${chat.chat}
+                                        <span class="msg_time_send">${chat.date}</span>
+                                    </div>
+                               </div>`;
+                    });
+
+                    document.getElementById("chatdiv").innerHTML = chatHtml;
+                    const userStatus = result.userStatus || "offline";
+                    document.getElementById("userStatus").innerHTML = userStatus === "online" ? "Online" : "Offline";
+                } else {
+                    console.warn("No chats available.");
+                    document.getElementById("chatdiv").innerHTML = "<p>No chats available.</p>";
+                }
+            } catch (e) {
+                console.error("Error parsing response:", e);
+                document.getElementById("chatdiv").innerHTML;
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", status, error);
+            document.getElementById("chatdiv").innerHTML = "<p>An error occurred while updating the chat.</p>";
+        }
+    });
+}
+
+  // Automatically update the chat every second if an ID is present
+  
+
+//   function updatechat() {
+//     const userID = document.getElementById("ID")?.value || "";
+
+//     // Validate that userID exists
+//     if (!userID) {
+//         console.error("User ID is missing for update.");
+//         return;
+//     }
+
+//     $.ajax({
+//         type: "GET",
+//         url: "include/ajax", // Replace with actual backend handler path
+//         data: {
+//             updatechat: true,
+//             ID: userID, // Ensure proper key for backend
+//         },
+//         success: function (response) {
+//             try {
+//                 // Parse the response from the backend
+//                 const result = JSON.parse(response);
+
+//                 if (result.status === "success") {
+//                     // Assuming result.chats contains the chat array
+//                     const chats = result.chats;
+//                     let chatHtml = "";
+
+//                     // Build chat messages HTML
+//                     chats.forEach(chat => {
+//                         if (chat.whois === "admin") {
+//                             chatHtml += 
+//                                 <div class="d-flex justify-content-start mb-4">
+//                                     <div class="msg_cotainer">
+//                                         ${chat.chat}
+//                                         <span class="msg_time">${chat.date}</span>
+//                                     </div>
+//                                 </div>;
+//                         } else if (chat.whois === "user") {
+//                             chatHtml += 
+//                                 <div class="d-flex justify-content-end mb-4">
+//                                     <div class="msg_cotainer_send">
+//                                         ${chat.chat}
+//                                         <span class="msg_time_send">${chat.date}</span>
+//                                     </div>
+//                                 </div>;
+//                         }
+//                     });
+
+//                     // Update the chat container
+//                     document.getElementById("chatdiv").innerHTML = chatHtml;
+
+//                     // Optionally update user status (e.g., Online/Offline)
+//                     const userStatus = result.userStatus; // Expecting backend to send userStatus
+//                     document.getElementById("userStatus").innerHTML = userStatus === "online" ? "Online" : "Offline";
+//                 } else {
+//                     // Handle case when no chats are available
+//                     document.getElementById("chatdiv").innerHTML = "<p>No chats available.</p>";
+//                 }
+//             } catch (e) {
+//                 console.error("Error parsing updatechat response:", e);
+//                 console.error("Server response:", response);
+//                 document.getElementById("chatdiv").innerHTML = "<p>An error occurred while updating the chat.</p>";
+//             }
+//         },
+//         error: function (xhr, status, error) {
+//             console.error("Failed to update chat. Status:", status, "Error:", error);
+//             document.getElementById("chatdiv").innerHTML = "<p>An error occurred while updating the chat.</p>";
+//         }
+//     });
+// }
+  
+
+// Automatically update the chat every second if an ID is present
+
+  
+  $(document).ready(function () {
+            const userID = document.getElementById("ID")?.value;
+            if (userID) {
+                setInterval(function () {
+                    updatechat();
+                }, 1000); // Update chat every second
+            } else {
+                console.warn("User ID is missing, auto-update disabled.");
+            }
+        });
 
 
+        document.addEventListener('DOMContentLoaded', function () {
+            // Auto scroll to the bottom of the chat
+            const chatDiv = document.getElementById('chatdiv');
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+
+            // Function to send a new chat message
+            document.getElementById('sendBtn').addEventListener('click', function () {
+                const messageInput = document.getElementById('chat');
+                const message = messageInput.value.trim();
+                if (message) {
+                    // For now, append the message to the chat div (this should be sent to the server in a real app)
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('message', 'user');
+                    messageElement.innerHTML = `
+                <div class="message-content">${message}</div>
+                <div class="message-time">${new Date().toLocaleTimeString()}</div>
+            `;
+                    chatDiv.appendChild(messageElement);
+
+                    // Clear the input field and auto scroll
+                    messageInput.value = '';
+                    chatDiv.scrollTop = chatDiv.scrollHeight;
+                }
+            });
+        });
+</script>
 <script src="js/my.js"></script>
 <script src="js/myjs.js"></script>  
-<!-- <script src="js/js.js"></script>    -->
+

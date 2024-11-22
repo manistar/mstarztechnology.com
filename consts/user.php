@@ -15,18 +15,19 @@ $user_validating = [
         
     ],
 
-    "password" => [
-        "title" => "Password",
-        "global_class" => "col-md-12",
-        "id" => "user-password",
-        "name"=> "password",
-        "description"=>"<a href='forgot.html'>Forgot Password ?</a>",
-        "placeholder" => "Enter Password",
-        "is_required" => true,
-        "input_type" => "password",
-        "type" => "input",
-        "icon" => "🔒" // Password icon
-    ],
+   "password" => [
+    "title" => "Password",
+    "global_class" => "col-md-12",
+    "id" => "user-password",
+    "name"=> "password",
+    "description"=>"<a href='forgetPassword' style='color: #fff; text-decoration: none;' onmouseover='this.style.color=\"#ccc\"' onmouseout='this.style.color=\"#fff\"'>Forgot Password ?</a>",  
+    "placeholder" => "Enter Password",
+    "is_required" => true,
+    "input_type" => "password",
+    "type" => "input",
+    "icon" => "🔒" // Password icon
+],
+
     
 ];
 
@@ -257,6 +258,32 @@ $products_reply = [
         "is_required" => true,
         "input_type" => "txtarea",
         "type" => "textarea"
+    ],
+];
+
+$forgetPass = [
+    "email" => [
+        "title" => "Email",
+        "global_class" => "col-md-12",
+        // "class"=> "rnform-group",
+        "name"=> "email",
+        "placeholder" => "Example@email.com",
+        "is_required" => true,
+        "input_type" => "email",
+        "type" => "input",
+        "unique"=>""
+    ],
+];
+
+$pass = [
+    "password" => [
+        "title" => "Password",
+        "global_class" => "col-md-12",
+        "name"=> "password",
+        "placeholder" => "Enter New password",
+        "is_required" => true,
+        "input_type"=>"password",
+        "type" => "input"
     ],
 ];
 

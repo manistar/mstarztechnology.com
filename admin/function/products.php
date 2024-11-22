@@ -257,7 +257,7 @@ class products extends database
     function getcategory($id, $type)
     {
         $d = new database;
-        return $d->fastgetwhere("$type", "ID = ?", $id, "details");
+        return $d->getall("$type", "ID = ?", [$id], fetch: "details");
     }
 
     function updatestaus($userID, $adsID, $status)

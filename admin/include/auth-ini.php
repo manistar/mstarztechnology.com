@@ -19,4 +19,7 @@ require_once 'consts/store.php';
 require_once "include/ini-users.php";
 $s = new shop; 
 $script = [];
+
+// $adminID = $userID; 
+// $data = $d->getall("admins", "ID = ?", [$adminID], fetch: "details");
 ?>

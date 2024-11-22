@@ -13,7 +13,7 @@ class Reply extends database{
             
             $data['userID'] = $userID;
             $data['ip_address'] = $ip_address;
-            
+            $data['status'] = "1";
             $check = $d->getall("prod_reply", "(userID = ? or ip_address = ?) and email = ?", [$userID, $ip_address, $data['email']]);
             
             if (!is_array($check)) {

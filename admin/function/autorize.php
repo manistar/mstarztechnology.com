@@ -13,7 +13,7 @@ class validate extends database
         if (is_array($value)) {
             if (password_verify($data['password'], $value['password'])) {
                  $_SESSION['adminSession'] = htmlspecialchars($value['ID']);
-                   return $this->loadpage("index.php", "json");
+                   return $this->loadpage("index", "json");
             } else {
                 $this->message("Password Incorrect", "error");
             }
@@ -22,6 +22,32 @@ class validate extends database
         }
     }
 
+    function lockscreen($screen_locked) {
+        $data = $this->validate_form($screen_locked);
+        if (!is_array($data)) return null;
+        $ID = $_SESSION['ID'];
+        $user = $this->getall("admins", "ID = ?", [$ID], fetch: "details");
+        if (!is_array($user)) {
+            $this->message("User not found", "error");
+            return;
+        }
+        
+    
+        if(isset($_POST['unlock'])){
+            $stored_password = $user['password']; // Assuming 'password' is the column name in the database
+            $input_password = htmlspecialchars($_POST['password']);
+            
+            if(password_verify($input_password, $stored_password)) {
+                unset($_SESSION['lockscreen']);
+                $_SESSION['adminSession'] = $user['ID'];
+                // echo "Got here";
+                return $this->loadpage("index", "json");
+            } else {
+                $this->message("Password Incorrect", "error");
+                return;
+            }
+        }
+    }
   
 
     public function signup($user_registration)
@@ -38,7 +64,7 @@ class validate extends database
                     $insert = $this->quick_insert("users", $data, "User created successfully",);
                     $_SESSION['userSession'] = htmlspecialchars($data['userID']);
                     if ($insert) {
-                           return $this->loadpage("index.php", "json");
+                           return $this->loadpage("index", "json");
                         
                     }
                 }
@@ -62,7 +88,42 @@ class validate extends database
                 // } 
     }
 }
- 
+
+// $unreadNotifications = $d->getall("chat", "userID = ? AND isRead = 0", [$userID], fetch: "details");
+
+// function unreadNotifications($userID)
+//     {
+//         return $this->getall("chat", "userID = ? and isRead = 0", [$userID], fetch: "");
+//     }
+
+function unreadNotifications($userID)
+{
+    // Fetch chat records where isRead is 0 (i.e., unread messages)
+    $results = $this->getall(
+        "chat",                           // Table name
+        "userID = ? AND isRead = 0",      // Condition to get unread messages for the specific user
+        [$userID],                        // Bind the userID parameter                // Select all columns (you can specify other columns if needed)
+        fetch: "details"                         // Fetch method (assuming "details" returns an array of chat details)
+    );
+
+    // Return the results or an empty array if no unread notifications found
+    return $results ?: [];
+}
+
+
+
+
+
+// Call the unreadNotifications function
+
+
+
+
+
+// var_dump($unreadNotifications);
+
+    
+ // return $this->getall("chat", "userID = ? and no_product > ?", [$userID, 0], fetch: "");
 }
 ?>
 

@@ -231,6 +231,8 @@ class database
         return false;
     }
 
+    
+
     function get_message($message =  null)
     {
         if ($message == null) {
@@ -240,17 +242,105 @@ class database
         return true;
     }
     // $update = $d->update("members", ["firstname"=>"tunde", "email"=>"tunde@gmail.com"], "ID = '4'");
-    function update($what, $data, $where, $message = null)
-    {
-        $this->get_index_data($data, "update");
-        $query = $this->db->prepare("UPDATE $what SET $this->index WHERE $where");
-        $update = $query->execute($this->data);
-        if ($update) {
-            $this->get_message($message);
-            return true;
-        }
-        return false;
+    // function update($what, $data, $where, $message = null)
+    // {
+    //     $this->get_index_data($data, "update");
+    //     $query = $this->db->prepare("UPDATE $what SET $this->index WHERE $where");
+    //     $update = $query->execute($this->data);
+    //     if ($update) {
+    //         $this->get_message($message);
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    function update($what, $data, $where, $whereParams = [], $message = null)
+{
+    $this->get_index_data($data, "update");
+
+    // Combine data and where parameters
+    $params = array_merge($this->data, $whereParams);
+
+    // Prepare query
+    $query = $this->db->prepare("UPDATE $what SET $this->index WHERE $where");
+
+    // Execute query with combined parameters
+    $update = $query->execute($params);
+
+    if ($update) {
+        $this->get_message($message);
+        return true;
     }
+    return false;
+}
+
+// function newchat($message){
+//     $database = new database;
+//     if(isset($_SESSION['userSession'])){
+//         $whois = "user";
+//         $userID = htmlspecialchars($_SESSION['userSession']);
+//     }else{
+//         $whois = "admin";
+//         $userID = htmlspecialchars($_SESSION['adminSession']);
+//     }
+//     $enter = "chat";
+//     $column = "userID, chat, whois";
+//     $set = "?,?,?";
+//     $data = array( $userID, $message, $whois);
+//     $insert = $database->quick_insert($set, $enter, $column, $data, "", ""); 
+//     // if($insert){
+//     //     $database->message("Message sent", "success");
+//     // }
+// }
+
+public function newchat($message) {
+    // Ensure the database instance is correctly initialized
+    $database = new database;
+
+    // Determine the sender's identity and userID
+    if (isset($_SESSION['userSession'])) {
+        $whois = "user";
+        $userID = htmlspecialchars($_SESSION['userSession'], ENT_QUOTES, 'UTF-8');
+   
+    } elseif (isset($_SESSION['adminSession'])) {
+        $whois = "admin";
+        $userID = htmlspecialchars($_SESSION['adminSession'], ENT_QUOTES, 'UTF-8');
+    } else {
+        // If neither session exists, return false
+        return false; // Optional: Handle this scenario or log it
+    }
+
+    // Prepare data for insertion (as an associative array)
+    $data = [
+        'userID' => $userID,
+        'chat' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
+        'whois' => $whois
+    ];
+
+    // Insert into the database using `quick_insert`
+    $table = "chat";
+
+    // Pass the data to `quick_insert`
+    $insert = $database->quick_insert($table, $data);
+
+    // Optionally handle the status of the insert operation
+    if ($insert) {
+        return true;
+    } else {
+        return false; // Optional: Log or handle the failure
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
     // $d->delete("members", "ID = ? or phonenumber = ?", [3, 3434]);
     function delete($from, $where, array $data)
     {
@@ -776,59 +866,89 @@ class database
             $sendmessage = $this->smtpmailer($user['email'], $subject, $smessage);
             if($sendmessage) { return true; }else{ return false; }
     }
-    function smtpmailer($to, $subject, $body, $name = "", $message = '', $smtpid = 1)
-    {
-        // require_once "";
-        $d = new database;
-        $smtp = $d->getall("smtp_config", "ID = ?", ["$smtpid"]);
-        if (!is_array($smtp)) {
-            $d->message("SMTP selected not found please choose another one or refresh page and try again", "error");
-            return false;
-        }
-        $server = $smtp['server'];
-        $username = $smtp['username'];
-        $password = $smtp['password'];
-        $port = $smtp['port'];
-        $smtp_from_email = $smtp['from_email'];
+//     function smtpmailer($to, $subject, $body, $name = "", $message = '', $smtpid = 1)
+// {
+//     $d = new database;
+//     $smtp = $d->getall("smtp_config", "id = ?", ["$smtpid"]);
 
-        // echo $body;
-        try {
-            $from = $username;
-            $mail = new PHPMailer(true);
-            $mail->IsSMTP();
-            $mail->SMTPAuth = true;
-            $mail->SMTPSecure = 'ssl';
-            $mail->Host = "$server";
-            $mail->Port = "$port";
-            $mail->Username = "$username";
-            $mail->Password = "$password";
+//     // Validate SMTP configuration
+//     if (!is_array($smtp) || empty($smtp['server']) || empty($smtp['username']) || empty($smtp['password']) || empty($smtp['port']) || empty($smtp['from_email'])) {
+//         throw new Exception("Invalid SMTP configuration. Please verify your database entries.");
+//     }
 
-            //   $path = 'reseller.pdf';
-            //   $mail->AddAttachment($path);
+//     $server = $smtp['server'];
+//     $username = $smtp['username'];
+//     $password = $smtp['password'];
+//     $port = $smtp['port'];
+//     $smtp_from_email = $smtp['from_email'];
 
-            $mail->IsHTML(true);
-            $mail->From = "$username";
-            $mail->FromName = $username;
-            $mail->Sender = "$smtp_from_email";
-            $mail->AddReplyTo("$username", $username);
-            $mail->Subject = $subject;
-            $mail->Body = $body;
-            $mail->AddAddress($to);
-            $send = $mail->Send();
-            if ($send) {
-                return true;
-            }
-        } catch (phpmailerException $e) {
+//     try {
+//         // Initialize PHPMailer
+//         $mail = new PHPMailer(true);
+//         $mail->IsSMTP();
+//         $mail->SMTPAuth = true;
+//         $mail->SMTPSecure = 'ssl';
+//         $mail->Host = $server;
+//         $mail->Port = $port;
+//         $mail->Username = $username;
+//         $mail->Password = $password;
 
-            // echo $e->errorMessage(); //Pretty error messages from PHPMailer
-            // $d->message("Error Sending message. You can try new SMTP", "error");
-            return false;
-        } catch (Exception $e) {
-            // echo $e->getMessage(); //Boring error messages from anything else!
-            // $d->message("Error Sending message. You can try new SMTP", "error");
-            return false;
-        }
-    }
+//         $mail->IsHTML(true); // Set email format to HTML
+//         $mail->From = $smtp_from_email; // Use the configured SMTP "from email"
+//         $mail->FromName = $name ?: "Mstarz Technology Hub"; // Use provided name or fallback
+//         $mail->Sender = $smtp_from_email; // Bounce address
+//         $mail->AddReplyTo($smtp_from_email, $mail->FromName); // Reply-to address
+//         $mail->Subject = $subject;
+//         $mail->Body = $body; // Email body content
+//         $mail->AddAddress($to);
+
+//         // 
+
+        
+
+//         // Send the email
+//         if ($mail->Send()) {
+//             return true;
+//         } else {
+//             throw new Exception("Email could not be sent. Mailer Error: " . $mail->ErrorInfo);
+//         }
+//     } catch (phpmailerException $e) {
+//         // Log PHPMailer-specific errors
+//         error_log("PHPMailer Error: " . $e->errorMessage());
+//         return false;
+//     } catch (Exception $e) {
+//         // Log generic errors
+//         error_log("Email Sending Error: " . $e->getMessage());
+//         return false;
+//     }
+// }
+
+public static function smtpmailer($to, $from, $from_name, $subject, $body)
+{
+    $mail = new PHPMailer();
+    $mail->IsSMTP();
+    $mail->SMTPAuth   = true;
+    $mail->SMTPSecure = 'ssl';
+    $mail->Host       = 'mail.tidebk.com';
+    $mail->Port       = 465;
+    $mail->Username   = 'no-reply@tidebk.com';
+    $mail->Password   = 'SJsl7fs3QCOF';
+
+    $mail->IsHTML(true);
+    $mail->From     = "no-reply@tidebk.com";
+    $mail->FromName = $from_name;
+    $mail->Sender   = $from;
+    $mail->AddReplyTo($from, $from_name);
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+    $mail->AddAddress($to);
+
+    return $mail->Send();
+}
+
+
+
+
 
     protected function imageupload($name)
     {
@@ -1211,6 +1331,17 @@ class database
     
         return $newDatetimeStr;
     }
+
+    function updatechat(){
+        $database = new database;
+        $userID  = htmlspecialchars($_SESSION['userSession']);
+        return $chats = $database->getall("chat", "userID = ? ORDER by date asc", [$userID], fetch: "moredetails");
+   
+    }
 }
+
+
+
+
 
 

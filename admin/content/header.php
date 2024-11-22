@@ -1,5 +1,6 @@
+<?php require_once "content/head.php"; ?>
 <!DOCTYPE html>
-<?php require_once "content/head.php";?>
+
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
@@ -34,13 +35,14 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="../upload/img/logo.png" alt="Music Web logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+      <a href="index" class="brand-link">
+        <img src="../upload/logo/logo.png" alt="MstarzTech" class="brand-image" style="opacity: .8">
+        <!-- <img src="../upload/logo/logo.png" alt="MstarzTech" class="brand-image img-circle elevation-3"
+          style="opacity: .8"> -->
         <span class="brand-text font-weight-light">
           <?= website_name ?>
         </span>
-      </a> 
+      </a>
 
       <!-- Sidebar -->
       <div class="sidebar">
@@ -85,7 +87,7 @@
 
             <!-- tasks  -->
             <li class="nav-item">
-              <a href="index.php" class="nav-link">
+              <a href="index" class="nav-link">
                 <i class="nav-icon  fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -96,7 +98,7 @@
             <!-- end of tasks  -->
 
             <!-- customer start  -->
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
@@ -106,59 +108,66 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="?p=users.php?a=add" class="nav-link">
+                  <a href="?p=users&action=add" class="nav-link">
                     <i class="fa fa-plus nav-icon"></i>
                     <p>Create new user</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="?p=users.php" class="nav-link">
+                  <a href="?p=users" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>All users</p>
                   </a>
                 </li>
               </ul>
-            </li> -->
+            </li>
 
             <!-- customer end  -->
 
             <!-- thrift start  -->
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-coins"></i>
+                <i class="nav-icon fas fa-home"></i>
                 <p>
-                  Home Page Control
+                  Home Control
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="?p=home.php" class="nav-link">
+                  <a href="?p=home" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Home</p>
                   </a>
                 </li>
+
                 <li class="nav-item">
+                  <a href="?p=feedbacks" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Feedbacks</p>
+                  </a>
+                </li>
+                <!-- <li class="nav-item">
                   <a href="?p=ads.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>List Ads</p>
                   </a>
-                </li>
+                </li> -->
               </ul>
-            </li> -->
+            </li>
             <!-- thrift end  -->
 
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-car"></i>
                 <p>
-                Add Cars Types
+                  Add Cars Types
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="?p=cars.php" class="nav-link">
+                  <a href="?p=cars" class="nav-link">
                     <i class="fa fa-plus nav-icon"></i>
                     <p>ADD CARS</p>
                   </a>
@@ -171,6 +180,45 @@
                 </li> -->
               </ul>
             </li>
+
+
+            <!-- <div class="notification-menu">
+              <button id="notification-btn">
+                  Notifications <span id="notification-count"><?= $v->unreadNotifications($userID) ?></span>
+              </button>
+              <ul id="notification-list"></ul>
+            </div> -->
+
+            <?php
+// Fetch unread notifications for the user
+$unreadNotifications = $v->unreadNotifications($userID);
+
+// Safely count notifications (unread chats)
+$notificationCount = is_array($unreadNotifications) || $unreadNotifications instanceof Countable
+    ? count($unreadNotifications)
+    : 0;
+?>
+
+<li class="nav-item notification-menu">
+  <a href="?p=chat" id="notification-btn" class="nav-link">
+    <i class="nav-icon fas fa-bell"></i>
+    <p>
+      Notifications <span id="notification-count"><?= htmlspecialchars($notificationCount); ?></span>
+    </p>
+  </a>
+  <ul id="notification-list">
+    <?php if (!empty($unreadNotifications)) : ?>
+      <?php foreach ($unreadNotifications as $notification) : ?>
+        <!-- <li>
+          <?= htmlspecialchars($notification['message'] ?? 'No details available'); ?>
+        </li> -->
+      <?php endforeach; ?>
+    <?php else : ?>
+      <!-- <li>No new notifications</li> -->
+    <?php endif; ?>
+  </ul>
+</li>
+
 
 
             <li class="nav-item">
@@ -207,24 +255,24 @@
             </li> -->
 
             <li class="nav-item">
-              <a href="?p=student.php" class="nav-link">
+              <a href="?p=student" class="nav-link">
                 <i class="nav-icon fas fa-user-graduate"></i>
                 <p>
-                Students Data
+                  Students Data
                 </p>
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="lock.php?lockscreen" class="nav-link">
+              <a href="lock?lockscreen" class="nav-link">
                 <i class="nav-icon fas fa-lock"></i>
                 <p>
-                Lock
+                  Lock
                 </p>
               </a>
             </li>
 
-          
+
 
             <!-- Profile data -->
 
@@ -232,19 +280,19 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
-                 Your Profile
+                  Your Profile
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="?p=profile.php?" class="nav-link">
+                  <a href="?p=profile" class="nav-link">
                     <i class="fa fa-plus nav-icon"></i>
                     <p>Profile</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="?p=password.php" class="nav-link">
+                  <a href="?p=password" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Password</p>
                   </a>
@@ -254,7 +302,7 @@
             <!-- co-operateive end -->
 
             <li class="nav-item">
-              <a href="?p=settings.php" class="nav-link">
+              <a href="?p=settings" class="nav-link">
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>
                   Settings
@@ -300,7 +348,7 @@
             </li> -->
 
             <li class="nav-item">
-              <a href="index.php?logout" class="nav-link">
+              <a href="index?logout" class="nav-link">
                 <i class="nav-icon fas fa-key"></i>
                 <p>
                   Logout
@@ -317,4 +365,3 @@
 
 
     <!--  -->
-    

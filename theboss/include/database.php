@@ -139,7 +139,7 @@ class Database{
          }
     }
 
-    function smtpmailer($to, $from_name, $subject, $body, $message = '')
+    function smtpmailers($to, $from_name, $subject, $body, $message = '')
     {
         // echo $body;
         $from = "automessage@mustardseedmicrofinance.com.ng";
