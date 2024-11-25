@@ -43,6 +43,7 @@ class database
 
     }
 
+
     function get_visitor_details()
     {
         // ip, browser, theme, country, postal_code, state, city
@@ -129,6 +130,21 @@ function newchat($message, $userID)
         return $database->quick_insert($table, $data);
     }
     
+    function updateCount($message, $userID)
+    {
+        $database = new database;
+       
+        $userID = $_POST['userID'];
+
+        // Data to update
+        $data = ["isRead" => 1];
+
+        // Construct the WHERE clause as a string directly
+        $where= "userID = '$userID' AND whois = 'user'";
+
+        // Call the update method directly with the WHERE clause as a string
+        $updateResult = $this->update("chat", $data, $where);
+    }
 
 
     function updatechat($userID)
@@ -138,6 +154,20 @@ function newchat($message, $userID)
         return $chats = $database->getall("chat", "userID = ? ORDER by date asc", [$userID], fetch: "moredetails");
 
     }
+
+    // Assuming your $d is a database class with getall() method
+    public function getMessageCount($table, $where, $params)
+    {
+        $query = "SELECT COUNT(*) FROM $table WHERE $where";  // Simple COUNT query
+        $stmt  = $this->db->prepare($query);
+
+        $stmt->execute($params);
+        $count = $stmt->fetchColumn();
+        return $count;
+    }
+
+
+
    
     function basicuserstatus($userid)
     {
@@ -449,24 +479,39 @@ function newchat($message, $userID)
         return true;
     }
 
-    private function getmethod($q, $fetch)
-    {
-        switch ($fetch) {
-            case 'details':
-                $data = $q->fetch(PDO::FETCH_ASSOC);
-                break;
-            case 'moredetails':
-                $data = $q;
-                break;
+    // private function getmethod($q, $fetch)
+    // {
+    //     switch ($fetch) {
+    //         case 'details':
+    //             $data = $q->fetch(PDO::FETCH_ASSOC);
+    //             break;
+    //         case 'moredetails':
+    //             $data = $q;
+    //             break;
 
-            default:
-                $data = $q->rowCount();
-                break;
-        }
-        return $data;
-    }
+    //         default:
+    //             $data = $q->rowCount();
+    //             break;
+    //     }
+    //     return $data;
+    // }
 
   
+    private function getmethod($q, $fetch)
+{
+    switch ($fetch) {
+        case 'details':
+            $data = $q->fetch(PDO::FETCH_ASSOC); // Fetch a single row as an associative array
+            break;
+        case 'moredetails':
+            $data = $q->fetchAll(PDO::FETCH_ASSOC); // Fetch all rows as an associative array
+            break;
+        default:
+            $data = $q->rowCount(); // Return the number of rows affected
+            break;
+    }
+    return $data;
+}
 
 
     function create_table($name, array $data)

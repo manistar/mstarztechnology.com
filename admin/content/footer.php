@@ -277,7 +277,7 @@ if (basename($_SERVER['PHP_SELF']) != "content.php") {
     chart.draw(view, options);
   }
 </script>
-<script src="js/payment.js"></script>
+<!-- <script src="js/payment.js"></script> -->
 </footer>
 </body>
 </html>

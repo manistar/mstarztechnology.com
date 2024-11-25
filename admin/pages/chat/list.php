@@ -502,6 +502,23 @@
             /* Adjusted font size */
         }
     }
+
+    /* Style for the message count */
+.message-count {
+    display: inline-block;
+    width: 30px; /* Size of the circle */
+    height: 30px; /* Size of the circle */
+    background-color: red; /* Red background */
+    color: white; /* White text color */
+    border-radius: 50%; /* Make it a circle */
+    text-align: center; /* Center the text inside the circle */
+    line-height: 30px; /* Vertically center the text */
+    font-weight: bold; /* Make the text bold */
+    font-size: 14px; /* Adjust the font size */
+    margin-left: 10px; /* Add some space between the name and the message count */
+}
+
+
 </style>
 
 <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
@@ -588,8 +605,12 @@
                                                                 // Determine status (Online/Offline) or time ago
                                                                 $timeAgo = $d->ago($lastActive);
 
-                                                                // Display User Card
-                                                                // 
+                                                                // Fetch the total number of messages sent by the user
+                                                                $messageCount = $d->getMessageCount("chat", "userID = ? AND whois ='user'", [$row['ID']]);
+
+                                                                // Fetch the last message sent by the user
+                                                                $lastChat = $d->getall("chat", "userID = ? ORDER BY created_at DESC LIMIT 1", [$row['ID']]);
+
                                                                 ?>
 
                                                                 <?php //foreach ($allusers as $row) { ?>
@@ -598,15 +619,24 @@
                                                                     <div class="contact-card">
                                                                         <div class="avatar">
                                                                             <img src="../upload/profile/<?= $row['upload_image']; ?>"
-                                                                                alt="Avatar of <?php echo $row['first_name']; ?>">
+                                                                                alt="Avatar of <?php echo $row['first_name'];?> ">
                                                                         </div>
                                                                         <div class="contact-info">
                                                                             <h5 class="contact-name">
-                                                                                <?php echo $row['first_name'] . ' ' . $row['last_name']; ?>
+                                                                                <?php echo $row['first_name'] . ' ' . $row['last_name'] ?>
+                                                                                <?php 
+                                                                                    if ($messageCount): ?>
+                                                                                        <span class="message-count" id="messageCount"><?= $messageCount; ?></span>
+                                                                                        <input type="hidden" id="userID" value="<?= $userID ?>">
+
+                                                                                    <?php endif; ?>
+                                                                                
                                                                             </h5>
                                                                             <p class="contact-status">
-                                                                                <?= $timeAgo; ?></span>
+                                                                                <?= $timeAgo; ?>
                                                                             </p>
+                                                                            <!-- Display message count -->
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -803,8 +833,9 @@
         //         }
         //     });
         // }
+</script>
 
 
-    </script>
+
 
     

@@ -1,5 +1,8 @@
-<?php require_once "content/head.php"; ?>
-<!DOCTYPE html>
+<?php 
+require_once "content/head.php"; 
+require_once "include/ajaxNotCount.php";
+?>
+
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -189,34 +192,23 @@
               <ul id="notification-list"></ul>
             </div> -->
 
-            <?php
-// Fetch unread notifications for the user
-$unreadNotifications = $v->unreadNotifications($userID);
+<?php
+// Assuming $chat is your array of messages
+$messageCount = count($chat);
 
-// Safely count notifications (unread chats)
-$notificationCount = is_array($unreadNotifications) || $unreadNotifications instanceof Countable
-    ? count($unreadNotifications)
-    : 0;
+// Return the count as a JSON response
+// header('Content-Type: application/json');
+// echo json_encode(['count' => $messageCount]);
 ?>
 
 <li class="nav-item notification-menu">
   <a href="?p=chat" id="notification-btn" class="nav-link">
     <i class="nav-icon fas fa-bell"></i>
-    <p>
-      Notifications <span id="notification-count"><?= htmlspecialchars($notificationCount); ?></span>
+    <p >
+      Notifications <span id="messageCount" class="messages-count"><?=$messageCount;?></span>
     </p>
+   
   </a>
-  <ul id="notification-list">
-    <?php if (!empty($unreadNotifications)) : ?>
-      <?php foreach ($unreadNotifications as $notification) : ?>
-        <!-- <li>
-          <?= htmlspecialchars($notification['message'] ?? 'No details available'); ?>
-        </li> -->
-      <?php endforeach; ?>
-    <?php else : ?>
-      <!-- <li>No new notifications</li> -->
-    <?php endif; ?>
-  </ul>
 </li>
 
 
@@ -363,5 +355,32 @@ $notificationCount = is_array($unreadNotifications) || $unreadNotifications inst
       <!-- /.sidebar -->
     </aside>
 
+<script>
 
-    <!--  -->
+
+
+//   function updateUser Count() {
+//     $.ajax({
+//         type: 'GET', // or 'POST' if you need to send data
+//         url: 'include/ajaxMsgCount', // The PHP file that returns the user count
+//         dataType: 'json',
+//         success: function(response) {
+//             if (response && response.count !== undefined) {
+//                 $('#userCount').text('Users who have sent messages: ' + response.count);
+//             } else {
+//                 console.error('Unexpected response format:', response);
+//             }
+//         },
+//         error: function(err) {
+//             console.error('Error fetching user count:', err);
+//         }
+//     });
+// }
+
+// // Call the function to update the user count every 10 seconds
+// setInterval(updateUser Count, 10000);
+// $(document).ready(function() {
+//     updateUser Count(); // Initial call to set the count immediately on page load
+// });
+  </script>
+ 

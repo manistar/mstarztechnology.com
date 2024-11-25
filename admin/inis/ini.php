@@ -177,7 +177,7 @@ $allusers = $d->getall("users", "addedby = ?", [$userID], fetch: "moredetails");
 // $allusers = $d->fastgetwhere($what_to_get="account", $where="addedby = ?", "$userID", $status="moredetails");
 // $news = $d->getall("user_details", "label = ?", ["blog"], fetch: "moredetails");
 
-// Safely count the results
+
 
 // var_dump($unreadNotifications);
 

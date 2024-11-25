@@ -45,14 +45,34 @@ if (isset($_GET['lockscreen'])) {
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="css/notification.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+  <!-- ajax running chat  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+<!-- <script src="js/ajaxNotCount.js"></script> -->
+
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
 
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> -->
 
   <style>
+    /* Style for the message count */
+    .messages-count {
+    display: inline-block;
+    width: 30px; /* Size of the circle */
+    height: 30px; /* Size of the circle */
+    background-color: #00a884; /* Red background */
+    color: white; /* White text color */
+    border-radius: 50%; /* Make it a circle */
+    text-align: center; /* Center the text inside the circle */
+    line-height: 30px; /* Vertically center the text */
+    font-weight: bold; /* Make the text bold */
+    font-size: 14px; /* Adjust the font size */
+    margin-left: 10px; /* Add some space between the name and the message count */
+}
+
     .color-palette {
       height: 35px;
       line-height: 35px;
