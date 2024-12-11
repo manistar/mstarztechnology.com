@@ -59,6 +59,10 @@ class bar extends database{
     public function portfolios_page($portfolio){
         $data = $this->validate_form($portfolio);
         if (is_array($data)) {
+
+            // Assuming description field contains HTML content
+            $data['content'] = $_POST['content']; // Make sure description is coming from a WYSIWYG editor
+
             $data['userID'] = uniqid();
             $data['ID'] = uniqid();  // Assuming you want to set the 'ID' field
             $data['label'] = "portfolios";

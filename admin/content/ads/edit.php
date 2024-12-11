@@ -31,7 +31,9 @@ if (isset($_POST['id'])) {
 
   </div>
 </div>
-
+  <!-- Place the first <script> tag in your HTML's <head> -->
+<!-- <script src="https://cdn.tiny.cloud/1/50n2ohr67wgiyqnrp26mtqlq05jj34o7hz531pvbzovdlta8/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
+ 
 
 <!-- <div style="display:none;" id="upload">
   <?php // require_once "content/ads/upload.php"; ?>

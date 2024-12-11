@@ -2,7 +2,7 @@
 require_once "content/head.php"; 
 require_once "include/ajaxNotCount.php";
 ?>
-
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -191,7 +191,7 @@ require_once "include/ajaxNotCount.php";
               </button>
               <ul id="notification-list"></ul>
             </div> -->
-
+  <audio id="playnote" src="assets/audio/notification.mp3" preload="auto"></audio>
 <?php
 // Assuming $chat is your array of messages
 $messageCount = count($chat);
@@ -205,7 +205,7 @@ $messageCount = count($chat);
   <a href="?p=chat" id="notification-btn" class="nav-link">
     <i class="nav-icon fas fa-bell"></i>
     <p >
-      Notifications <span id="messageCount" class="messages-count"><?=$messageCount;?></span>
+      Notifications <span class="messages-count" id="messageCount"><?=$messageCount?></span>
     </p>
    
   </a>
@@ -355,32 +355,5 @@ $messageCount = count($chat);
       <!-- /.sidebar -->
     </aside>
 
-<script>
 
-
-
-//   function updateUser Count() {
-//     $.ajax({
-//         type: 'GET', // or 'POST' if you need to send data
-//         url: 'include/ajaxMsgCount', // The PHP file that returns the user count
-//         dataType: 'json',
-//         success: function(response) {
-//             if (response && response.count !== undefined) {
-//                 $('#userCount').text('Users who have sent messages: ' + response.count);
-//             } else {
-//                 console.error('Unexpected response format:', response);
-//             }
-//         },
-//         error: function(err) {
-//             console.error('Error fetching user count:', err);
-//         }
-//     });
-// }
-
-// // Call the function to update the user count every 10 seconds
-// setInterval(updateUser Count, 10000);
-// $(document).ready(function() {
-//     updateUser Count(); // Initial call to set the count immediately on page load
-// });
-  </script>
  

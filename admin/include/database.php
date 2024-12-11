@@ -278,6 +278,21 @@ function newchat($message, $userID)
     }
 
     
+    function geturl(){
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+                $url = "https://";   
+        else  
+                $url = "http://";   
+        // Append the host(domain name, ip) to the URL.   
+        $url.= $_SERVER['HTTP_HOST'];   
+        
+        // Append the requested resource location to the URL   
+        $url.= $_SERVER['REQUEST_URI'];    
+            
+        return $url;  
+    }
+
+
     //   function getusername($id){
 //     $user_data = $this->getall("users", "ID = ?", [$id], fetch: "details");
 //     $admin_data = $this->getall("admins", "ID = ?", [$id], fetch: "details");
@@ -992,21 +1007,21 @@ function newchat($message, $userID)
         }
     }
 
-    function verifyassign($adminid, $customerid)
-    {
-        $d      = new database;
-        $verify = $d->getall("admins", "ID = ?", [$adminid], fetch: "details");
-        if ($verify['type'] == "admin") {
-            return true;
-        } else {
-            $verify = $d->getall("people_assign", "adminID = ? and userID = ?", ["$adminid", "$customerid"], "");
-            if ($verify > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+    // function verifyassign($adminid, $customerid)
+    // {
+    //     $d      = new database;
+    //     $verify = $d->getall("admins", "ID = ?", [$adminid], fetch: "details");
+    //     if ($verify['type'] == "admin") {
+    //         return true;
+    //     } else {
+    //         // $verify = $d->getall("people_assign", "adminID = ? and userID = ?", ["$adminid", "$customerid"], "");
+    //         if ($verify > 0) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     }
+    // }
 
     // function userID($type = "admin"){
 //     if($type == "users" || $type == "customers"){
@@ -1203,59 +1218,82 @@ function newchat($message, $userID)
     }
     function process_image($title, $path, $name = "uploaded_file", $i = 0, array $valid_formats1 = null)
     {
-        //file to place within the server
-        // echo $name;
+        // Default valid formats if none provided
         if ($valid_formats1 == null) {
             $valid_formats1 = ["JPG", "jpg", "png", "jpeg", "JPEG", "PNG", "svg", "SVG"];
         }
-        if ($_FILES["$name"]["name"] == "") {
-            return null;
+    
+        // Check if a file is uploaded
+        if (empty($_FILES["$name"]["name"])) {
+            database::message("No file selected", "error");
+            return false;
         }
-        if ($i == 0 && $name != "uploaded_file") {
-            $image = $_FILES["$name"]["name"]; //input file name in this code is file1
-            $size  = $_FILES["$name"]["size"];
-            $tmp   = $_FILES["$name"]["tmp_name"];
-        } else {
-            $image = $_FILES["$name"]["name"][$i]; //input file name in this code is file1
+    
+        // For single file or multiple file upload handling
+        if (is_array($_FILES["$name"]["name"])) {
+            // Multiple files (access the file by index)
+            $image = $_FILES["$name"]["name"][$i];
             $size  = $_FILES["$name"]["size"][$i];
             $tmp   = $_FILES["$name"]["tmp_name"][$i];
+        } else {
+            // Single file upload (no index needed)
+            $image = $_FILES["$name"]["name"];
+            $size  = $_FILES["$name"]["size"];
+            $tmp   = $_FILES["$name"]["tmp_name"];
         }
-        //list of file extention to be accepted
+    
+        // If no file is selected
         if (empty($image)) {
             database::message("No file selected", "error");
             return false;
         }
-        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
-
+    
+        // Handle the file upload logic
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            // Validate file size (limit to 7MB)
             if ($size < 7500000) {
+                // Get file extension using pathinfo
                 $fileInfo = pathinfo($image);
-                $ext      = $fileInfo['extension'];
-
-                if (in_array($ext, $valid_formats1)) {
-                    if ($path == "check") {
-                        return true;
-                    }
-                    $titlename         = str_replace(" ", "_", $title);
-                    $actual_image_name = $titlename . "." . $ext;
-
-                    if (move_uploaded_file($tmp, $path . $actual_image_name)) {
-                        return $actual_image_name;
+                
+                // Ensure we have an extension
+                if (isset($fileInfo['extension'])) {
+                    $ext = strtolower($fileInfo['extension']); // Convert to lowercase for consistency
+    
+                    // Check if the file extension is in the allowed formats
+                    if (in_array($ext, $valid_formats1)) {
+                        if ($path == "check") {
+                            return true; // Just checking the file validity
+                        }
+    
+                        // Sanitize the title and generate the actual image name
+                        $titlename = str_replace(" ", "_", $title);
+                        $actual_image_name = $titlename . "." . $ext;
+    
+                        // Move the uploaded file to the target directory
+                        if (move_uploaded_file($tmp, $path . $actual_image_name)) {
+                            return $actual_image_name;  // Return the file name if upload is successful
+                        } else {
+                            database::message('<b>' . $image . ': Image Not Uploaded. Try again', 'error');
+                            return false;  // Failed to upload the image
+                        }
                     } else {
-                        database::message($message = '<b>' . $image . ': Image Not Uploaded Try again', $type = 'error');
+                        // Invalid file type
+                        database::message('<b>' . $image . ':</b> Image file Not Supported. We support: ' . implode(", ", $valid_formats1), 'error');
                         return false;
                     }
                 } else {
-
-                    database::message($message = '<b>' . $image . ':</b> Image file Not Support. We support: ' . implode(" ", $valid_formats1), $type = 'error');
+                    // Unable to determine file extension
+                    database::message('<b>' . $image . ':</b> Unable to determine file extension.', 'error');
                     return false;
                 }
             } else {
+                // File too large
                 database::message("<b>$image</b>: Image too large. Make sure your image size is not above 7MB", "error");
                 return false;
             }
         }
     }
-
+    
 
     // addtion functions
 

@@ -88,6 +88,7 @@
   }
 </script>
 
+
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <!-- <script src="../js/address.js"></script> -->
 <script>
@@ -123,11 +124,13 @@
       },
       success: function (response) {
         console.log("Response:", response); // Debug server response
+       
         // document.getElementById("messageCount");
         try {
           const result = JSON.parse(response);
           if (result.status === "success") {
             document.getElementById("message").innerHTML = "Message sent successfully.";
+            document.getElementById("playnote").click(); // Play the notification sound
             updatechat();
             // updateMessageCount(userID); // Update the count here
             document.getElementById("chat").value = ""; // Clear input
@@ -247,6 +250,9 @@
 </script>
 
 <script>
+
+
+// Below is to pass the notification count using ajax
 function updateCount(){
   chat = document.getElementById("messageCount").value;
   userID = document.getElementById("ID").value;
@@ -259,7 +265,7 @@ function updateCount(){
       updatechat: true, 
       ID: userID },
     success: function (response) {
-      
+      $('#messageCount').text(response.count);
       updatechat();
       // document.getElementById("chat").value = "";
     }
@@ -274,29 +280,91 @@ $(document).ready(function() {
 
 
 
-function updateUserCount(){
-    // chat = document.getElementById("messageCount").value;
+// function loadnotification() {
+//     document.getElementById("playnote").innerHTML = "Loading...";
+//     var data = {
+//         get_recent_notification: "",
+//         page: "notifications",
+//     };
   
-  // document.getElementById("messageCount").innerHTML = response;
+//     $.ajax({
+//         url: "include/ajaxNotCount",
+//         data: data,
+//         type: 'POST',
+//         success: function (response) {
+//           document.getElementById("playnote").click(); // Play the notification sound
+//             document.getElementById("playnote").innerHTML = response;
+//         }
+//     });
+//   }
+
+
+function updateUserCount() {
     $.ajax({
-      type: 'GET',
-      url: 'include/ajaxNotCount',
-      dataType: 'json', // Specify the expected response type
-      success: function (response) {
-        // chat = document.getElementById("messageCount").value;
-        $('#messageCount').text(response.count);
-        updatechat();
-        // document.getElementById("messageCount").value = "";
-      }
+        type: 'GET',
+        url: 'include/ajaxNotCount', // Ensure this URL is correct and accessible
+        dataType: 'json', // Expecting JSON response
+        success: function (response) {
+            // Ensure response contains the 'count' property
+            if (response && response.count !== undefined) {
+              // document.getElementById("playnote").click(); // Play the notification sound
+                // Update the message count in the HTML
+                $('#messageCount').text(response.count);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching message count:", error);
+        }
     });
-  }
+}
   // Call the function to update the user count every 10 seconds
-  setInterval(updateUserCount, 10000);
+  setInterval(updateUserCount, 2000);
   $(document).ready(function() {
     updateUserCount(); // Initial call to set the count immediately on page load
   });
 
-</script>
+  // Polling to check if the message is marked as read
+let lastUpdate = 0;
 
+function checkMessageReadStatus(userID) {
+    const now = Date.now();
+    if (now - lastUpdate < 500) return; // Prevent updates more frequently than every 2 seconds
+
+    $.ajax({
+        url: 'include/update_status',
+        type: 'POST',
+        data: { userID: userID },
+        dataType: 'json',
+        success: function(response) {
+            const statusIconId = 'statusIcon_' + userID;
+            // console.log('Response:', response);
+            if (response.userRead === 1) {
+                $('#' + statusIconId).attr('src', 'assets/status/tick.png');
+            } else {
+                $('#' + statusIconId).attr('src', 'assets/status/tick_grey.png');
+            }
+            lastUpdate = now; // Update the last update time
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', status, error);
+        }
+    });
+}
+
+    $(document).ready(function () {
+    const userID = <?php echo json_encode($userID); ?>; // Pass the userID to JavaScript
+    if (userID) {
+        // Clear any existing intervals before setting a new one
+        clearInterval(window.checkMessageInterval);
+        window.checkMessageInterval = setInterval(function() {
+            checkMessageReadStatus(userID);
+        }, 500); // Check every 2 seconds
+    } else {
+        console.error('User  ID is not set in the session.');
+    }
+});
+</script>
+<script src="js/ajaxNotCount.js"></script>
+<script src="js/notification.js"></script>
 <script src="js/my.js"></script>
 <script src="js/myjs.js"></script>

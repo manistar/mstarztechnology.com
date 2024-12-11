@@ -1,6 +1,6 @@
 var payBtn = document.getElementById("payBtn");
 var payment_info = {
-    public_key: "FLWPUBK_TEST-9b9efaabfbb3b031e6a9fba2f9dafb60-X",
+    public_key: "FLWPUBK-6eb3185d35019de46b7cea7571af31af-X",
     tx_ref: "",
     amount: 0,
     currency: "NGN",

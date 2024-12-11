@@ -48,17 +48,16 @@ $store_edit = [
     ],
 
     
-   "description" => [
+  "description" => [
     "title" => "Description",
-    "global_class" => "col-md-12", // Full-width column in a medium-sized screen
-    "name" => "content_text",
-    "cols" => "100", // Adjusted for better width
-    "rows" => "10",
+    "global_class" => "customtextarea col-md-12",
+    "class" => "col-md-12", // This is passed to the textarea method
+    "name" => "description",
     "placeholder" => "Enter Product description",
-    "is_required" => false,
+    "is_required" => true,
     "input_type" => "txtarea",
     "type" => "textarea",
-    "style" => "width: 100%; max-width: 100%; height: auto;", // Ensure full width and auto height
+    "style" => "height: 300px;" // Passed for inline styling
 ],
 
 "upload_image" => [
@@ -88,17 +87,20 @@ $store_insert = [
         "type" => "input"
     ],
 
+ 
+   "description" => [
+    "title" => "Description",
+    "global_class" => "customtextarea col-md-12",
+    "class" => "col-md-12", // This is passed to the textarea method
+    "name" => "description",
+    "placeholder" => "Enter Product description",
+    "is_required" => true,
+    "input_type" => "txtarea",
+    "type" => "textarea",
+    "style" => "height: 300px;" // Passed for inline styling
+],
 
 
-    "description" => [
-        "title" => "Description",
-        "global_class" => "col-md-12",
-        "name" => "content_text",
-        "placeholder" => "Enter Product description",
-        "is_required" => true,
-        "input_type" => "txtarea",
-        "type" => "textarea"
-    ],
 
 
     "amount" => [

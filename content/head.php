@@ -30,6 +30,32 @@
     <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
+        body.light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        body.dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        .theme-toggle-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: #555;
+        }
+
+        /* Ends here */
+        
             .read-more-button {
                 background-color: #007bff;
                 color: white;
@@ -50,7 +76,11 @@
 </head>
 
 <body class="template-color-1 spybody" data-spy="scroll" data-target=".navbar-example2" data-offset="70">
-
+<header>
+        <div class="header-right">
+            <button id="themeToggle" class="theme-toggle-btn">Switch to Light Mode</button>
+        </div>
+    </header>
     <!-- Start Header -->
     <header class="rn-header haeder-default black-logo-version header--fixed header--sticky">
         <div class="header-wrapper rn-popup-mobile-menu m--0 row align-items-center">

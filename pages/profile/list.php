@@ -1,3 +1,4 @@
+<?php require_once "ini.php";?>
 <style>
     /* General page styles */
 /* General page styles */
@@ -221,6 +222,7 @@ body {
                         <div class="profile">
                             <div class="profile__user">
                                 <div class="profile__avatar">
+                                
                                 <img src="upload/profile/<?= $data['upload_image']; ?>" alt="Image-HasTech">
                                     <!-- <img src="upload/profile/<?= $data['upload_image'];?>" alt> -->
                                 </div>

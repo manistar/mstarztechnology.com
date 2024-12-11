@@ -212,13 +212,54 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="js/my.js?n=980"></script>
+<script src="js/my.js?n=9805"></script>
 <script>
     function handlelikes(action, postID) {
         likecount = document.getElementById("like-count-"+postID) ?? 0;
         likecount.innerHTML = parseInt(likecount.innerHTML) + parseInt(action);
         console.log(likecount.innerHTML);
     }
+
+//     function getBrowserTheme() {
+//     return window.matchMedia &&
+//         window.matchMedia("(prefers-color-scheme: dark)").matches
+//         ? "dark"
+//         : "light";
+// }
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const toggleButton = document.getElementById("themeToggle");
+//     const body = document.body;
+
+//     // Set initial theme based on browser preference
+//     let browserTheme = getBrowserTheme();
+//     applyTheme(browserTheme);
+
+//     // Handle theme toggle button click
+//     toggleButton.addEventListener("click", () => {
+//         const currentTheme = body.classList.contains("light-mode") ? "light" : "dark";
+//         const newTheme = currentTheme === "dark" ? "light" : "dark";
+//         applyTheme(newTheme);
+//     });
+
+//     function applyTheme(theme) {
+//         if (theme === "light") {
+//             body.classList.add("light-mode");
+//             body.classList.remove("dark-mode");
+//             toggleButton.textContent = "Switch to Dark Mode";
+//             toggleButton.style.backgroundColor = "white";
+//             toggleButton.style.color = "black";
+//         } else {
+//             body.classList.add("dark-mode");
+//             body.classList.remove("light-mode");
+//             toggleButton.textContent = "Switch to Light Mode";
+//             toggleButton.style.backgroundColor = "#333";
+//             toggleButton.style.color = "white";
+//         }
+//     }
+// });
+
+    
 </script>
 
 
@@ -227,7 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="js/vendor.bundle.base.js"></script>
 
 <!-- JS ============================================ -->
-<!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
 <script src="assets/js/vendor/jquery.js"></script>
 <script src="assets/js/vendor/modernizer.min.js"></script>
 <script src="assets/js/vendor/feather.min.js"></script>
@@ -273,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 }); -->
-</script>
+<!-- </script> -->
 
 <!-- Endof reCAPTCHA JavaScript API --> 
 

@@ -105,7 +105,7 @@
 
                             <input type="hidden" name="submit_btn" value="">
                             <div id="custommessage"></div>
-                            <div class="g-recaptcha" data-sitekey="6LdrUXMqAAAAAAbEK4__X8iJhQdjpxvoExRh5i_v" data-callback="onSubmit"></div>
+                            <div class="g-recaptcha" data-sitekey="6LdNUY4qAAAAAGkKVk3TASRyQttYZZ_G81JI8hMG" data-callback="onSubmit"></div>
                             <div class="submit-row">
                                 <center>
                                     <div class="col-md-12">

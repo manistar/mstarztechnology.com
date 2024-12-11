@@ -6,30 +6,7 @@ class content extends database
     private String | int $key;
     private array $accepted_type = ["input", "textarea", "select", "countries"];
     private String $placeholder = "---placeholderforinput---";
-    // Example code for create_form
-    // $users_form = [
-    //     "full_name"=>[
-    //     "title"=>"Enter full name",
-    //     "value"=>"",
-    //     "id"=>"my_full_name_id",
-    //     "class"=>"add this class",
-    //      "atb"=>"data-info='data'",
-    //      "global_class"=>"add gloabl class",
-    //     "placeholder"=>"Enter your full name", 
-
-    //     "description"=>"<a href='forgot.html'>Forgot Password ?</a>",
-    //      or
-    //     "description"=>"Enter both first name and last name", 
-    
-    //     "is_required"=>true, 
-    //     "input_type"=>"text", 
-    //     "type"=>"input",
-    // ],
-    // "upload_image"=>["input_type"=>"file", "path"=>"upload/", "file_name"=>"profile_".$userID, "formart"=>["pdf", "doc", "php"]]
-    //     "gender"=>["placeholder"=>"Select your gender", "is_required"=>true, "options"=>["Male"=>"Male", "Female"=>"Female"], "type"=>"input"],
-    //     "tell_us_more"=>["placeholder"=>"Tell us more about your self", "is_required"=>false, "type"=>"textarea",],
-    //     "input_data"=>["full_name"=>"seriki gbenga"],
-    // ];
+   
     function create_form($datas)
     {
         if (!is_array($datas)) {
@@ -91,6 +68,12 @@ class content extends database
                 $main_code .=  $this->$type();
                 continue;
             }
+
+             // Handle select input for icons
+            if ($this->data['type'] == "select") {
+                $main_code .= $this->render_select($this->data);
+                continue;
+            }   
             // echo $key;
             // if ($key == "password") {
             //     $main_code .= $this->showpassword();
@@ -100,6 +83,24 @@ class content extends database
         }
         return $main_code;
     }
+
+    // New method to render select inputs
+    private function render_select($data)
+    {
+        $select_html = '<div class="' . htmlspecialchars($data['global_class']) . '">';
+        $select_html .= '<label for="' . htmlspecialchars($data['id']) . '">' . htmlspecialchars($data['title']) . ' ' . $data['star'] . '</label>';
+        $select_html .= '<select name="' . htmlspecialchars($data['id']) . '" id="' . htmlspecialchars($data['id']) . '" class="form-control" ' . ($data['is_required'] ? 'required' : '') . '>';
+        
+        foreach ($data['options'] as $value => $label) {
+            $select_html .= '<option value="' . htmlspecialchars($value, ENT_QUOTES) . '">' . $label . '</option>';
+        }
+        
+        $select_html .= '</select>';
+        $select_html .= '</div>';
+        
+        return $select_html;
+    }
+
 
     function showpassword() {
         return  "<input type='checkbox' onclick='showPassword()'>Show Password";
@@ -160,10 +161,31 @@ class content extends database
         }
         return "";
     }
+    // function textarea()
+    // {
+    //     return "<textarea id='" . $this->data['id'] . "' class='form-control' placeholder='" . $this->data['placeholder'] . "'  name='" . $this->key . "'>" . $this->data['value'] . "</textarea>";
+    // }
+
     function textarea()
-    {
-        return "<textarea id='" . $this->data['id'] . "' class='form-control' placeholder='" . $this->data['placeholder'] . "'  name='" . $this->key . "'>" . $this->data['value'] . "</textarea>";
-    }
+{
+    // Check if a specific class is set, otherwise use 'form-control'
+    $class = isset($this->data['class']) ? $this->data['class'] : 'form-control';
+    
+    // Add TinyMCE class dynamically
+    $class .= ' tinymce-editor';
+
+    // Generate the textarea HTML
+    return "<textarea 
+                id='" . $this->data['id'] . "' 
+                class='" . $class . "' 
+                placeholder='" . $this->data['placeholder'] . "' 
+                name='" . $this->key . "' 
+                style='" . (isset($this->data['style']) ? $this->data['style'] : '') . "'>" 
+                . $this->data['value'] . 
+            "</textarea>";
+}
+
+
     function select()
     {
         if (isset($this->data['options'])) {
@@ -358,7 +380,8 @@ class content extends database
                             <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $row['userID'] ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button>
                             <div class="dropdown-divider"></div>
                             <!-- <button class="dropdown-item" id="e<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $name ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button> -->
-                            <a class="dropdown-item" href="?p=ads&action=upload=<?= $row['ID'] ?>&id=<?= $row['userID'] ?>">Manage Image</a>
+                            <a class="dropdown-item" href="?p=ads&action=upload&id=<?= $row['ID'] ?>&userID=<?= $row['userID'] ?>">Manage Image</a>
+
                             <div class="dropdown-divider"></div>
                             <!-- <a class="dropdown-item" href="?p=contact&id=<?= $row['ID'] ?>">View Account</a> -->
                             <!-- <div class="dropdown-divider"></div> -->
@@ -418,7 +441,7 @@ class content extends database
                         <div class="dropdown-menu" role="menu">
                             <!-- <button class="dropdown-item" id="<?= $row['ID'] ?>" data-url="ads/edit" data-id="<?= $row['ID']; ?>" data-title="<?= $row['userID'] ?>" onclick="modalcontent(this.id)" data-toggle="modal" data-target="#modal-lg">Edit Ads</button> -->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="?p=ads&pID=<?=$row['ID']; ?>&products">Delete Account</a>
+                            <a class="dropdown-item" href="?p=feedbacks&pID=<?=$row['ID']; ?>&feedbacks">Delete Account</a>
                             <div class="dropdown-divider"></div>
                            
                         </div>

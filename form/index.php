@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="testbox">
-      <form action="index.php" method="POST" enctype='multipart/form-data'>
+      <form action="index" method="POST" enctype='multipart/form-data'>
         <?php require_once "include/isset.php";?>
         <div class="banner">
           <h1>Training Application Form</h1>
@@ -120,7 +120,7 @@
           <div class="question-answer checkbox-item">
             <div>
               <input type="checkbox" value="1" id="check_1" name="agreement" required/>
-              <label for="check_1" class="check"><span>I agree to the <a href="https://mstarztech.com/policy">privacy policy.</a></span></label>
+              <label for="check_1" class="check"><span>I agree to the <a href="https://mstarztech.com/?p=terms">privacy policy.</a></span></label>
             </div>
           </div>
         </div>

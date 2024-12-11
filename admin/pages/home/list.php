@@ -66,12 +66,13 @@
                     <div class="form-group">
                       <select id="selectid" class="form-control" onchange="check()">
                           <option value="">Select Page to Control</option>
-                          <option value="?p=what-i-do.php">What I Do</option>
-                          <option value="?p=portfolio.php">My Portfolio</option>
-                          <option value="?p=education.php">Education</option>
-                          <option value="?p=job-exp.php">Job Experience</option>
-                          <option value="?p=testimonial.php">Testonials</option>
-                          <option value="?p=blog.php">Blog</option>
+                          <option value="?p=what-i-do">What I Do</option>
+                          <option value="?p=portfolio">My Portfolio</option>
+                          <option value="?p=education">Education</option>
+                          <option value="?p=job-exp">Job Experience</option>
+                          <option value="?p=testimonial">Testonials</option>
+                          <option value="?p=reels">Post Reels</option>
+                          <option value="?p=blog">Blog</option>
                       </select>
                     </div> 
               </form>
@@ -88,3 +89,30 @@
     </div>
     <!-- /.row -->
 </section>
+
+<script>
+    // $(document).ready(function() {
+    //     $('.customtextarea').richText();
+    // });
+
+    tinymce.init({
+    selector: 'textarea',
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+      // Your account includes a free trial of TinyMCE premium features
+      // Try the most popular premium features until Dec 16, 2024:
+      'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+      // Early access to document converters
+      'importword', 'exportword', 'exportpdf'
+    ],
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+  });
+</script>

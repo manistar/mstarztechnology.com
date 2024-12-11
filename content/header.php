@@ -32,6 +32,9 @@ $title = "MSTARZ TECH";
         <!-- Style css -->
         <link rel="stylesheet" href="assets/css/style.css">
         <style>
+
+
+
             /* Chat Icon */
             #chat-icon {
                 /* position: fixed;
@@ -170,7 +173,13 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
     }
 }
 
-
+.status-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+        }
 
 
             /* Chat Box */
@@ -557,6 +566,7 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
                 color: #4da7d5;
             }
 
+
             /* Responsive Adjustments */
             @media (max-width: 768px) {
                 .header__action--cart {
@@ -717,8 +727,14 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
 
     <body class="template-color-1 spybody" data-spy="scroll" data-target=".navbar-example2" data-offset="70">
 
+    
         <!-- Start Header -->
         <header class="rn-header haeder-default black-logo-version header--fixed header--sticky">
+        <!-- <header>
+        <div class="header-right">
+            <button id="themeToggle" class="theme-toggle-btn">Switch to Light Mode</button>
+        </div>
+    </header> -->
             <div class="header-wrapper rn-popup-mobile-menu m--0 row align-items-center">
                 <!-- Start Header Left -->
                 <div class="col-lg-2 col-6">
@@ -742,7 +758,7 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
                                 <li class="nav-item"><a class="nav-link" href="index">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+                                <!-- <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li> -->
                                 <!-- <li class="nav-item current"><a class="nav-link" href="http://localhost:3000/#clients">Clients</a></li> -->
                                 <!-- <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li> -->
                                 <li class="nav-item"><a class="nav-link" href="?p=blog">blog</a></li>
@@ -893,7 +909,7 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
 
         <div id="chat-box">
             <!-- Notification Sound -->
-    <audio id="notification-sound" src="assets/audio/notification.mp3" preload="auto"></audio>
+            <audio id="playnote" src="assets/audio/message_sent.mp3" preload="auto"></audio>
     <?php if (is_array($data)): ?>
         <div class="chat-header">
             <span class="chat-logo"><img src="upload/profile/<?= $data['upload_image'] ?>"
@@ -911,7 +927,7 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
         </div>
         <div class="chat-body">
             <p>Welcome to our live chat!<br>
-                <a href="#" class="chat-link">Log in</a> if you have an account, or
+                <a href="login" class="chat-link">Log in</a> if you have an account to proceed chatting, or
                 <a href="#" class="chat-link" onclick="showDetailsForm()">provide your details</a>
             </p>
         </div>
@@ -926,7 +942,7 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
                         <div class="msg_cotainer">
                             <?= htmlspecialchars($row['chat']); ?>
                             <span class="msg_time_send"><?= date('H:i', strtotime($row['date'])); ?></span>
-
+                            
                             <!-- <span class="msg_time"><?= htmlspecialchars($row['date']); ?></span> -->
                         </div>
                     </div>
@@ -935,7 +951,7 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
                         <div class="msg_cotainer_send">
                             <?= htmlspecialchars($row['chat']); ?>
                             <span class="msg_time_send"><?= date('H:i', strtotime($row['date'])); ?></span>
-
+                            <!-- <img id="statusIcon" class="status-icon" src="assets/images/status/tick_grey.png" alt="Status"> -->
                             <!-- <span class="msg_time_send"><?= htmlspecialchars($row['date']); ?></span> -->
                         </div>
                     </div>
@@ -952,8 +968,35 @@ body.dark-mode .msg_time, body.dark-mode .msg_time_send {
         <button id="send-button" onclick="newchat();">
             <img src="https://img.icons8.com/ios-filled/50/FFFFFF/sent.png" alt="Send" />
         </button>
+        
     </div>
 </div>
+<!-- <script>
+    setInterval(() => {
+            // Update users
+            $.ajax({
+                type: "POST",
+                url: "include/ajax",
+                data: {
+                    countmessage: "countmessage",
+                },
+                success: function(response) {
+                    // Get the current value of chatdiv
+                    let value = document.getElementById("chatdiv").innerHTML;
 
+                    // Compare new response with the current value
+                    if (parseInt(response) > parseInt(value)) {
+                        // Simulate a click on playnote for audio notification
+                        document.getElementById("playnote").click();
+                    }
+
+                    // Update all elements with id "chatdiv" (if any duplicates exist)
+                    document.querySelectorAll('#chatdiv').forEach(el => {
+                        el.innerHTML = response;
+                    });
+                }
+            });
+        }, 5000); // Check every 5 seconds
+</script> -->
 
         <!--  -->

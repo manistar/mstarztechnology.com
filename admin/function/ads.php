@@ -62,26 +62,135 @@ class ads extends database {
     }
 
     // upload image 
+    // function uploadproductimage()
+    // {
+    //     $d = new database;
+    //     $id = htmlspecialchars($_GET['transid']);
+    //     $userID = htmlspecialchars($_GET['userID']);
+    //     $check = $d->getall("products", "ID = ? and userID = ?", [$id, $userID], fetch: "");
+    //     // var_dump($check);
+    //     echo "yes";
+    //     if ($check > 0) {
+    //         $path = "../upload/cart/";
+    //         $title = uniqid("img");
+    //         $upload = $d->process_image($title, $path);
+    //         if (!empty($upload)) {
+    //             $d->quick_insert("image_upload", "", ["forID" => $id, "userID" => $userID, "name" => $upload, "imagefor" => "products"]);
+    //         }
+    //     } else {
+    //         $d->message("Error: Product not found", "error");
+    //     }
+    // }
+
     function uploadproductimage()
     {
         $d = new database;
         $id = htmlspecialchars($_GET['transid']);
         $userID = htmlspecialchars($_GET['userID']);
-        $check = $d->getall("products", "ID = ? and userID = ?", [$id, $userID], fetch: "");
-        if ($check > 0) {
-            $path = "../upload/products/";
-            $title = uniqid("img");
-            $upload = $d->process_image($title, $path);
+    
+        // Check if the product exists
+        $check = $d->getall("products", "ID = ? and userID = ?", [$id, $userID], fetch: "details");
+        if (is_array($check) && count($check) > 0) {
+            $path = "../upload/cart/";  // Define the upload path
+            $title = uniqid("products_");  // Generate a unique title for the image
+    
+            // Call process_image to upload the file and get the file name
+            $upload = $d->process_image($title, $path, "uploaded_file");  // Assuming the file input name is 'uploaded_file'
+    
             if (!empty($upload)) {
-                $d->quick_insert("image_upload", "", ["forID" => $id, "userID" => $userID, "name" => $upload, "imagefor" => "products"]);
+                // Prepare the data to be inserted into the database
+                $insertData = [
+                    [
+                        "forID" => $id,
+                        "userID" => $userID,
+                        "upload_image" => $upload,  // This is the file name returned by process_image()
+                        "imagefor" => "products"
+                    ]
+                ];
+    
+                // Log the data to ensure it's correct
+                error_log("Inserting data into database: " . print_r($insertData, true));
+    
+                // Insert the data into the database
+                $result = $d->quick_insert("image_upload", $insertData);
+    
+                if ($result) {
+                    echo "Image uploaded and inserted into database successfully!";
+                } else {
+                    echo "Failed to insert the image into the database.";
+                }
+            } else {
+                echo "Failed to upload the image.";
             }
         } else {
             $d->message("Error: Product not found", "error");
         }
     }
+    
+
+   
+// function uploadproductimage()
+// {
+//     $d = new database;
+
+//     // Sanitize and validate input
+//     $id = isset($_GET['transid']) ? htmlspecialchars($_GET['transid']) : null;
+//     $userID = isset($_GET['userID']) ? htmlspecialchars($_GET['userID']) : null;
+
+//     if ($id && $userID) {
+//         // Verify the product exists
+//         $check = $d->getall("products", "ID = ? and userID = ?", [$id, $userID], fetch: "");
+//         if (is_array($check) && count($check) > 0) {
+//             // Process the uploaded file
+//             $path = "../upload/cart/";
+//             $title = uniqid("img");
+//             $upload = $d->process_image($title, $path);  // Assuming process_image handles the file upload and returns the file name
+
+//             if (!empty($upload)) {
+//                 // Insert the uploaded file details into the database
+//                 $insertData = [
+//                     [
+//                         "forID" => $id,
+//                         "userID" => $userID,
+//                         "name" => $upload,
+//                         "imagefor" => "products"
+//                     ]
+//                 ];
+
+//                 // Log the data to ensure it's correct
+//                 error_log("Inserting data into database: " . print_r($insertData, true));
+
+//                 // Use the quick_insert method to insert the data into the database
+//                 $result = $d->quick_insert("image_upload", $insertData);
+
+//                 if ($result) {
+//                     return true;  // Indicate success
+//                 } else {
+//                     error_log("Error inserting into database.");
+//                     return false; // Failed to insert into the database
+//                 }
+//             } else {
+//                 error_log("File upload failed.");
+//                 return false; // File upload failed
+//             }
+//         } else {
+//             error_log("Product not found or invalid product data.");
+//         }
+//     } else {
+//         error_log("Missing product ID or user ID.");
+//     }
+//     return false; // Invalid input or product not found
+// }
+
+
+
+
+
+
+
 
     // edit ads 
-    function editads(){
+function editads(){ 
         $d = new database;
         $c = new content;
         $id = htmlspecialchars($_POST['ID']);

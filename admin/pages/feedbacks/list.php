@@ -52,7 +52,7 @@
               <tbody>
                 <?php
                 
-                if ($reply_feed->rowCount() > 0) {
+                if ($reply_feed) {
                     foreach ($reply_feed as $row) {
                         if (!empty($reply_feed)) {
                             // echo "i am here";

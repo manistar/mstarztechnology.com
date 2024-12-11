@@ -3,6 +3,189 @@
 // $loggedIn = isset($_SESSION['userSession']);  
 // Adjust session key if needed
 ?>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* Dark background */
+    color: #ccc; /* Faded text color */
+    margin: 0;
+    padding: 0;
+}
+
+.status-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px;
+    background-color: #1a1a1a; /* Matches WhatsApp theme */
+}
+
+.profile-container {
+    text-align: center;
+    color: #fff;
+    width: 70px;
+}
+
+.status-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #25D366; /* WhatsApp green color */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; /* Fallback background */
+}
+
+.user-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.no-reels,
+.login-message {
+    text-align: center;
+    font-size: 16px;
+    color: #999;
+    margin: 20px 0;
+}
+
+.no-reels {
+    color: #ff6b6b; /* Slightly alerting color */
+}
+
+.login-message {
+    color: #ffc107; /* Informative yellow color */
+}
+    /* Video feed */
+    .video-feed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        width: 100%;
+        height: 100vh;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        background: #000;
+        /* Black background like TikTok */
+    }
+
+    .video-container {
+        width: 100%;
+        max-height: 500px;
+        overflow: hidden;
+        position: relative;
+        margin: 20px 0;
+    }
+
+    .reel-video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+
+    /* Ebd of video */
+    /* Hide Scrollbar for Horizontal Scrolling */
+    .portfolio-items {
+        overflow-x: scroll;
+        /* Keep horizontal scrolling */
+        scroll-behavior: smooth;
+        /* Smooth scrolling */
+        padding: 10px;
+    }
+
+    /* Hide scrollbar for most modern browsers */
+    .portfolio-items::-webkit-scrollbar {
+        display: none;
+        /* Hide scrollbar for WebKit browsers */
+    }
+
+    .portfolio-items {
+        -ms-overflow-style: none;
+        /* Hide scrollbar for IE and Edge */
+        scrollbar-width: none;
+        /* Hide scrollbar for Firefox */
+    }
+
+    /* Portfolio Section Styles */
+    .portfolio-scroll-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        /* Hide overflowing items */
+        padding: 20px 0;
+    }
+
+    .portfolio-items {
+        display: flex;
+        gap: 20px;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        padding: 10px;
+    }
+
+    .portfolio-item {
+        min-width: 300px;
+        flex-shrink: 0;
+    }
+
+    /* Arrows */
+    .scroll-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 24px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 50%;
+        user-select: none;
+    }
+
+    .left-arrow {
+        left: 10px;
+    }
+
+    .right-arrow {
+        right: 10px;
+    }
+
+    .scroll-arrow:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Portfolio Content */
+    .thumbnail img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    @media (max-width: 768px) {
+        .portfolio-item {
+            min-width: 90%;
+        }
+    }
+</style>
+
+
 <main class="main-page-wrapper">
 
     <!-- Start Slider Area -->
@@ -13,17 +196,21 @@
                     <div class="order-2 order-lg-1 col-lg-7 mt_md--50 mt_sm--50 mt_lg--30">
                         <div class="content">
                             <div class="inner">
-                                <span class="subtitle">Welcome to my world</span>
-                                <h1 class="title">Hi, I’m <span> <?= $profiles["fname"]; ?> </span><br>
+                                <span class="subtitle">Welcome to Mstarz Technology</span>
+                                <h1 class="title">
+                                    <!-- <span> <//?= $profiles["fname"]; ?> </span> -->
+                                    <!-- <br> -->
                                     <span class="header-caption" id="page-top">
                                         <!-- type headline start-->
                                         <span class="cd-headline clip is-full-width">
-                                            <span>a </span>
+                                            <!-- <span>a </span> -->
                                             <!-- ROTATING TEXT -->
                                             <span class="cd-words-wrapper">
-                                                <b class="is-visible">Front-end Developer</b>
+                                                <b class="is-visible">Full-Stack Developer</b>
+                                                <b class="is-hidden">Cyber Security</b>
                                                 <b class="is-hidden">Back-end Developer</b>
                                                 <b class="is-hidden">Graphics Designer</b>
+                                                <b class="is-hidden">Video Editing</b>
                                             </span>
                                         </span>
                                         <!-- type headline end -->
@@ -55,11 +242,10 @@
                                 </div>
                                 <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12 mt_mobile--30">
                                     <div class="skill-share-inner">
-                                        <span class="title">best skill on</span>
+                                        <span class="title">Reels</span>
                                         <ul class="skill-share d-flex liststyle">
-                                            <li><img src="assets/images/icons/icons-01.png" alt="Icons Images"></li>
-                                            <li><img src="assets/images/icons/icons-02.png" alt="Icons Images"></li>
-                                            <li><img src="assets/images/icons/icons-03.png" alt="Icons Images"></li>
+
+                                            <!-- <li><img src="assets/images/icons/icons-01.png" alt="Icons Images"></li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -213,6 +399,197 @@
     </div>
     <!-- End Service Area  -->
 
+    <!-- Reels -->
+
+
+    <?php
+    // Check if the user session is set and not empty
+    if (isset($_SESSION['userSession']) && !empty($_SESSION['userSession'])) {
+        // Get the user's session ID
+        $userID = htmlspecialchars($_SESSION['userSession']);
+
+        echo '<div class="rn-portfolio-area rn-section-gap section-separator" id="portfolio">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="section-title text-center">
+                <span class="subtitle">Reels</span>
+                <!-- <h2 class="title">My Portfolio</h2> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row row--25 mt--10 mt_md--10 mt_sm--10"> -->
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">';
+
+
+
+        // Fetch the data
+        if ($adminReels->rowCount() > 0) {
+            foreach ($adminReels as $row) {
+                // Convert the timestamp to seconds for each row
+                $postTime = strtotime($row['created_at']);
+                $timeAgo  = $d->ago($postTime); // Get the "time ago" message
+    
+                echo '
+            <div style="width: 300px; background-color: #121212; border-radius: 10px; overflow: hidden; color: #fff; margin-bottom: 20px;">
+                <!-- User Details -->
+                <div style="display: flex; align-items: center; padding: 10px;">
+                    <img src="assets/images/reels/reel.jpg" alt="User Avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+                    <div>
+                        <span style="font-weight: bold;">Mstarz Technology</span><br>
+                        <span style="font-size: 12px; color: #888;">' . $timeAgo . '</span>
+                    </div>
+                </div>
+
+                <!-- Post Text -->
+                <div style="padding: 10px; font-size: 14px; line-height: 1.5;">
+                    ' . htmlspecialchars($row['title']) . '
+                </div>
+
+                <!-- Video -->
+                <video style="width: 100%; height: auto; max-height: 300px;" controls autoplay muted loop>
+                    <source src="upload/reels/' . htmlspecialchars($row['upload_reels']) . '" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- Actions -->
+                <div style="padding: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px;">
+                    <div style="display: flex; gap: 20px;">
+                        <span>27 <i class="fa fa-heart" style="color: red;"></i></span>
+                        <span>25 <i class="fa fa-comment"></i></span>
+                    </div>
+                     
+                    <button class="share-btn" data-url="http://localhost/mstarztech.com/upload/reels/' . htmlspecialchars($row['upload_reels']) . '" style="background: none; border: none; color: #00f; cursor: pointer;">
+                        <i class="fa fa-share"></i> Share
+                    </button>
+                </div>
+            </div>';
+            }
+        } else {
+            echo "No videos found.";
+        }
+    } else {
+        // Redirect to login page or display a message
+        // echo "<div style='text-align: center; color: red; font-weight: bold; margin-top: 20px;'>
+        //  You need to log in to view this content.
+        // </div>";
+    }
+    '</div>';
+    ?>
+
+    
+
+
+
+    </div>
+
+    <?php
+    // Check and display reels
+    // if ($adminReels->rowCount() > 0) {
+    //     foreach ($adminReels as $row) {
+    
+    //         echo '<span class="chat-logo"><img src="assets/images/reels/reel.jpg" class="user-avatar"></span>';
+    
+
+    //         // Check if the row contains a valid 'links' field
+    //         if (isset($row['links']) && !empty($row['links'])) {
+    //             $videoLink = htmlspecialchars($row['links']);
+    
+    //             // Check if the link is a TikTok URL
+    //             if (strpos($videoLink, 'tiktok.com') !== false) {
+    //                 // Resolve the shortened TikTok URL
+    //                 $headers = get_headers($videoLink, 1);
+    //                 if (isset($headers['Location'])) {
+    //                     $resolvedLink = is_array($headers['Location']) ? end($headers['Location']) : $headers['Location'];
+    
+    //                     // Extract TikTok video ID from the resolved link
+    //                     if (preg_match('/\/video\/(\d+)/', $resolvedLink, $matches)) {
+    //                         $videoID = $matches[1];
+    
+    // Embed TikTok video
+    //                         echo '<div class="video-container">';
+    //                         echo '<blockquote class="tiktok-embed" cite="' . $resolvedLink . '" data-video-id="' . $videoID . '" style="max-width: 605px;min-width: 325px;">
+    //                                 <section></section>
+    //                               </blockquote>';
+    //                         echo '<script async src="https://www.tiktok.com/embed.js"></script>';
+    //                         echo '</div>';
+    //                     } else {
+    //                         echo '<div class="video-container">Unable to extract TikTok video ID from resolved URL.</div>';
+    //                     }
+    //                 } else {
+    //                     echo '<div class="video-container">Unable to resolve TikTok URL.</div>';
+    //                 }
+    //             } else {
+    //                 echo '<div class="video-container">Invalid TikTok link provided.</div>';
+    //             }
+    //         } else {
+    //             echo '<div class="video-container">No video link found.</div>';
+    //         }
+    //     }
+    // } else {
+    //     // echo '<div>No reels found.</div>';
+    // }
+    
+    ?>
+    <div class="reels_spacing">
+        <?php
+
+         // Fetch reels posted by users
+// $userReels = $d->getall("reels", "whois = ? AND status = ? AND label_status = ?", ['user', '1', '1'], fetch: "moredetails");
+        
+   
+      
+// Check if any reels exist
+if ($userReels && $userReels->rowCount() > 0) {
+    echo '<div class="status-container">';
+    foreach ($userReels as $row) {
+        // Get the user details of the reel's poster
+        $posterDetails = $d->getall("users", "ID = ?", [$row['userID']], fetch: "details");
+
+        if ($posterDetails) {
+            $firstName = htmlspecialchars($posterDetails['first_name']);
+            $lastName  = htmlspecialchars($posterDetails['last_name']);
+            $profileImage = htmlspecialchars($posterDetails['upload_image']);
+        } else {
+            $firstName = 'Unknown';
+            $lastName  = 'User';
+            $profileImage = 'user2-160x160.png'; // Default image
+        }
+
+        // Display the user's profile image
+        echo '<div class="profile-container">
+            <a href="?p=reel&ID= '. $row['userID']. '">
+                <div class="status-circle">
+                    <img src="upload/profile/' . (!empty($profileImage) ? $profileImage : 'user2-160x160.png') . '" class="user-avatar">
+                </div>
+                <span style="font-weight: bold; color: grey; font-size: 10px;">' . $firstName . ' ' . $lastName . '</span><br>
+            </a>
+        </div>';
+    }
+    echo '</div>';
+} else {
+    echo '<div class="no-reels">No reels found.</div>';
+}
+      
+        ?>
+    </div>
+
+
+
+
+    </div>
+    <!-- Right Arrow -->
+    <!-- <div class="scroll-arrow right-arrow" onclick="scrollPortfolio(1)">
+                    <span>&gt;</span>
+                </div> -->
+    </div>
+    </div>
+    </div>
+
+    <!-- Reels Ends -->
+
+
     <!-- Start Portfolio Area -->
     <div class="rn-portfolio-area rn-section-gap section-separator" id="portfolio">
         <div class="container">
@@ -225,183 +602,65 @@
                 </div>
             </div>
 
-            <div class="row row--25 mt--10 mt_md--10 mt_sm--10">
+            <!-- <div class="row row--25 mt--10 mt_md--10 mt_sm--10"> -->
 
+            <!-- Horizontal Scroll Wrapper -->
+            <div class="portfolio-scroll-wrapper">
+                <!-- Left Arrow -->
+                <div class="scroll-arrow left-arrow" onclick="scrollPortfolio(-1)">
+                    <span>&lt;</span>
+                </div>
 
-                <!-- Start Single Portfolio -->
-                <?php
+                <!-- Portfolio Items -->
+                <div class="portfolio-items" id="portfolioItems">
 
-                foreach ($portfolio as $row) { ?>
-                    <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true"
-                        class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            <div href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bs-example-modal-md"
-                                id="chat_user_<?= $row['ID'] ?>"
-                                data-url="modal?p=dashboard&action=view&pID=<?= $row['ID'] ?>"
-                                data-title="<?= $row['title'] ?>" data-user-id="<?= $row['ID'] ?>" class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="upload/portfolio/<?= $row['img']; ?>" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)"><?= $row['professions']; ?></a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                                600</span>
-                                        </div>
+                    <?php
+
+                    foreach ($portfolio as $row) { ?>
+                        <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true"
+                            class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
+                            <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                <div href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bs-example-modal-md"
+                                    id="chat_user_<?= $row['ID'] ?>"
+                                    data-url="modal?p=dashboard&action=view&pID=<?= $row['ID'] ?>"
+                                    data-title="<?= $row['title'] ?>" data-user-id="<?= $row['ID'] ?>" class="inner">
+                                    <div class="thumbnail">
+                                        <a href="javascript:void(0)">
+                                            <img src="upload/portfolio/<?= $row['img']; ?>" alt="Personal Portfolio Images">
+                                        </a>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)"><?= $row['title']; ?><i
-                                                class="feather-arrow-up-right"></i></a></h4>
+                                    <div class="content">
+                                        <div class="category-info">
+                                            <div class="category-list">
+                                                <a href="javascript:void(0)"><?= $row['professions']; ?></a>
+                                            </div>
+                                            <div class="meta">
+                                                <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
+                                                    600</span>
+                                            </div>
+                                        </div>
+                                        <h4 class="title"><a href="javascript:void(0)"><?= $row['title']; ?><i
+                                                    class="feather-arrow-up-right"></i></a></h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php }
-                require_once 'content/modal.php';
-                ?>
-                <!-- End Single Portfolio -->
-
-                <!-- Start Single Portfolio -->
-                <!-- <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-02.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Application</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                        750</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Mobile app landing design & app
-                                            maintain<i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- End Single Portfolio -->
-
-                <!-- Start Single Portfolio -->
-                <!-- <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-03.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Photoshop</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                        630</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Logo design creativity & Application
-                                            <i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- End Single Portfolio -->
-
-                <!-- Start Single Portfolio -->
-                <!-- <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-04.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Figma</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                        360</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Mobile app landing design &
-                                            Services<i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- End Single Portfolio -->
-
-                <!-- Start Single Portfolio -->
-                <!-- <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-05.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Web Design</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                        280</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Design for tecnology & services<i
-                                        class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- End Single Portfolio -->
-
-                <!-- Start Single Portfolio -->
-                <!-- <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-06.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Web Design</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                        690</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">App for tecnology & services<i
-                                        class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- End Single Portfolio -->
+                    <?php }
+                    require_once 'content/modal.php';
+                    ?>
+                </div>
+                <!-- Right Arrow -->
+                <div class="scroll-arrow right-arrow" onclick="scrollPortfolio(1)">
+                    <span>&gt;</span>
+                </div>
             </div>
         </div>
     </div>
+
+
+
+    <!-- End Portfolio Area -->
+
     <!-- End portfolio Area -->
 
 
@@ -411,8 +670,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title text-left" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100"
-                        data-aos-once="true">
+                    <div class="section-title text-center" data-aos="fade-up" data-aos-duration="500"
+                        data-aos-delay="100" data-aos-once="true">
                         <span class="subtitle">Websites</span>
                         <h2 class="title">Purchase Script</h2>
                     </div>
@@ -422,12 +681,13 @@
             <div class="row row--25 mt_md--10 mt_sm--10">
                 <?php if ($product_data->rowCount() > 0) {
                     $index = 0;
-                    foreach ($product_data as $row) { 
+                    foreach ($product_data as $row) {
                         $likeCount = $d->getall('like_product', 'productID = ?', [$row['ID']], fetch: "");
                         ?>
                         <!-- Start Single Service -->
                         <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true"
-                            class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30 product-item" data-index="<?= $index ?>">
+                            class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30 product-item"
+                            data-index="<?= $index ?>">
                             <div class="rn-service">
                                 <div class="inner">
                                     <!-- Product Image -->
@@ -453,7 +713,8 @@
                                             <form action="passer" method="post" id="foo">
                                                 <input type="hidden" name="likeID" value="<?= $row['ID']; ?>">
                                                 <div id="custommessage"></div>
-                                                <button type="submit" class="rn-btn thumbs-icon like-btn" data-id="<?= $row['ID']; ?>">
+                                                <button type="submit" class="rn-btn thumbs-icon like-btn"
+                                                    data-id="<?= $row['ID']; ?>">
                                                     <span id="like-count-<?= $row['ID']; ?>">
                                                         <?= $likeCount; ?>
                                                     </span>
@@ -468,7 +729,7 @@
                                                 </span>
                                                 <i data-feather="thumbs-up"></i>
                                             </div> -->
-                                            
+
                                             <!-- </div> -->
 
                                             <!-- Eye Icon Button -->
@@ -508,9 +769,9 @@
                                 </div> <!-- End of inner -->
                             </div> <!-- End of rn-service -->
                         </div> <!-- End of col -->
-                    <?php 
-                     $index++;
-                }
+                        <?php
+                        $index++;
+                    }
 
                 } else {
                     echo "No data found";
@@ -561,655 +822,7 @@
 
 
 
-    <!-- Start Resume Area -->
-    <div class="rn-resume-area rn-section-gap section-separator" id="resume">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title text-center">
-                        <span class="subtitle">7+ Years of Experience</span>
-                        <h2 class="title">My Resume</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt--45">
-                <div class="col-lg-12">
-                    <ul class="rn-nav-list nav nav-tabs" id="myTabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="education-tab" data-bs-toggle="tab" href="#education"
-                                role="tab" aria-controls="education" aria-selected="true">education</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="professional-tab" data-bs-toggle="tab" href="#professional"
-                                role="tab" aria-controls="professional" aria-selected="false">professional
-                                Skills</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="experience-tab" data-bs-toggle="tab" href="#experience" role="tab"
-                                aria-controls="experience" aria-selected="false">experience</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="interview-tab" data-bs-toggle="tab" href="#interview" role="tab"
-                                aria-controls="interview" aria-selected="false">interview</a>
-                        </li>
-                    </ul>
 
-                    <!-- Start Tab Content Wrapper  -->
-                    <div class="rn-nav-content tab-content" id="myTabContents">
-                        <!-- Start Single Tab  -->
-                        <div class="tab-pane show active fade single-tab-area" id="education" role="tabpanel"
-                            aria-labelledby="education-tab">
-                            <div class="personal-experience-inner mt--40">
-                                <div class="row">
-                                    <!-- Start Skill List Area  -->
-
-                                    <?php foreach ($edu as $row) { ?>
-                                        <div class="col-lg-6 col-md-12 col-12">
-                                            <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
-                                                <h4 class="maintitle">Education Quality</h4>
-                                                <div class="experience-list">
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4><?= $row['course']; ?></h4>
-                                                                    <span><?= $row['institute']; ?></span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.30/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description"><?= $row['content']; ?></p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <!-- <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>PHP, Phython 3, JavaScript, jQuery</h4>
-                                                                    <span>Sololearn (2000 - 2002)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.50/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Certificate of  Proficiency in PHP, Phython 3 &  HTML fundamental course.</p>
-                                                        </div>
-                                                    </div> -->
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <!-- <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>PDO</h4>
-                                                                    <span>Segmadesigns Ltd (2017 - 2021)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.80/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description"> Certificate of  Proficiency in PHP (PDO).</p>
-                                                        </div>
-                                                    </div> -->
-                                                    <!-- End Single List  -->
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-
-                                    <!-- End Skill List Area  -->
-
-
-                                    <!-- Start Skill List Area 2nd  -->
-                                    <?php foreach ($job as $row) { ?>
-                                        <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
-                                            <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
-                                                <h4 class="maintitle">Job Experience</h4>
-                                                <div class="experience-list">
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4><?= $row['course']; ?></h4>
-                                                                    <span><?= $row['institute']; ?></span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.70/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description"><?= $row['content']; ?></p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <!-- <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Diploma in Computer Science</h4>
-                                                                    <span>Works at Plugin Development (2016 -
-                                                                2020)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>5.00/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Maecenas finibus nec sem ut
-                                                                imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div> -->
-                                                    <!-- End Single List  -->
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-                                    <!-- End Skill List Area  -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Tab  -->
-
-                        <!-- Start Single Tab  -->
-                        <div class="tab-pane fade " id="professional" role="tabpanel"
-                            aria-labelledby="professional-tab">
-                            <div class="personal-experience-inner mt--40">
-                                <div class="row row--40">
-
-                                    <!-- Start Single Progressbar  -->
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <div class="progress-wrapper">
-                                            <div class="content">
-                                                <span class="subtitle">Features</span>
-                                                <h4 class="maintitle">Design Skill</h4>
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">PHOTOSHOT</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.5s" data-wow-delay=".3s"
-                                                            role="progressbar" style="width: 100%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">100%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">FIGMA</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.6s" data-wow-delay=".4s"
-                                                            role="progressbar" style="width: 95%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">95%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">ADOBE XD</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.7s" data-wow-delay=".5s"
-                                                            role="progressbar" style="width: 60%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">60%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">ADOBE ILLUSTRATOR</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.8s" data-wow-delay=".6s"
-                                                            role="progressbar" style="width: 70%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">70%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">DESIGN</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.9s" data-wow-delay=".7s"
-                                                            role="progressbar" style="width: 90%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">90%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Progressbar  -->
-
-                                    <!-- Start Single Progressbar  -->
-                                    <div class="col-lg-6 col-md-6 col-12 mt_sm--60">
-                                        <div class="progress-wrapper">
-                                            <div class="content">
-                                                <span class="subtitle">Features</span>
-                                                <h4 class="maintitle">Development Skill</h4>
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">HTML</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.5s" data-wow-delay=".3s"
-                                                            role="progressbar" style="width: 85%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">85%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">CSS</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.6s" data-wow-delay=".4s"
-                                                            role="progressbar" style="width: 80%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">80%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">JAVASCRIPT</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.7s" data-wow-delay=".5s"
-                                                            role="progressbar" style="width: 90%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">90%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">SOFTWARE</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.8s" data-wow-delay=".6s"
-                                                            role="progressbar" style="width: 75%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">75%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                                <!-- Start Single Progress Charts -->
-                                                <div class="progress-charts">
-                                                    <h6 class="heading heading-h6">PLUGIN</h6>
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft"
-                                                            data-wow-duration="0.9s" data-wow-delay=".7s"
-                                                            role="progressbar" style="width: 70%" aria-valuenow="85"
-                                                            aria-valuemin="0" aria-valuemax="100"><span
-                                                                class="percent-label">70%</span></div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single Progress Charts -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Progressbar  -->
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Tab  -->
-
-                        <!-- Start Single Tab  -->
-                        <div class="tab-pane fade" id="experience" role="tabpanel" aria-labelledby="experience-tab">
-                            <div class="personal-experience-inner mt--40">
-                                <div class="row">
-                                    <!-- Start Skill List Area  -->
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="content">
-                                            <span class="subtitle">2007 - 2010</span>
-                                            <h4 class="maintitle">Education Quality</h4>
-                                            <div class="experience-list">
-
-                                                <!-- Start Single List  -->
-                                                <div class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Personal Portfolio April Fools</h4>
-                                                                <span>University of DVI (1997 - 2001)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.30/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">The education should be very
-                                                            interactual. Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4> Examples Of Personal Portfolio</h4>
-                                                                <span>College of Studies (2000 - 2002)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.50/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Maecenas finibus nec sem ut
-                                                            imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Tips For Personal Portfolio</h4>
-                                                                <span>University of Studies (1997 - 2001)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.80/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description"> If you are going to use a passage.
-                                                            Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Skill List Area  -->
-
-                                    <!-- Start Skill List Area 2nd  -->
-                                    <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
-                                        <div class="content">
-                                            <span class="subtitle">2007 - 2010</span>
-                                            <h4 class="maintitle">Job Experience</h4>
-                                            <div class="experience-list">
-
-                                                <!-- Start Single List  -->
-                                                <div class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Diploma in Web Development</h4>
-                                                                <span>BSE In CSE (2004 - 2008)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.70/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Contrary to popular belief. Ut
-                                                            tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>The Personal Portfolio Mystery</h4>
-                                                                <span>Job at Rainbow-Themes (2008 - 2016)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.95/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Generate Lorem Ipsum which looks. Ut
-                                                            tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Diploma in Computer Science</h4>
-                                                                <span>Works at Plugin Development (2016 -
-                                                                    2020)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>5.00/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Maecenas finibus nec sem ut
-                                                            imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Skill List Area  -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Tab  -->
-
-                        <!-- Start Single Tab  -->
-                        <div class="tab-pane fade" id="interview" role="tabpanel" aria-labelledby="interview-tab">
-                            <div class="personal-experience-inner mt--40">
-                                <div class="row">
-                                    <!-- Start Skill List Area  -->
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="content">
-                                            <span class="subtitle">2007 - 2010</span>
-                                            <h4 class="maintitle">Company Experience</h4>
-                                            <div class="experience-list">
-
-                                                <!-- Start Single List  -->
-                                                <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300"
-                                                    data-aos-once="true" class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Personal Portfolio April Fools</h4>
-                                                                <span>University of DVI (1997 - 2001)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.30/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">The education should be very
-                                                            interactual. Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500"
-                                                    data-aos-once="true" class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4> Examples Of Personal Portfolio</h4>
-                                                                <span>College of Studies (2000 - 2002)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.50/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Maecenas finibus nec sem ut
-                                                            imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="700"
-                                                    data-aos-once="true" class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Tips For Personal Portfolio</h4>
-                                                                <span>University of Studies (1997 - 2001)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.80/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description"> If you are going to use a passage.
-                                                            Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Skill List Area  -->
-
-                                    <!-- Start Skill List Area 2nd  -->
-                                    <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
-                                        <div class="content">
-                                            <span class="subtitle">2007 - 2010</span>
-                                            <h4 class="maintitle">Job Experience</h4>
-                                            <div class="experience-list">
-
-                                                <!-- Start Single List  -->
-                                                <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500"
-                                                    data-aos-once="true" class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Diploma in Web Development</h4>
-                                                                <span>BSE In CSE (2004 - 2008)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.70/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Contrary to popular belief. Ut
-                                                            tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="700"
-                                                    data-aos-once="true" class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>The Personal Portfolio Mystery</h4>
-                                                                <span>Job at Rainbow-Themes (2008 - 2016)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>4.95/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Generate Lorem Ipsum which looks. Ut
-                                                            tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                                <!-- Start Single List  -->
-                                                <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="900"
-                                                    data-aos-once="true" class="resume-single-list">
-                                                    <div class="inner">
-                                                        <div class="heading">
-                                                            <div class="title">
-                                                                <h4>Diploma in Computer Science</h4>
-                                                                <span>Works at Plugin Development (2016 -
-                                                                    2020)</span>
-                                                            </div>
-                                                            <div class="date-of-time">
-                                                                <span>5.00/5</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="description">Maecenas finibus nec sem ut
-                                                            imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                            Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                            mauris hendrerit ante.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single List  -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Skill List Area  -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Tab  -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Resume Area -->
 
 
     <!-- Start Testimonia Area  -->
@@ -2724,9 +2337,11 @@
         </div>
     </div> -->
 
-    <div id="chat-icon">
-    <span>💬</span>
-</div>
+    <div class="backto-top">
+        <div id="chat-icon">
+            <span>💬</span>
+        </div>
+    </div>
     <!-- Back to top end -->
 
 
@@ -3472,11 +3087,89 @@
 </main>
 
 <script>
-    // document.getElementById('addToCartButton').addEventListener('click', function (event) {
-    //     <?php if (!$loggedIn): ?>  // If user not logged in, prevent submission
-    //         event.preventDefault();
-    //         // Redirect to login page (rewritten URL)
-    //         window.location.href = "login";
-    //     <?php endif; ?>
+    function scrollPortfolio(direction) {
+        const container = document.getElementById('portfolioItems');
+        const scrollAmount = 300; // Adjust the amount to scroll
+        container.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'smooth',
+        });
+    }
+
+    //     document.addEventListener('DOMContentLoaded', () => {
+    //     const shareButtons = document.querySelectorAll('.share-btn');
+
+    //     shareButtons.forEach(button => {
+    //         button.addEventListener('click', async () => {
+    //             const url = button.dataset.url;
+    //             if (!navigator.share) {
+    //                 alert('Sharing is not supported in this browser.');
+    //                 return;
+    //             }
+
+    //             try {
+    //                 console.log('Sharing URL:', url);
+    //                 await navigator.share({
+    //                     title: 'Check out this video!',
+    //                     text: 'Here is a video you might like.',
+    //                     url: url,
+    //                 });
+    //                 alert('Content shared successfully!');
+    //             } catch (error) {
+    //                 if (error.name === 'AbortError') {
+    //                     console.log('User canceled the share.');
+    //                 } else {
+    //                     console.error('Error sharing content:', error.message);
+    //                     alert('Error sharing content. Please try again.');
+    //                 }
+    //             }
+    //         });
+    //     });
     // });
+
+
+
+
+
+    // Video play
+    document.addEventListener("DOMContentLoaded", function () {
+        const shareButtons = document.querySelectorAll(".share-btn");
+
+        shareButtons.forEach(button => {
+            button.addEventListener("click", async function () {
+                const shareUrl = button.getAttribute("data-url");
+
+                // Disable the button temporarily to prevent multiple clicks
+                button.disabled = true;
+
+                // Show a loading spinner (optional)
+                const originalInnerHTML = button.innerHTML;
+                button.innerHTML = "<i class='fa fa-spinner fa-spin'></i> Sharing...";
+
+                try {
+                    if (navigator.share) {
+                        await navigator.share({
+                            title: "Check out this video!",
+                            url: shareUrl
+                        });
+                        // alert("Content shared successfully!");
+                    } else {
+                        alert("Sharing is not supported on this device. Copy this URL: " + shareUrl);
+                    }
+                } catch (error) {
+                    console.error("Error sharing content:", error);
+                    if (error.name === "AbortError") {
+                        alert("Sharing was aborted. Please try again.");
+                    } else {
+                        alert("An error occurred while sharing the content. Please try again.");
+                    }
+                } finally {
+                    // Re-enable the button and restore its innerHTML
+                    button.disabled = false;
+                    button.innerHTML = originalInnerHTML; // Restore the original text
+                }
+            });
+        });
+    });
+
 </script>

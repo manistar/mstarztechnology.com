@@ -1,6 +1,9 @@
 <?php
-require_once "GoogleAPI/vendor/autoload.php";
-require_once 'include/phpmailer/PHPMailerAutoload.php';
+require_once __DIR__ . '/../GoogleAPI/vendor/autoload.php';
+// echo "Autoload file included successfully!";
+require_once __DIR__ . '/../include/phpmailer/PHPMailerAutoload.php';
+require_once __DIR__ . '/../include/database.php';
+
 class Project extends Database
 {
     // public function signin($user_validating)
@@ -35,105 +38,7 @@ class Project extends Database
     //     }
     // }
 
-    // Checking login Code
 
-    // public function signin($user_validating)
-    // {
-    //     $d = new database;
-
-    //     // Validate the form input
-    //     $data = $this->validate_form($user_validating);
-    //     // var_dump($data);
-    //     if (!is_array($data)) {
-    //         $this->message("Invalid form data.", "error");
-    //         return null;
-    //     }
-
-       
-
-    //     // Get the visitor details, including the IP address
-    //     $visitorDetails = $this->get_visitor_details();
-    //     $ip_address     = $visitorDetails['ip_address'];
-    //     $user_id = $user['userID']; // Assign the actual userID from the database record
-
-        
-
-    //     // Check if the user exists in the database by email
-    //     $user = $d->getall("users", "email = ?", [$data['email']], fetch: "details");
-    //     // var_dump($user);
-    //     if (is_array($user)) {
-    //         // Verify the provided password
-    //         if (password_verify($data['password'], $user['password'])) {
-    //             // Set the user session
-    //             $_SESSION['userSession'] = $user_id;
-    //             // $_SESSION['userSession'] = htmlspecialchars($user['ID']);
-    //             // $_SESSION['userSession'] = htmlspecialchars($user['ID'], ENT_QUOTES, 'UTF-8');
-    //             // if (!empty($user['userID'])) {
-    //             //     $_SESSION['userSession'] = htmlspecialchars($user['userID'], ENT_QUOTES, 'UTF-8');
-    //             // } else {
-    //             //     $this->message("User ID is missing. Please contact support.", "error");
-    //             //     return null;
-    //             // }
-
-    //             // Log the user's IP address
-    //             $this->log_user_ip($user['email'], $ip_address);
-
-    //             // Send a welcome email upon successful login
-    //             $to             = $data['email'];
-    //             $from           = 'no-reply@tidebk.com';
-    //             $name           = 'No Reply';
-    //             $subj           = 'Welcome Back to Mstarz Technology!';
-    //             $companyLogoUrl = 'https://mstarztech.com/assets/images/logo/logo.png';
-
-    //             $user = $d->getall("users", "email = ?", [$data['email']], fetch: "details");
-
-    //             $msg = "
-    //             <div style='font-family: Arial, sans-serif; color: #ffffff; max-width: 600px; margin: 0 auto; background-color: #1b1b1d; padding: 20px; border-radius: 8px;'>
-    //                 <div style='text-align: center; margin-bottom: 20px;'>
-    //                     <img src='{$companyLogoUrl}' alt='Your Logo' style='width: 150px; height: auto;' />
-    //                 </div>
-    //                 <h2 style='color: #9266f5; text-align: center; margin-bottom: 10px;'>Welcome to Mstarz Technology Hub!</h2>
-    //                 <p style='font-size: 16px; line-height: 1.6; color: #555;'>
-    //                     Dear {$user['first_name']} {$user['last_name']},<br>
-    //                 </p>
-
-    //                 <p style='font-size: 16px; line-height: 1.6; color: #555;'>
-    //                     MSTARZ TECHNOLOGY HUB LOG IN CONFIRMATION
-    //                     <br><br>
-    //                     Please be informed that your account was accessed with the IP Address: {$ip_address}.
-    //                 </p>
-                    
-
-    //                 <p style='font-size: 14px; color: #c7c7c7; text-align: center;'>
-    //                     If this wasn't you, please contact our support team at 
-    //                     <a href='mailto:support@mstarztech.com' style='color: #9266f5;'>support@mstarztech.com</a>.
-    //                 </p>
-    //                 <p style='font-size: 14px; color: #999; text-align: center;'>&copy; " . date('Y') . " Mstarz Technology. All rights reserved.</p>
-    //             </div>
-    //             ";
-
-
-
-
-    //             // Send the email using SMTP
-    //             $emailSuccess = $this->smtpmailer($to, $from, $name, $subj, $msg);
-
-    //             if ($emailSuccess) {
-    //                 // Redirect the user to the index page
-    //                 return $this->loadpage("index", "json");
-    //             } else {
-    //                 $this->message("Failed to send the welcome email. Please try again.", "error");
-    //             }
-
-    //         } else {
-    //             $this->message("Password Incorrect.", "error");
-    //         }
-    //     } else {
-    //         $this->message("Email does not exist.", "error");
-    //     }
-
-    //     return null;
-    // }
 
     public function signin($user_validating)
 {
@@ -151,11 +56,17 @@ class Project extends Database
     $ip_address = $visitorDetails['ip_address'];
 
     // Check if the user exists in the database by email
+    $startTime = microtime(true);
     $user = $d->getall("users", "email = ?", [$data['email']], fetch: "details");
+    $endTime = microtime(true);
+    error_log("Database query time: " . ($endTime - $startTime));
 
     if (is_array($user)) {
         // Verify the provided password
+        $startTime = microtime(true);
         if (password_verify($data['password'], $user['password'])) {
+            $endTime = microtime(true);
+            error_log("Password verification time: " . ($endTime - $startTime));
             // Set the user session with the correct userID
             $_SESSION['userSession'] = $user['ID']; // Correctly assign the userID
 
@@ -220,129 +131,111 @@ class Project extends Database
 
 
 
-
-    // public function google_signin($token) {
-    //     $d = new database;
+    // public function google_signin($token = null)
+    // {
+    //     $d      = new database;
     //     $client = new Google\Client();
     //     $client->setClientId('109908398316-4qh8o3a339uqtrrtr5ngmi90mtdocop1.apps.googleusercontent.com');
     //     $client->setClientSecret('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');
+    //     $client->setRedirectUri('http://localhost/mstarztech.com/google_callback');
 
     //     try {
-    //         // Verify token and get the user's Google profile info
-    //         $payload = $client->verifyIdToken($token);
-
-    //         if (!$payload) {
-    //             throw new Exception("Invalid Google token.");
+    //         if ($token) {
+    //             // Client-side token verification
+    //             $payload = $client->verifyIdToken($token);
+    //             if (!$payload)
+    //                 throw new Exception("Invalid Google token.");
+    //         } elseif (isset($_GET['code'])) {
+    //             // Server-side authorization code flow
+    //             $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+    //             if (!isset($token['access_token']))
+    //                 throw new Exception("Failed to fetch access token.");
+    //             $client->setAccessToken($token['access_token']);
+    //         } else {
+    //             // Redirect to Google Sign-In page
+    //             header('Location: ' . $client->createAuthUrl());
+    //             exit();
     //         }
 
-    //         $google_oauth = new Google_Service_Oauth2($client);
+    //         // Fetch user info
+    //         $google_oauth        = new Google_Service_Oauth2($client);
     //         $google_account_info = $google_oauth->userinfo->get();
+    //         $email               = $google_account_info->email;
+    //         $name                = $google_account_info->name;
 
-    //         // Get email and name from Google profile info
-    //         $email = $google_account_info->email;
-    //         $name = $google_account_info->name;
-
-    //         // Check if the user exists in the database
+    //         // Database check and session handling
     //         $user = $this->getall("users", "email = ?", [$email], fetch: "details");
-
     //         if (is_array($user)) {
-    //             // If user exists, log them in
     //             $_SESSION['userSession'] = htmlspecialchars($user['ID']);
-
-    //             // Log IP address
-    //             $visitorDetails = $this->get_visitor_details();
-    //             $ip_address = $visitorDetails['ip_address'];
-    //             $this->log_user_ip($user['email'], $ip_address);
-
+    //             $this->log_user_ip($user['email'], $this->get_visitor_details()['ip_address']);
     //             return $this->loadpage("index", "json");
     //         } else {
-    //             // Register new user if not found in database
     //             $newUser = [
     //                 'ID' => uniqid(),
     //                 'email' => $email,
     //                 'name' => $name,
     //                 'created_at' => date('Y-m-d H:i:s')
     //             ];
-
-    //             $insertion_result = $this->quick_insert("users", $newUser);
-
-    //             // Check if the insertion was successful
-    //             if (!$insertion_result) {
-    //                 throw new Exception("Failed to insert new user into database.");
-    //             }
-
+    //             if (!$this->quick_insert("users", $newUser))
+    //                 throw new Exception("Failed to insert new user.");
     //             $_SESSION['userSession'] = htmlspecialchars($newUser['ID']);
-
-    //             // Log IP address for new user
-    //             $visitorDetails = $this->get_visitor_details();
-    //             $ip_address = $visitorDetails['ip_address'];
-    //             $this->log_user_ip($email, $ip_address);
-
+    //             $this->log_user_ip($email, $this->get_visitor_details()['ip_address']);
     //             return $this->loadpage("index", "json");
     //         }
     //     } catch (Exception $e) {
-    //         // Handle errors, e.g., invalid token or database error
-    //         error_log("Google Sign-in Error: " . $e->getMessage()); // Log error for debugging
+    //         error_log("Google Sign-in Error: " . $e->getMessage());
     //         $this->message("Failed to authenticate with Google.", "error");
     //     }
     // }
 
     public function google_signin($token = null)
-    {
-        $d      = new database;
-        $client = new Google\Client();
-        $client->setClientId('109908398316-4qh8o3a339uqtrrtr5ngmi90mtdocop1.apps.googleusercontent.com');
-        $client->setClientSecret('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');
-        $client->setRedirectUri('http://localhost/mstarztech.com/google_callback');
+{
+    $client = new Google\Client();
+    $client->setClientId('109908398316-4qh8o3a339uqtrrtr5ngmi90mtdocop1.apps.googleusercontent.com');
+    $client->setClientSecret('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');
+    $client->setRedirectUri('http://localhost/mstarztech.com/google_callback');
 
-        try {
-            if ($token) {
-                // Client-side token verification
-                $payload = $client->verifyIdToken($token);
-                if (!$payload)
-                    throw new Exception("Invalid Google token.");
-            } elseif (isset($_GET['code'])) {
-                // Server-side authorization code flow
-                $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-                if (!isset($token['access_token']))
-                    throw new Exception("Failed to fetch access token.");
-                $client->setAccessToken($token['access_token']);
-            } else {
-                // Redirect to Google Sign-In page
-                header('Location: ' . $client->createAuthUrl());
-                exit();
-            }
-
-            // Fetch user info
-            $google_oauth        = new Google_Service_Oauth2($client);
-            $google_account_info = $google_oauth->userinfo->get();
-            $email               = $google_account_info->email;
-            $name                = $google_account_info->name;
-
-            // Database check and session handling
-            $user = $this->getall("users", "email = ?", [$email], fetch: "details");
-            if (is_array($user)) {
-                $_SESSION['userSession'] = htmlspecialchars($user['ID']);
-                $this->log_user_ip($user['email'], $this->get_visitor_details()['ip_address']);
-                return $this->loadpage("index", "json");
-            } else {
-                $newUser = [
-                    'ID' => uniqid(),
-                    'email' => $email,
-                    'name' => $name,
-                    'created_at' => date('Y-m-d H:i:s')
-                ];
-                if (!$this->quick_insert("users", $newUser))
-                    throw new Exception("Failed to insert new user.");
-                $_SESSION['userSession'] = htmlspecialchars($newUser['ID']);
-                $this->log_user_ip($email, $this->get_visitor_details()['ip_address']);
-                return $this->loadpage("index", "json");
-            }
-        } catch (Exception $e) {
-            error_log("Google Sign-in Error: " . $e->getMessage());
-            $this->message("Failed to authenticate with Google.", "error");
+    try {
+        if ($token) {
+            $payload = $client->verifyIdToken($token);
+            if (!$payload) throw new Exception("Invalid Google token.");
+        } elseif (isset($_GET['code'])) {
+            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            if (empty($token['access_token'])) throw new Exception("Failed to fetch access token.");
+            $client->setAccessToken($token['access_token']);
+        } else {
+            header('Location: ' . $client->createAuthUrl());
+            exit();
         }
+
+        $google_oauth = new Google_Service_Oauth2($client);
+        $google_account_info = $google_oauth->userinfo->get();
+        $email = $google_account_info->email;
+
+        // Check if user exists or register a new user
+        $user = $this->getall("users", "email = ?", [$email], fetch: "details");
+        $userData = is_array($user) ? $user : [
+            'ID' => uniqid(),
+            'email' => $email,
+            'name' => $google_account_info->name,
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        if (!is_array($user)) {
+            if (!$this->quick_insert("users", $userData)) throw new Exception("Failed to insert new user.");
+        }
+
+        $_SESSION['userSession'] = htmlspecialchars($userData['ID']);
+        $this->log_user_ip($email, $this->get_visitor_details()['ip_address']);
+        header('Location: https://mstarztech.com/index');
+        exit();
+
+    } catch (Exception $e) {
+        error_log("Google Sign-in Error: " . $e->getMessage());
+        header('Location: https://mstarztech.com/login');
+        exit();
     }
+}
 
 
 
@@ -402,7 +295,7 @@ class Project extends Database
                 $loginCode = mt_rand(100000, 999999); // Generate random login code
 
                 // Company logo URL
-                $companyLogoUrl = 'localhost/mstarztech.com/assets/images/logo/logo.png';
+                $companyLogoUrl = 'https://mstarztech.com/assets/images/logo/logo.png';
 
                 // Prepare email message
                 $msg = "
@@ -411,7 +304,7 @@ class Project extends Database
                 <img src='{$companyLogoUrl}' alt='Your Logo' style='width: 150px; height: auto;' />
             </div>
             <div style='text-align: center; margin-bottom: 20px;'>
-                <img src='localhost/mstarztech.com/assets/images/run.jpg' alt='Welcome Image' style='width: 100%; max-width: 500px; height: auto; border-radius: 8px;' />
+                <img src='mstarztech.com/assets/images/run.jpg' alt='Welcome Image' style='width: 100%; max-width: 500px; height: auto; border-radius: 8px;' />
             </div>
             <h2 style='color: #9266f5; text-align: center; margin-bottom: 10px;'>Welcome to Your Mstarz Technology Hub!</h2>
             <p style='font-size: 16px; line-height: 1.6; color: #555;'>
@@ -432,7 +325,7 @@ class Project extends Database
                 </p>
                 <p style='font-size: 14px; color: #c7c7c7;'>
                     &copy; " . date('Y') . " Your Company. All rights reserved.<br>
-                    <a href='https://your-privacy-policy-url.com' style='color: #9266f5; text-decoration: none;'>Privacy Policy</a>
+                    <a href='https://mstarztech.com?p=terms' style='color: #9266f5; text-decoration: none;'>Privacy Policy</a>
                 </p>
             </div>
         </div>
@@ -450,6 +343,8 @@ class Project extends Database
 
                     // Insert user data into the database
                     $insert = $this->quick_insert("users", $data, "Account has been created successfully");
+
+                    
 
                     if ($insert) {
                         return $this->loadpage("login", "json");
@@ -690,7 +585,7 @@ class Project extends Database
     public function contact_server($contact)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $secret   = "6LdrUXMqAAAAAFdbKHjqmk7eAwQK_K5q89sEXhh8";
+            $secret   = "6LdNUY4qAAAAAPnr_0Wah8a1l1S8LxwYuaoYPUbW";
             $response = $_POST['g-recaptcha-response'];
             $remoteip = $_SERVER['REMOTE_ADDR'];
 

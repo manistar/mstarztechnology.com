@@ -18,6 +18,10 @@ if (isset($_GET['lockscreen'])) {
   <title><?= website_name ?> | Admin Area</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+  <!-- Textarea -->
+  <script src="https://cdn.tiny.cloud/1/50n2ohr67wgiyqnrp26mtqlq05jj34o7hz531pvbzovdlta8/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- daterange picker -->

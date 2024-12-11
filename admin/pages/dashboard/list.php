@@ -78,7 +78,7 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3><?= $totalSuccessPayments = $Tsucessp['total_success'] ?? 0; ?></h3>
+              <h3><?= $Tsucessp; ?></h3>
 
 
               <p>Total Payment</p>
@@ -336,7 +336,7 @@ $pro = $d->getall("profile", "ID = ?", ['userID'], fetch: "details");
 
                   <tbody>
                   <?php
-                    if ($cart_data->rowCount() > 0) {
+                    if ($cart_data) {
                         foreach ($cart_data as $row) {
                             $carting = $d->getall("products", "ID = ?", [$row['productID']]);
 

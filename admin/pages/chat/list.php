@@ -688,6 +688,7 @@
                                                                                 <?= $row['chat']; ?>
                                                                                 <span
                                                                                     class="msg_time_send"><?= $row['date']; ?></span>
+                                                                                    <img id='statusIcon_" <?= $row['userID']; ?>"' class='status-icon' src='assets/status/tick_grey.png' alt='Status' style='width:14px; height:12px;'>
                                                                             </div>
                                                                         </div>
                                                                     <?php } ?>
@@ -700,6 +701,7 @@
                                                                                 <?= $row['chat']; ?>
                                                                                 <span
                                                                                     class="msg_time"><?= $row['date']; ?></span>
+                                                                                    
                                                                             </div>
                                                                         </div>
                                                                     <?php } ?>

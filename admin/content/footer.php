@@ -59,9 +59,46 @@ if (basename($_SERVER['PHP_SELF']) != "content.php") {
   <!-- Page specific script -->
   <!-- <script src="js/myjs.js"></script> -->
 
-  
-
+ 
   <script>
+    
+            function check() {
+                var f = document.getElementById('formid');
+                var s = document.getElementById('selectid');
+                if( s.selectedIndex == 1) { 
+                f.setAttribute("action",s.options[1].value) ;  
+
+                
+                f.submit();
+                }
+                if( s.selectedIndex == 2) { 
+                location.href = s.options[2].value;
+                }
+
+                if( s.selectedIndex == 3) { 
+                location.href = s.options[3].value;
+                }
+
+                if( s.selectedIndex == 4) { 
+                location.href = s.options[4].value;
+                }
+
+                if( s.selectedIndex == 5) { 
+                location.href = s.options[5].value;
+                }
+
+                if( s.selectedIndex == 6) { 
+                location.href = s.options[6].value;
+                }
+
+                if( s.selectedIndex == 7) { 
+                location.href = s.options[7].value;
+                }
+            }
+
+
+
+
     $(function() {
       //Initialize Select2 Elements
       $('.select2').select2()
@@ -277,7 +314,7 @@ if (basename($_SERVER['PHP_SELF']) != "content.php") {
     chart.draw(view, options);
   }
 </script>
-<!-- <script src="js/payment.js"></script> -->
+<script src="js/payment.js"></script>
 </footer>
 </body>
 </html>

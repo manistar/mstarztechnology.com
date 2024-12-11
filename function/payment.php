@@ -86,7 +86,8 @@
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "Content-Type: application/json",
-                "Authorization: Bearer FLWSECK_TEST-47acd6b17c2263c000211a6e6027292b-X",
+                // Security Key
+                "Authorization: Bearer FLWSECK-a7efea0395edb60f977362bf71e76f7b-193960ff9bdvt-X",
             ),
         ));
 

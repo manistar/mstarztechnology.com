@@ -10903,6 +10903,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .cd-words-wrapper b.is-visible {
+  /* color: #fff; */
   position: relative;
 }
 
@@ -10911,6 +10912,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .no-js .cd-words-wrapper b.is-visible {
+  color: #fff;
   opacity: 1;
 }
 
@@ -13568,6 +13570,7 @@ figcaption {
   color: var(--color-lightn);
 }
 .slider-style-6 .cd-headline .cd-words-wrapper b {
+ 
   font-weight: 300;
   font-size: 30px;
   color: var(--color-primary);

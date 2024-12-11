@@ -5,19 +5,21 @@ class input extends database
     {
         $data = $this->validate_form($store_insert);
         if (is_array($data)) {
+                
+            // Assuming description field contains HTML content
+            $data['description'] = $_POST['description']; // Make sure description is coming from a WYSIWYG editor
+
             $data['userID'] = $_SESSION['adminSession']; 
             $data['ID'] = uniqid();  // Assuming you want to set the 'ID' field
             $data['date'] = date("M j, Y", time());
-            // $data['date'] = date("j F, Y H:i:s");
-            // $insert = $this->quick_insert("products", $data, "Product uploaded Successfully");
-            return json_encode([
-                "message" => $this->quick_insert("products", $data)
-                    ? ["Product Updated", "Product updated successfully.", "success"]
-                    : ["Update Failed", "Issue updating the product.", "error"],
-                "closemodal" => true
-            ]);
-        }
+
+            // Insert into the database
+            $insert = $this->quick_insert("products", $data, "products inserted Successfully");
     }
+}
+    
+  
+
 
 
     // public function update_pro($store_edit)

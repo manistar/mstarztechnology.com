@@ -394,6 +394,29 @@ public function newchat($message) {
         return $data;
     }
 
+//     private function getmethod($q, $fetch)
+// {
+//     switch ($fetch) {
+//         case 'details':
+//             // Fetch a single row
+//             $data = $q->fetch(PDO::FETCH_ASSOC);
+//             break;
+
+//         case 'moredetails':
+//             // Fetch all rows
+//             $data = $q->fetchAll(PDO::FETCH_ASSOC);
+//             break;
+
+//         default:
+//             // Optionally, you could handle other cases or return row count
+//             $data = $q->rowCount();
+//             break;
+//     }
+
+//     return $data;
+// }
+
+
     function create_table($name, array $data)
     {
         if (!is_array($data)) {

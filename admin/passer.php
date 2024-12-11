@@ -19,6 +19,12 @@ if (isset($_POST['create_account'])) {
     $u->createuser($new_user);
 }
 
+// if($_FILES['uploaded_file']['name']){
+//     include "inis/ini.php";
+//     echo "yes";
+//     $a->uploadproductimage();
+// }
+
 // if(isset($_POST['unlock'])){
 //     require_once "inis/ini.php";
 //     $correct = $_SESSION['lockscreen'];
@@ -127,6 +133,13 @@ if(isset($_POST['upload_portfolio'])){
     echo $b->portfolios_page($portfolio);
     return null;
 }
+
+if(isset($_POST['create_reels'])){
+    require_once "inis/ini.php";
+    echo $u->upload_reels($adminReels);
+    return null;
+}
+
 
 // print_r($_POST);
 
